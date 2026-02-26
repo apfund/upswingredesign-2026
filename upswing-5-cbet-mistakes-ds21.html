@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5 Situations Where C-Betting Is a Big Mistake in Poker Tournaments | Upswing Poker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === UPSWING DS v2.1 TOKENS === */
+:root{
+  --color-primary-50:#FFF1F0;--color-primary-100:#FFE0DE;--color-primary-200:#FFC1BC;
+  --color-primary-300:#FF8F87;--color-primary-400:#FF5C52;--color-primary-500:#FF2C1F;
+  --color-primary-600:#E01A0E;--color-primary-700:#B81209;--color-primary-800:#8C0E07;--color-primary-900:#6B0B05;
+  --color-secondary-50:#FFF9E6;--color-secondary-100:#FFF0BF;--color-secondary-200:#FFE080;
+  --color-secondary-300:#FFD040;--color-secondary-400:#FFC200;--color-secondary-500:#FFB800;
+  --color-accent-50:#EDFDF4;--color-accent-100:#D0F9E3;--color-accent-200:#A3F2CA;
+  --color-accent-300:#5FE6A5;--color-accent-400:#33C687;--color-accent-500:#00A651;
+  --color-accent-600:#008B46;--color-accent-700:#006F38;
+  --color-neutral-0:#FFFFFF;--color-neutral-50:#F8F9FA;--color-neutral-100:#F1F2F4;
+  --color-neutral-200:#E4E6E9;--color-neutral-300:#CDD1D6;--color-neutral-400:#9DA3AB;
+  --color-neutral-500:#6E7681;--color-neutral-600:#4D545E;--color-neutral-700:#343A42;
+  --color-neutral-800:#22272E;--color-neutral-900:#14171B;--color-neutral-950:#0C0D0F;
+  --color-error-50:#FFF1F0;--color-error-500:#DC2626;--color-error-700:#B91C1C;
+  --color-info-50:#EFF6FF;--color-info-500:#3B82F6;--color-info-700:#1D4ED8;
+  --color-success-50:#EDFDF4;--color-success-500:#16A34A;
+  --color-warn-50:#FFFBEB;--color-warn-500:#F59E0B;
+  --font-display:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --font-body:'DM Sans',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code',monospace;
+  --text-xs:clamp(0.6875rem,0.65rem + 0.15vw,0.75rem);
+  --text-sm:clamp(0.8125rem,0.78rem + 0.15vw,0.875rem);
+  --text-base:clamp(0.9375rem,0.9rem + 0.18vw,1rem);
+  --text-lg:clamp(1.0625rem,1rem + 0.25vw,1.125rem);
+  --text-xl:clamp(1.1875rem,1.1rem + 0.4vw,1.3125rem);
+  --text-2xl:clamp(1.4375rem,1.3rem + 0.6vw,1.6875rem);
+  --text-3xl:clamp(1.75rem,1.5rem + 1vw,2.25rem);
+  --text-4xl:clamp(2.125rem,1.75rem + 1.5vw,3rem);
+  --leading-tight:1.15;--leading-snug:1.3;--leading-normal:1.5;
+  --leading-relaxed:1.65;--leading-loose:1.8;
+  --tracking-tighter:-0.03em;--tracking-tight:-0.015em;--tracking-normal:0;
+  --tracking-wide:0.025em;--tracking-wider:0.05em;--tracking-widest:0.1em;
+  --weight-regular:400;--weight-medium:500;--weight-semi:600;--weight-bold:700;--weight-extra:800;
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;
+  --grid-max:1280px;--grid-narrow:720px;--grid-gutter:1.5rem;
+  --shadow-xs:0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 6px -1px rgba(0,0,0,0.08),0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.08),0 4px 6px -4px rgba(0,0,0,0.04);
+  --shadow-red-glow:0 0 20px rgba(255,44,31,0.15),0 0 40px rgba(255,44,31,0.05);
+  --radius-none:0;--radius-xs:2px;--radius-sm:3px;--radius-md:8px;--radius-lg:10px;--radius-full:9999px;
+  --surface-primary:var(--color-neutral-0);--surface-secondary:var(--color-neutral-50);
+  --surface-tertiary:var(--color-neutral-100);--surface-elevated:var(--color-neutral-0);
+  --text-strong:var(--color-neutral-900);--text-default:var(--color-neutral-700);
+  --text-subtle:var(--color-neutral-500);--text-muted:var(--color-neutral-400);
+  --border-default:var(--color-neutral-200);--border-subtle:var(--color-neutral-100);
+  --border-strong:var(--color-neutral-300);
+  /* Suit colors */
+  --suit-heart:#E5243F;--suit-diamond:#3B7DDD;--suit-club:#1B8A4E;--suit-spade:var(--color-neutral-800);
+}
+/* === RESET === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important;animation:none !important}}
+body{font-family:var(--font-body);font-size:var(--text-base);line-height:var(--leading-relaxed);color:var(--text-default);background:var(--surface-primary)}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--color-primary-600);text-decoration:none;transition:color .15s}
+a:hover{color:var(--color-primary-700);text-decoration:underline}
+a:focus-visible{outline:2px solid var(--color-primary-500);outline-offset:2px;border-radius:var(--radius-xs)}
+strong,b{font-weight:var(--weight-bold)}
+em,i{font-style:italic}
+
+/* === ARTICLE LAYOUT === */
+.l-article{max-width:var(--grid-max);margin:0 auto;padding:0 var(--grid-gutter)}
+.l-article__grid{display:grid;grid-template-columns:1fr;gap:var(--space-8)}
+@media(min-width:1024px){
+  .l-article__grid{grid-template-columns:minmax(0,var(--grid-narrow)) 260px;gap:var(--space-12)}
+}
+.l-article__main{min-width:0}
+.l-article__rail{display:none}
+@media(min-width:1024px){.l-article__rail{display:block}}
+
+/* === BREADCRUMBS === */
+.c-breadcrumbs{font-size:var(--text-xs);color:var(--text-subtle);padding:var(--space-4) 0 var(--space-2);display:flex;align-items:center;gap:var(--space-1);flex-wrap:wrap}
+.c-breadcrumbs a{color:var(--text-subtle)}
+.c-breadcrumbs a:hover{color:var(--color-primary-600)}
+.c-breadcrumbs__sep{color:var(--text-muted)}
+
+/* === ARTICLE HEADER === */
+.c-article-header__cat{display:inline-block;font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-bold);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--color-primary-600);margin-bottom:var(--space-2)}
+.c-article-header h1{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:var(--weight-extra);line-height:var(--leading-tight);letter-spacing:var(--tracking-tighter);color:var(--text-strong);margin-bottom:var(--space-4)}
+
+/* === ARTICLE META === */
+.c-article-meta{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;font-size:var(--text-xs);color:var(--text-subtle);margin-bottom:var(--space-4)}
+.c-article-meta__dot{width:4px;height:4px;border-radius:var(--radius-full);background:var(--color-primary-500)}
+.c-article-meta__sep{color:var(--border-default)}
+
+/* === INSTRUCTOR STRIP (Article E-E-A-T) === */
+.c-instructor-strip--article{display:flex;align-items:flex-start;gap:var(--space-3);padding:var(--space-4);border:1px solid var(--border-default);border-radius:var(--radius-xs);background:var(--surface-secondary);margin-bottom:var(--space-6)}
+.c-instructor-strip__avatar{width:48px;height:48px;border-radius:var(--radius-full);background:var(--color-neutral-800);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);flex-shrink:0}
+.c-instructor-strip__info{flex:1;min-width:0}
+.c-instructor-strip__byline{font-size:var(--text-xs);color:var(--text-subtle)}
+.c-instructor-strip__name{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-instructor-strip__role{font-size:var(--text-xs);color:var(--text-subtle);margin-top:2px}
+.c-instructor-strip__creds{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-2)}
+.c-instructor-strip__cred{font-family:var(--font-mono);font-size:10px;font-weight:var(--weight-medium);padding:2px 8px;border-radius:var(--radius-full);background:var(--color-neutral-800);color:#fff;white-space:nowrap}
+.c-instructor-strip__links{display:flex;gap:var(--space-3);margin-top:var(--space-2);font-size:var(--text-xs)}
+.c-instructor-strip__links a{color:var(--color-primary-600)}
+
+/* === KEY TAKEAWAYS === */
+.c-takeaways{border:1px solid var(--border-default);border-radius:var(--radius-xs);background:var(--surface-secondary);margin-bottom:var(--space-6);overflow:hidden}
+.c-takeaways__header{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--border-default);background:var(--surface-tertiary)}
+.c-takeaways__title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-takeaways__list{padding:var(--space-4)}
+.c-takeaways__item{display:flex;gap:var(--space-2);padding:var(--space-2) 0;font-size:var(--text-sm);line-height:var(--leading-relaxed);color:var(--text-default)}
+.c-takeaways__item+.c-takeaways__item{border-top:1px solid var(--border-subtle)}
+.c-takeaways__check{color:var(--color-accent-500);font-weight:var(--weight-bold);flex-shrink:0}
+
+/* === TABLE OF CONTENTS === */
+.c-toc{border:1px solid var(--border-default);border-radius:var(--radius-xs);background:var(--surface-primary);overflow:hidden}
+.c-toc--rail{position:sticky;top:var(--space-4)}
+.c-toc__header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4);cursor:pointer;background:var(--surface-secondary);border-bottom:1px solid var(--border-default)}
+.c-toc__title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-toc__count{font-size:var(--text-xs);color:var(--text-muted);font-weight:var(--weight-regular);margin-left:var(--space-1)}
+.c-toc__toggle{font-size:var(--text-xs);color:var(--text-muted);transition:transform .2s}
+.c-toc.is-collapsed .c-toc__toggle{transform:rotate(-90deg)}
+.c-toc.is-collapsed .c-toc__list{display:none}
+.c-toc__progress{height:2px;background:var(--border-subtle)}
+.c-toc__progress-bar{height:100%;background:var(--color-primary-500);width:0;transition:width .1s}
+.c-toc__list{padding:var(--space-2) 0}
+.c-toc__link{display:flex;align-items:baseline;gap:var(--space-2);padding:var(--space-2) var(--space-4);font-size:var(--text-xs);color:var(--text-subtle);text-decoration:none;border-left:2px solid transparent;transition:all .15s}
+.c-toc__link:hover{color:var(--text-default);background:var(--surface-secondary)}
+.c-toc__link.is-active{color:var(--color-primary-600);border-left-color:var(--color-primary-500);background:var(--color-primary-50);font-weight:var(--weight-semi)}
+.c-toc__link-num{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);min-width:16px}
+
+/* === METHODOLOGY === */
+.c-methodology{border:1px solid var(--border-default);border-radius:var(--radius-xs);background:var(--surface-secondary);margin-bottom:var(--space-6);overflow:hidden}
+.c-methodology__header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4);cursor:pointer;background:none;border:none;width:100%;font:inherit;text-align:left}
+.c-methodology__header-title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-methodology__header-icon{color:var(--text-muted);font-size:var(--text-lg)}
+.c-methodology__body{padding:0 var(--space-4) var(--space-4);display:none}
+.c-methodology.is-open .c-methodology__body{display:block}
+.c-methodology.is-open .c-methodology__header-icon{transform:rotate(45deg)}
+.c-methodology__text{font-size:var(--text-sm);color:var(--text-default);line-height:var(--leading-relaxed);margin-bottom:var(--space-3)}
+.c-methodology__assumptions{display:flex;flex-wrap:wrap;gap:var(--space-1)}
+.c-methodology__chip{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border-radius:var(--radius-full);background:var(--color-neutral-800);color:#fff}
+
+/* === SPOT BLOCK (situation wrapper) === */
+.c-spot{border:1px solid var(--border-default);border-radius:var(--radius-xs);margin:var(--space-8) 0;overflow:hidden;background:var(--surface-primary)}
+.c-spot__header{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--color-neutral-900);color:#fff}
+.c-spot__num{font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-extra);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--color-primary-400)}
+.c-spot__title{font-family:var(--font-display);font-size:var(--text-lg);font-weight:var(--weight-bold);color:#fff;flex:1}
+.c-spot__body{padding:var(--space-5) var(--space-4)}
+.c-spot__body p{margin-bottom:var(--space-4);font-size:var(--text-base);line-height:var(--leading-relaxed)}
+.c-spot__body p:last-child{margin-bottom:0}
+.c-spot__body strong{color:var(--text-strong)}
+.c-spot__body ul,.c-spot__body ol{margin:var(--space-4) 0;padding-left:var(--space-6)}
+.c-spot__body li{margin-bottom:var(--space-2);line-height:var(--leading-relaxed)}
+.c-spot__body .c-img-caption{font-size:var(--text-xs);font-style:italic;color:var(--text-subtle);margin:-var(--space-2) 0 var(--space-4);line-height:var(--leading-relaxed)}
+
+/* DS v2.1 inline pip cards */
+.pip{display:inline-flex;align-items:center;gap:1px;font-family:var(--font-display);font-weight:var(--weight-extra);font-size:inherit;padding:1px 5px;border-radius:3px;background:var(--surface-primary);border:1px solid var(--border-default);white-space:nowrap;line-height:1.3;vertical-align:baseline}
+.pip--h{color:var(--suit-heart);border-color:rgba(229,36,63,.2);background:rgba(229,36,63,.04)}
+.pip--d{color:var(--suit-diamond);border-color:rgba(59,125,221,.2);background:rgba(59,125,221,.04)}
+.pip--c{color:var(--suit-club);border-color:rgba(27,138,78,.2);background:rgba(27,138,78,.04)}
+.pip--s{color:var(--suit-spade);border-color:rgba(52,58,66,.2);background:rgba(52,58,66,.04)}
+.suit-h{color:var(--suit-heart)}.suit-h::after{content:"♥"}
+.suit-d{color:var(--suit-diamond)}.suit-d::after{content:"♦"}
+.suit-c{color:var(--suit-club)}.suit-c::after{content:"♣"}
+.suit-s{color:var(--suit-spade)}.suit-s::after{content:"♠"}
+/* Pip group (hand or board) */
+.pip-group{display:inline-flex;align-items:center;gap:var(--space-1);vertical-align:baseline;white-space:nowrap}
+/* Board texture label */
+.pip-board{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;background:var(--color-neutral-900);vertical-align:baseline;white-space:nowrap}
+.pip-board .pip{background:#fff;border-color:rgba(255,255,255,.15)}
+
+/* === DEFINITIONS / GLOSSARY === */
+.c-def-term{position:relative;border-bottom:1px dashed var(--color-primary-400);cursor:help;color:var(--text-strong)}
+.c-def-tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--color-neutral-900);color:#fff;font-size:var(--text-xs);font-style:normal;font-weight:var(--weight-regular);padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);width:max-content;max-width:260px;z-index:100;box-shadow:var(--shadow-lg);line-height:var(--leading-relaxed)}
+.c-def-term.is-active .c-def-tip{display:block}
+.c-def-term:hover .c-def-tip{display:block}
+.c-definitions{border:1px solid var(--border-default);border-radius:var(--radius-xs);margin-bottom:var(--space-6);overflow:hidden}
+.c-definitions__header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4);cursor:pointer;background:var(--surface-secondary);border:none;width:100%;font:inherit;text-align:left}
+.c-definitions__title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-definitions__toggle{color:var(--text-muted);font-size:var(--text-lg);transition:transform .2s}
+.c-definitions__list{display:none;padding:var(--space-3) var(--space-4)}
+.c-definitions.is-open .c-definitions__list{display:block}
+.c-definitions.is-open .c-definitions__toggle{transform:rotate(45deg)}
+.c-definitions__entry{display:flex;gap:var(--space-3);padding:var(--space-2) 0;border-bottom:1px solid var(--border-subtle)}
+.c-definitions__entry:last-child{border-bottom:none}
+.c-definitions__dt{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--text-strong);min-width:100px}
+.c-definitions__dd{font-size:var(--text-sm);color:var(--text-default);line-height:var(--leading-relaxed)}
+
+/* === RELATED CONCEPTS ROW === */
+.c-related-concepts{display:flex;flex-wrap:wrap;gap:var(--space-2);margin:var(--space-4) 0;padding:var(--space-3) 0;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)}
+.c-related-concepts__label{font-size:var(--text-xs);font-weight:var(--weight-semi);color:var(--text-subtle);align-self:center}
+.c-related-concepts a{font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-semi);padding:4px 12px;border-radius:var(--radius-full);background:var(--surface-tertiary);color:var(--text-default);text-decoration:none;transition:all .15s}
+.c-related-concepts a:hover{background:var(--color-primary-50);color:var(--color-primary-600)}
+
+/* === FAQ === */
+.c-article-faq{border:1px solid var(--border-default);border-radius:var(--radius-xs);margin:var(--space-8) 0;overflow:hidden}
+.c-article-faq__header{padding:var(--space-3) var(--space-4);background:var(--surface-secondary);border-bottom:1px solid var(--border-default)}
+.c-article-faq__header-title{font-family:var(--font-display);font-size:var(--text-lg);font-weight:var(--weight-bold);color:var(--text-strong);margin:0}
+.c-article-faq__item{border-bottom:1px solid var(--border-subtle)}
+.c-article-faq__item:last-child{border-bottom:none}
+.c-article-faq__q{display:flex;align-items:center;justify-content:space-between;width:100%;padding:var(--space-3) var(--space-4);background:none;border:none;font:inherit;cursor:pointer;text-align:left;gap:var(--space-3);font-size:var(--text-sm);font-weight:var(--weight-semi);color:var(--text-strong)}
+.c-article-faq__q:hover{background:var(--surface-secondary)}
+.c-article-faq__q-icon{flex-shrink:0;color:var(--text-muted);transition:transform .2s}
+.c-article-faq__a{display:none;padding:0 var(--space-4) var(--space-4);font-size:var(--text-sm);line-height:var(--leading-relaxed);color:var(--text-default)}
+.c-article-faq__item.is-open .c-article-faq__a{display:block}
+.c-article-faq__item.is-open .c-article-faq__q-icon{transform:rotate(45deg)}
+
+/* === RELATED HUB === */
+.c-related-hub{margin:var(--space-8) 0}
+.c-related-hub__header{margin-bottom:var(--space-4)}
+.c-related-hub__title{font-family:var(--font-display);font-size:var(--text-xl);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-related-hub__grid{display:grid;grid-template-columns:1fr;gap:var(--space-3)}
+@media(min-width:640px){.c-related-hub__grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:768px){.c-related-hub__grid{grid-template-columns:repeat(3,1fr)}}
+.c-related-hub__card{display:flex;flex-direction:column;padding:var(--space-4);border:1px solid var(--border-default);border-radius:var(--radius-xs);text-decoration:none;transition:all .15s;background:var(--surface-primary)}
+.c-related-hub__card:hover{border-color:var(--color-primary-400);box-shadow:var(--shadow-sm);text-decoration:none}
+.c-related-hub__card-type{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);margin-bottom:var(--space-1)}
+.c-related-hub__card-title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-semi);color:var(--text-strong);line-height:var(--leading-snug);flex:1}
+.c-related-hub__card-meta{display:flex;gap:var(--space-2);margin-top:var(--space-2);font-size:var(--text-xs);color:var(--text-subtle)}
+
+/* === UPGRADE CTA === */
+.c-upgrade{border:1px solid var(--border-default);border-radius:var(--radius-xs);overflow:hidden;margin:var(--space-8) 0;background:var(--surface-secondary)}
+.c-upgrade__header{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-4);background:var(--color-neutral-900);color:#fff}
+.c-upgrade__icon{font-size:var(--text-2xl)}
+.c-upgrade__label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--color-primary-400)}
+.c-upgrade__title{font-family:var(--font-display);font-size:var(--text-lg);font-weight:var(--weight-bold)}
+.c-upgrade__body{padding:var(--space-4)}
+.c-upgrade__desc{font-size:var(--text-sm);color:var(--text-default);margin-bottom:var(--space-3)}
+.c-upgrade__form{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.c-upgrade__form input{flex:1;min-width:180px;padding:var(--space-2) var(--space-3);border:1px solid var(--border-default);border-radius:var(--radius-md);font:inherit;font-size:var(--text-sm)}
+.c-upgrade__form input:focus{outline:2px solid var(--color-primary-500);outline-offset:-1px}
+.c-upgrade__privacy{font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-2)}
+
+/* === LUCID CTA === */
+.c-lucid-cta{display:flex;flex-direction:column;align-items:center;text-align:center;padding:var(--space-8) var(--space-4);border:2px solid var(--color-accent-500);border-radius:var(--radius-xs);background:var(--color-accent-50);margin:var(--space-8) 0}
+.c-lucid-cta__badge{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:var(--tracking-widest);padding:2px 10px;border-radius:var(--radius-full);background:var(--color-accent-500);color:#fff;margin-bottom:var(--space-3)}
+.c-lucid-cta__title{font-family:var(--font-display);font-size:var(--text-xl);font-weight:var(--weight-extra);color:var(--text-strong);margin-bottom:var(--space-2)}
+.c-lucid-cta__text{font-size:var(--text-sm);color:var(--text-default);margin-bottom:var(--space-4);max-width:480px}
+
+/* === BUTTONS === */
+.c-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-2) var(--space-5);border:none;border-radius:var(--radius-md);font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);cursor:pointer;text-decoration:none;transition:all .15s;line-height:var(--leading-normal)}
+.c-btn:focus-visible{outline:2px solid var(--color-primary-500);outline-offset:2px}
+.c-btn--primary{background:var(--color-primary-600);color:#fff}
+.c-btn--primary:hover{background:var(--color-primary-700);text-decoration:none;color:#fff}
+.c-btn--accent{background:var(--color-accent-500);color:#fff}
+.c-btn--accent:hover{background:var(--color-accent-600);text-decoration:none;color:#fff}
+.c-btn--sm{padding:var(--space-1) var(--space-3);font-size:var(--text-xs)}
+
+/* === AUTHOR BOX === */
+.c-author-box{display:flex;gap:var(--space-4);padding:var(--space-5);border:1px solid var(--border-default);border-radius:var(--radius-xs);background:var(--surface-secondary);margin:var(--space-8) 0}
+.c-author-box__avatar{width:64px;height:64px;border-radius:var(--radius-full);background:var(--color-neutral-800);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-display);font-size:var(--text-xl);font-weight:var(--weight-bold);flex-shrink:0}
+.c-author-box__name{font-family:var(--font-display);font-size:var(--text-lg);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-author-box__bio{font-size:var(--text-sm);color:var(--text-default);line-height:var(--leading-relaxed);margin-top:var(--space-2)}
+
+/* === ARTICLE PROSE === */
+.c-prose p{margin-bottom:var(--space-4);line-height:var(--leading-relaxed)}
+.c-prose p:last-child{margin-bottom:0}
+.c-prose strong{color:var(--text-strong)}
+.c-prose h2,.c-prose h3{font-family:var(--font-display);font-weight:var(--weight-bold);color:var(--text-strong);margin:var(--space-8) 0 var(--space-4);scroll-margin-top:var(--space-8)}
+.c-prose h2{font-size:var(--text-2xl)}
+.c-prose h3{font-size:var(--text-xl)}
+.c-prose ul,.c-prose ol{margin:var(--space-4) 0;padding-left:var(--space-6)}
+.c-prose li{margin-bottom:var(--space-2);line-height:var(--leading-relaxed)}
+.c-prose .c-img-caption{font-size:var(--text-xs);font-style:italic;color:var(--text-subtle);margin:var(--space-2) 0 var(--space-4);line-height:var(--leading-relaxed)}
+
+/* === EQUITY TABLE === */
+.c-equity-table{width:100%;border-collapse:collapse;margin:var(--space-4) 0;font-size:var(--text-sm)}
+.c-equity-table th,.c-equity-table td{padding:var(--space-2) var(--space-3);border:1px solid var(--border-default);text-align:left}
+.c-equity-table th{background:var(--color-neutral-900);color:#fff;font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-bold)}
+.c-equity-table td:last-child{font-family:var(--font-mono);font-weight:var(--weight-bold);text-align:right}
+
+/* === MOBILE TOC (inline) === */
+.c-toc--inline{margin-bottom:var(--space-6)}
+@media(min-width:1024px){.c-toc--inline{display:none}}
+/* === QUIZ (from DS v2.1 D22) === */
+.c-quiz{border:1px solid var(--border-default);border-radius:var(--radius-xs);overflow:hidden;margin:var(--space-6) 0}
+.c-quiz__header{background:var(--color-neutral-900);padding:var(--space-4) var(--space-5);display:flex;align-items:center;justify-content:space-between}
+.c-quiz__header-title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:#fff;text-transform:uppercase;letter-spacing:var(--tracking-wider)}
+.c-quiz__header-step{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-neutral-400)}
+.c-quiz__progress{height:3px;background:var(--color-neutral-200)}
+.c-quiz__progress-bar{height:100%;background:var(--color-primary-500);transition:width var(--duration-slow) var(--ease-out)}
+.c-quiz__body{padding:var(--space-5)}
+.c-quiz__question{font-family:var(--font-display);font-size:var(--text-lg);font-weight:var(--weight-bold);color:var(--text-strong);margin-bottom:var(--space-4);line-height:var(--leading-snug)}
+.c-quiz__context{font-size:var(--text-sm);color:var(--text-subtle);line-height:var(--leading-relaxed);margin-bottom:var(--space-4);padding:var(--space-3) var(--space-4);background:var(--surface-secondary);border-radius:var(--radius-xs);border-left:3px solid var(--color-secondary-500)}
+.c-quiz__options{display:flex;flex-direction:column;gap:var(--space-2)}
+.c-quiz__option{display:flex;align-items:flex-start;gap:var(--space-3);padding:var(--space-3) var(--space-4);border:1.5px solid var(--border-default);border-radius:var(--radius-md);cursor:pointer;transition:all var(--duration-fast);font-size:var(--text-sm);color:var(--text-default);background:var(--surface-primary);text-align:left;width:100%;font-family:var(--font-body);line-height:var(--leading-normal)}
+.c-quiz__option:hover{border-color:var(--color-primary-300);background:var(--color-primary-50)}
+.c-quiz__option.is-selected{border-color:var(--color-primary-500);background:var(--color-primary-50);color:var(--text-strong);font-weight:var(--weight-medium)}
+.c-quiz__option.is-correct{border-color:var(--color-accent-500);background:rgba(27,138,78,.06);color:var(--color-accent-700)}
+.c-quiz__option.is-incorrect{border-color:var(--color-error-400);background:rgba(229,36,63,.04);color:var(--color-error-600);opacity:.7}
+.c-quiz__option:focus-visible{outline:2px solid var(--color-primary-500);outline-offset:2px}
+.c-quiz__option[disabled]{pointer-events:none}
+.c-quiz__option-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border-default);flex-shrink:0;position:relative;transition:border-color var(--duration-fast);margin-top:1px}
+.c-quiz__option.is-selected .c-quiz__option-dot{border-color:var(--color-primary-500)}
+.c-quiz__option.is-selected .c-quiz__option-dot::after{content:'';position:absolute;inset:3px;background:var(--color-primary-500);border-radius:50%}
+.c-quiz__option.is-correct .c-quiz__option-dot{border-color:var(--color-accent-500)}
+.c-quiz__option.is-correct .c-quiz__option-dot::after{content:'';position:absolute;inset:3px;background:var(--color-accent-500);border-radius:50%}
+.c-quiz__option.is-incorrect .c-quiz__option-dot{border-color:var(--color-error-400)}
+.c-quiz__option.is-incorrect .c-quiz__option-dot::after{content:'';position:absolute;inset:3px;background:var(--color-error-400);border-radius:50%}
+.c-quiz__footer{padding:0 var(--space-5) var(--space-5);display:flex;justify-content:flex-end}
+.c-quiz__explain{margin-top:var(--space-4);padding:var(--space-4);background:var(--surface-secondary);border-radius:var(--radius-xs);border-left:3px solid var(--color-accent-500);font-size:var(--text-sm);line-height:var(--leading-relaxed);color:var(--text-default);display:none}
+.c-quiz__explain.is-visible{display:block}
+.c-quiz__explain strong{color:var(--text-strong)}
+</style>
+</head>
+<body>
+<div class="l-article">
+  <!-- Breadcrumbs -->
+  <nav class="c-breadcrumbs" aria-label="Breadcrumb">
+    <a href="https://upswingpoker.com/">Home</a>
+    <span class="c-breadcrumbs__sep">&#8250;</span>
+    <a href="https://upswingpoker.com/category/poker-strategy/">Poker Strategy</a>
+    <span class="c-breadcrumbs__sep">&#8250;</span>
+    <span aria-current="page">5 Situations Where C-Betting Is a Big Mistake</span>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="c-article-header">
+    <span class="c-article-header__cat">Poker Strategy</span>
+    <h1>5 Situations Where C-Betting Is a Big Mistake in Poker Tournaments</h1>
+    <div class="c-article-meta">
+      <span class="c-article-meta__dot"></span>
+      <span>Feb 6, 2026</span>
+      <span class="c-article-meta__sep">|</span>
+      <span>11 min read</span>
+    </div>
+  </header>
+
+  <!-- E-E-A-T Instructor Strip -->
+  <div class="c-instructor-strip--article">
+    <div class="c-instructor-strip__avatar">LS</div>
+    <div class="c-instructor-strip__info">
+      <div style="display:flex;align-items:baseline;gap:var(--space-2);flex-wrap:wrap;">
+        <span class="c-instructor-strip__byline">Written by</span>
+        <span class="c-instructor-strip__name">Leo Song-Carrillo</span>
+      </div>
+      <div class="c-instructor-strip__role">MTT Specialist, 2x ACR OSS Champion</div>
+      <div class="c-instructor-strip__creds">
+        <span class="c-instructor-strip__cred">MTT</span>
+        <span class="c-instructor-strip__cred">25bb &amp; 50bb</span>
+        <span class="c-instructor-strip__cred">NL Hold'em</span>
+        <span class="c-instructor-strip__cred">ICM</span>
+        <span class="c-instructor-strip__cred">6-max</span>
+      </div>
+      <div class="c-instructor-strip__links">
+        <a href="https://upswingpoker.com/author/lp-songcarrillogmail-com/">&#9654; More by author</a>
+        <a href="#methodology">&#9654; Methodology</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="c-takeaways">
+    <div class="c-takeaways__header">
+      <span>&#128161;</span>
+      <span class="c-takeaways__title">Key Takeaways</span>
+    </div>
+    <div class="c-takeaways__list">
+      <div class="c-takeaways__item"><span class="c-takeaways__check">&#10003;</span> Under ICM pressure, check instead of c-betting when a bigger stack can leverage you into tough spots.</div>
+      <div class="c-takeaways__item"><span class="c-takeaways__check">&#10003;</span> When OOP with a wide range (CO vs BTN), check about two-thirds of the time. Earlier positions c-bet more because tighter ranges have more natural value.</div>
+      <div class="c-takeaways__item"><span class="c-takeaways__check">&#10003;</span> In multiway pots, your equity drops with each added player. Check more often, except when both opponents are in the blinds.</div>
+      <div class="c-takeaways__item"><span class="c-takeaways__check">&#10003;</span> On low connected boards (like 7-6-5), opponents carry more strength in their checking range than GTO assumes. Check after they do.</div>
+      <div class="c-takeaways__item"><span class="c-takeaways__check">&#10003;</span> If getting check-raised would destroy your equity realization, checking preserves your hand's value at shallow stacks.</div>
+    </div>
+  </div>
+
+  <!-- Mobile TOC (hidden on desktop, desktop uses rail) -->
+  <div class="c-toc c-toc--inline" id="tocMobile">
+    <div class="c-toc__header" role="button" tabindex="0" aria-expanded="true">
+      <span class="c-toc__title">In This Article <span class="c-toc__count">5</span></span>
+      <span class="c-toc__toggle">&#9660;</span>
+    </div>
+    <div class="c-toc__progress"><div class="c-toc__progress-bar"></div></div>
+    <nav class="c-toc__list" aria-label="Table of contents">
+      <a class="c-toc__link" href="#spot-1"><span class="c-toc__link-num">1</span> Under Serious ICM Pressure</a>
+      <a class="c-toc__link" href="#spot-2"><span class="c-toc__link-num">2</span> OOP in a Wide Range Battle</a>
+      <a class="c-toc__link" href="#spot-3"><span class="c-toc__link-num">3</span> Multiway Pots</a>
+      <a class="c-toc__link" href="#spot-4"><span class="c-toc__link-num">4</span> Low Connected Flops IP vs BB</a>
+      <a class="c-toc__link" href="#spot-5"><span class="c-toc__link-num">5</span> When a Shove Would Ruin You</a>
+    </nav>
+  </div>
+
+  <!-- === MAIN GRID: article + rail === -->
+  <div class="l-article__grid">
+    <main class="l-article__main c-prose">
+
+      <!-- INTRO -->
+      <p>C-betting is super effective in MTTs, so it's no surprise that it happens so frequently. On average, after you open-raise, you'll <span class="c-def-term" tabindex="0" role="button">c-bet<span class="c-def-tip" role="tooltip">A continuation bet made on the flop by the preflop aggressor, continuing the story of strength.</span></span> 60-70% of the time.</p>
+      <p>But that also means <strong>there are times you don't.</strong></p>
+      <p>In this article, you're going to learn five specific situations where c-betting is a <em>huge</em> mistake. In fact, if you're c-betting in <em>these</em> spots, <strong>you're practically flushing chips down the toilet</strong>.</p>
+      <p>For a deep dive on how <a href="https://upswingpoker.com/continuation-bet-c-bet-strategy-position/">c-betting works in and out of position</a>, make sure to study that guide alongside this one. You can also review <a href="https://upswingpoker.com/tournament-c-betting-strategy/">tournament c-betting fundamentals</a> for more context.</p>
+
+      <!-- Related concepts row #1 -->
+      <div class="c-related-concepts">
+        <span class="c-related-concepts__label">Related:</span>
+        <a href="https://upswingpoker.com/continuation-bet-c-bet-strategy-position/">C-Betting IP vs OOP</a>
+        <a href="https://upswingpoker.com/tournament-c-betting-strategy/">Tournament C-Bet Guide</a>
+        <a href="https://upswingpoker.com/mechanics-of-c-betting-phemo/">Modern C-Bet Mechanics</a>
+      </div>
+
+      <!-- METHODOLOGY -->
+      <div class="c-methodology" id="methodology">
+        <button class="c-methodology__header" aria-expanded="false">
+          <span class="c-methodology__header-title">&#128300; Methodology &amp; Assumptions</span>
+          <span class="c-methodology__header-icon">+</span>
+        </button>
+        <div class="c-methodology__body">
+          <p class="c-methodology__text">Strategies in this article are informed by solver outputs from the Lucid GTO Poker Trainer, verified against tournament game conditions. Exploit adjustments are noted where live and online population tendencies diverge from GTO.</p>
+          <div class="c-methodology__assumptions">
+            <span class="c-methodology__chip">MTT</span>
+            <span class="c-methodology__chip">25bb effective</span>
+            <span class="c-methodology__chip">50bb effective</span>
+            <span class="c-methodology__chip">NL Hold'em</span>
+            <span class="c-methodology__chip">ICM</span>
+            <span class="c-methodology__chip">CO vs BTN</span>
+            <span class="c-methodology__chip">HJ vs BB</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SPOT 1 ==================== -->
+      <div class="c-spot" id="spot-1">
+        <div class="c-spot__header">
+          <span class="c-spot__num">Situation #1</span>
+          <span class="c-spot__title">When You're Under Serious ICM Pressure</span>
+        </div>
+        <div class="c-spot__body">
+          <p>If you're facing a bigger stack who can apply pressure, you've gotta play more defensively. <em>You can't just attack.</em></p>
+          <p>For example, suppose you're on the money bubble, weighing whether or not to c-bet as a middling stack (25bb) vs a huge stack (65bb). Or let's say you're at a final table with seven players left where you're second in chips with 50bb.</p>
+          <p>You raise preflop. The chip leader, sitting on 80bb, calls from the Small Blind. In both situations, your opponent can leverage <span class="c-def-term" tabindex="0" role="button">ICM<span class="c-def-tip" role="tooltip">Independent Chip Model. A mathematical model that assigns a monetary value to your chip stack based on prize pool distribution, not just chip count.</span></span> against you. <em>And they should</em>.</p>
+          <p>In ICM, when you are the player at risk of busting, <strong>you need to play more defensively.</strong></p>
+          <p>With hands you'd normally bet, you might be better off <em>checking</em>. Especially if you have a marginal hand or draw. Imagine holding <span class="pip-group"><span class="pip pip--h">J<span class="suit-h"></span></span> <span class="pip pip--h">T<span class="suit-h"></span></span></span> on a <span class="pip-board"><span class="pip pip--d">9<span class="suit-d"></span></span> <span class="pip pip--d">7<span class="suit-d"></span></span> <span class="pip pip--c">4<span class="suit-c"></span></span></span> flop.</p>
+          <p>While it's tempting to c-bet with your gutshot and two overs, getting raised would be brutal. You'll have to decide between calling and risking more chips in a bloated pot. Even when you turn a pair, you're still in no man's land. Or you can fold, which you really don't want to do either.</p>
+          <p>By checking, you can avoid that situation altogether.</p>
+          <p><strong>Don't be so eager to play pots when a big stack can leverage ICM against you.</strong></p>
+        </div>
+      </div>
+
+      <!-- Lucid CTA (native placement from original article) -->
+      <div class="c-lucid-cta">
+        <span class="c-lucid-cta__badge">Free to Play</span>
+        <div class="c-lucid-cta__title">Practice These Spots on Lucid Poker</div>
+        <p class="c-lucid-cta__text"><em>By the way, I used the Lucid Poker Trainer to find most of these spots, and I'm using it for this article.</em> If you like winning at poker, you should know that <strong>Lucid Poker is now free to play</strong>. It's a fast, fun, and effective way to improve your skills. We highly recommend making the Daily Cardle quiz a regular part of your study routine.</p>
+        <a href="http://lucidpoker.com" class="c-btn c-btn--accent">Start Training Free &#8594;</a>
+      </div>
+
+      <!-- QUIZ 1: ICM C-Bet Decision -->
+      <div class="c-quiz" id="quiz1">
+        <div class="c-quiz__header">
+          <span class="c-quiz__header-title">Test Your Knowledge</span>
+          <span class="c-quiz__header-step">Spot #1 Quiz</span>
+        </div>
+        <div class="c-quiz__progress"><div class="c-quiz__progress-bar" style="width:100%"></div></div>
+        <div class="c-quiz__body">
+          <div class="c-quiz__context">
+            <strong>Scenario:</strong> Final table bubble of an MTT. You open from MP with <span class="pip-group"><span class="pip pip--h">J<span class="suit-h"></span></span> <span class="pip pip--h">T<span class="suit-h"></span></span></span>. Only the Big Blind calls. Flop comes <span class="pip-board"><span class="pip pip--d">9<span class="suit-d"></span></span> <span class="pip pip--d">7<span class="suit-d"></span></span> <span class="pip pip--c">4<span class="suit-c"></span></span></span>. You have an open-ended straight draw. Big Blind checks. <strong>What is the best play under heavy ICM pressure?</strong>
+          </div>
+          <p class="c-quiz__question">What should you do here?</p>
+          <div class="c-quiz__options" role="radiogroup">
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> Bet 33% pot as a small c-bet to deny equity</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> Bet 66% pot to pressure the Big Blind into folding</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="correct"><span class="c-quiz__option-dot"></span> Check back to preserve your equity and avoid a check-raise</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> Shove all-in since you have an open-ender</button>
+          </div>
+          <div class="c-quiz__explain" id="quiz1Explain">
+            <strong>Correct: Check back.</strong> Under heavy ICM pressure, betting with a draw like <span class="pip-group"><span class="pip pip--h">J<span class="suit-h"></span></span> <span class="pip pip--h">T<span class="suit-h"></span></span></span> invites a check-raise that puts you in a terrible spot. You would be forced to fold a hand with significant equity, or call and risk your tournament life on a draw. Checking preserves your equity and lets you realize it on later streets without facing an all-in decision.
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SPOT 2 ==================== -->
+      <div class="c-spot" id="spot-2">
+        <div class="c-spot__header">
+          <span class="c-spot__num">Situation #2</span>
+          <span class="c-spot__title">When You're Out of Position (OOP) in a Wide Range Battle</span>
+        </div>
+        <div class="c-spot__body">
+          <p>Let's suppose you're playing 25bb effective stacks. You open in the Cutoff and the Button calls. A <span class="pip-board"><span class="pip pip--h">Q<span class="suit-h"></span></span> <span class="pip pip--d">J<span class="suit-d"></span></span> <span class="pip pip--c">5<span class="suit-c"></span></span></span> flop is dealt.</p>
+          <p>Believe it or not, you should be checking a lot.</p>
+          <p>Take a look.</p>
+          <p class="c-img-caption"><em>Lucid Poker actions breakdown for OOP: Cutoff vs Button, 25bb effective on QJ5r.</em></p>
+          <p><strong>You should check a lot.</strong> About two-thirds of the time.</p>
+          <p>In this spot, your <span class="c-def-term" tabindex="0" role="button">range<span class="c-def-tip" role="tooltip">The complete set of hands you could hold in a given situation based on your preflop action.</span></span> has a significant representation of medium-strength hands, marginal draws, and complete misses. Do you check these, betting only your strongest combos?</p>
+          <p><em>Of course not.</em></p>
+          <p class="c-img-caption"><em>Lucid Poker OOP strategy for Cutoff vs Button, 25bb effective on QJ5r. Cutoff has a lot of unpaired Ax, Kx, suited connectors and gappers, underpairs to second and third pair, second pairs, and top pairs with weak kickers (Q6s).</em></p>
+          <p>You check your strong hands too. A benefit of checking your strong hands is that you protect the <a href="https://upswingpoker.com/tim-jenkins-range-bet/">equity of the middle and bottom of your range</a>.</p>
+          <p>But is this always the case?</p>
+          <p>Let's see.</p>
+          <p class="c-img-caption"><em>Lucid Poker actions: UTG c-bets 82% and checks 18% vs Button on QJ5r. Lo-Jack c-bets 54% and checks 46%.</em></p>
+          <p>Notice that you c-bet more often when the opening range is earlier, and therefore tighter. Early position opening ranges index on top-end strength (big cards, big pairs).</p>
+          <p>Thus, Under the Gun and Lo-Jack bet a lot, having a lot of natural strong value.</p>
+          <p>This is a widespread trend in GTO strategies.</p>
+          <p>Check any flop in the Lucid GTO trainer (medium flops, high flops, paired flops) and you'll find a high checking frequency when playing from the Cutoff against the Button.</p>
+          <p class="c-img-caption"><em>Slide from <a href="https://www.youtube.com/watch?v=s3_36RlmwBs">"Do NOT C-bet in Poker Tournaments"</a>. Comparing Under the Gun and Cutoff's checking frequencies vs the Button on different flop textures.</em></p>
+        </div>
+      </div>
+
+      <!-- ==================== SPOT 3 ==================== -->
+      <div class="c-spot" id="spot-3">
+        <div class="c-spot__header">
+          <span class="c-spot__num">Spot #3</span>
+          <span class="c-spot__title">Multiway Pots</span>
+        </div>
+        <div class="c-spot__body">
+          <p>When you've got multiple ranges to worry about, it's usually right to start with a check.</p>
+          <p>This is true on almost all flops, but especially those which are neutral or unfavorable for your range.</p>
+          <p>When you're heads-up, the equity is split between you and one other. It's reasonable to bet a lot. But when you have a third, fourth, or fifth player in the hand, you don't have the same amount of <span class="c-def-term" tabindex="0" role="button">equity<span class="c-def-tip" role="tooltip">Your share of the pot based on your chances of winning at showdown if all remaining cards are dealt.</span></span>. So you check.</p>
+          <p>For example, let's say you open <span class="pip-group"><span class="pip pip--c">A<span class="suit-c"></span></span> <span class="pip pip--c">4<span class="suit-c"></span></span></span> and an <span class="pip-board"><span class="pip pip--s">A<span class="suit-s"></span></span> <span class="pip pip--h">K<span class="suit-h"></span></span> <span class="pip pip--d">9<span class="suit-d"></span></span></span> flop is dealt.</p>
+          <p class="c-img-caption"><em>Cardplayer Equity Calculator: A4s vs QTs on AK9r. A4s has 77.88% equity and QTs has 22.12% equity.</em></p>
+          <p>When your opponent has <span class="pip-group"><span class="pip pip--d">Q<span class="suit-d"></span></span> <span class="pip pip--d">T<span class="suit-d"></span></span></span> you have about ~78% equity. Betting makes sense.</p>
+          <p>But what happens if we add a third player?</p>
+
+          <table class="c-equity-table">
+            <thead><tr><th>Hand</th><th>Equity (2-way)</th><th>Equity (3-way)</th><th>Equity (4-way)</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pip-group"><span class="pip pip--c">A<span class="suit-c"></span></span> <span class="pip pip--c">4<span class="suit-c"></span></span></span> (Hero)</td><td>77.88%</td><td>57.25%</td><td>49.39%</td></tr>
+              <tr><td><span class="pip-group"><span class="pip pip--d">Q<span class="suit-d"></span></span> <span class="pip pip--d">T<span class="suit-d"></span></span></span></td><td>22.12%</td><td>22.15%</td><td>23.17%</td></tr>
+              <tr><td><span class="pip-group"><span class="pip pip--s">K<span class="suit-s"></span></span> <span class="pip pip--s">8<span class="suit-s"></span></span></span></td><td></td><td>20.60%</td><td>20.37%</td></tr>
+              <tr><td><span class="pip-group"><span class="pip pip--s">3<span class="suit-s"></span></span> <span class="pip pip--h">3<span class="suit-h"></span></span></span></td><td></td><td></td><td>7.07%</td></tr>
+            </tbody>
+          </table>
+
+          <p>Now, A4s, the best hand on the flop, sees a ~20% drop in equity which the third player takes.</p>
+          <p>Now, A4s equity drops further. And remember, we are pretending we know our opponent's exact hands which we don't. As your equity decreases, you should bet less often. Multiway pots mean less c-betting, ipso facto.</p>
+          <p><em>There is an exception though.</em></p>
+          <p>When you're up against exactly two opponents and they're both in the blinds, you get to c-bet more.</p>
+          <p>There are at least three reasons for this.</p>
+          <ul>
+            <li>Ranges are wider, which works out to more auto-folds.</li>
+            <li>Because neither player 3-bet, they are more capped than a Button flatting range (which includes strong pocket pairs, Ace-Queen and even Ace-King).</li>
+            <li>Small Blind has to fold greater than <a href="https://upswingpoker.com/glossary/minimum-defense-frequency-mdf/"><span class="c-def-term" tabindex="0" role="button">minimum defense frequency<span class="c-def-tip" role="tooltip">The minimum percentage of your range you must continue with to prevent your opponent from profiting with any two cards.</span></span></a> (MDF) since they have to play OOP vs two players.</li>
+          </ul>
+          <p>So if you're going to c-bet in multiway pots, do it when your opponents are in the blinds.</p>
+        </div>
+      </div>
+
+      <!-- QUIZ 2: Multiway Pot Equity -->
+      <div class="c-quiz" id="quiz2">
+        <div class="c-quiz__header">
+          <span class="c-quiz__header-title">Test Your Knowledge</span>
+          <span class="c-quiz__header-step">Spot #3 Quiz</span>
+        </div>
+        <div class="c-quiz__progress"><div class="c-quiz__progress-bar" style="width:100%"></div></div>
+        <div class="c-quiz__body">
+          <div class="c-quiz__context">
+            <strong>Scenario:</strong> You open with <span class="pip-group"><span class="pip pip--c">A<span class="suit-c"></span></span> <span class="pip pip--c">4<span class="suit-c"></span></span></span> and get 3 callers. Flop is <span class="pip-board"><span class="pip pip--s">A<span class="suit-s"></span></span> <span class="pip pip--h">K<span class="suit-h"></span></span> <span class="pip pip--d">9<span class="suit-d"></span></span></span>. Heads-up your equity would be ~78%, but with 3 opponents it drops to ~49%.
+          </div>
+          <p class="c-quiz__question">Why does c-betting become a mistake as more players enter the pot?</p>
+          <div class="c-quiz__options" role="radiogroup">
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> More players means bigger pots, so the risk-reward is worse</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="correct"><span class="c-quiz__option-dot"></span> Each additional opponent dilutes your equity, so your hand is no longer strong enough to bet for value</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> Your opponents will always have stronger ranges in multiway pots</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> You should never c-bet with less than top pair in any pot</button>
+          </div>
+          <div class="c-quiz__explain" id="quiz2Explain">
+            <strong>Correct: Equity dilution.</strong> Each player in the pot has their own share of equity. Heads-up with <span class="pip-group"><span class="pip pip--c">A<span class="suit-c"></span></span> <span class="pip pip--c">4<span class="suit-c"></span></span></span> on <span class="pip-board"><span class="pip pip--s">A<span class="suit-s"></span></span> <span class="pip pip--h">K<span class="suit-h"></span></span> <span class="pip pip--d">9<span class="suit-d"></span></span></span>, you have ~78% equity. Add one opponent and it drops to ~57%. Add two more and you are below 50%. A hand that is a clear value bet heads-up becomes a check in a 4-way pot. This is the fundamental principle behind why c-bet frequency should decrease sharply in multiway pots.
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SPOT 4 ==================== -->
+      <div class="c-spot" id="spot-4">
+        <div class="c-spot__header">
+          <span class="c-spot__num">Spot #4</span>
+          <span class="c-spot__title">Low Connected Flops IP vs the Big Blind</span>
+        </div>
+        <div class="c-spot__body">
+          <p>A helpful way to think about c-betting is by categorizing flops as they relate to your range.</p>
+          <p><strong>Good flops, ok flops, and bad flops.</strong></p>
+          <ul>
+            <li>Naturally, on good flops -- c-bet more.</li>
+            <li>On ok flops -- c-bet sometimes.</li>
+            <li>On bad flops -- c-bet less.</li>
+            <li>Sometimes <em>a lot</em> less.</li>
+          </ul>
+          <p>Let's say you open the Hi-Jack, Big Blind defends, and you see a <span class="pip-board"><span class="pip pip--d">7<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">5<span class="suit-c"></span></span></span> flop.</p>
+          <p>This flop is so good for the Big Blind that the solver elects to lead nearly half of the time.</p>
+          <p class="c-img-caption"><em>Lucid Poker actions breakdown for OOP: Big Blind vs Hi-Jack, 25bb effective on <span class="pip-group"><span class="pip pip--d">7<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">5<span class="suit-c"></span></span></span>. Big Blind leads 42% and checks 58% frequency.</em></p>
+          <p>When the Big Blind checks, you bet about half the time. But are your opponents playing this spot like a solver? Are they leading out over half the time when they flop the nuts?</p>
+          <p>Are they firing a bet with all of these top pairs and decent draws like the solver would? I'm going to go out on a limb and say the answer is no. On these textures, your opponents will be carrying a lot more strength in their checking range than GTO supposes.</p>
+          <p>This means you should <a href="https://upswingpoker.com/check-back-bet-strategies/">check after they do</a>.</p>
+          <p><em>Solver strategies shouldn't be treated as a master, but a servant.</em></p>
+        </div>
+      </div>
+
+      <!-- ==================== SPOT 5 ==================== -->
+      <div class="c-spot" id="spot-5">
+        <div class="c-spot__header">
+          <span class="c-spot__num">Spot #5</span>
+          <span class="c-spot__title">When You'd Hate Your Life If They Shoved All-In</span>
+        </div>
+        <div class="c-spot__body">
+          <p>Remember the earlier <span class="pip-group"><span class="pip pip--h">J<span class="suit-h"></span></span> <span class="pip pip--h">T<span class="suit-h"></span></span></span> hand? In that instance, ICM meant your opponent could press you to make big folds, making you want to check more often.</p>
+          <p>However, that tactic is not exclusive to ICM. It happens whenever, by betting, you jeopardize your <span class="c-def-term" tabindex="0" role="button">equity realization<span class="c-def-tip" role="tooltip">How much of your raw equity you actually get to realize, considering future streets, position, and opponent actions.</span></span> while also improving your opponents' equity realization. You'll see this a lot at shallower stack depths where betting triggers an aggressive response from your opponent, usually the Big Blind and when there isn't a lot of folding.</p>
+          <p><em>There, checking helps preserve your equity.</em></p>
+          <p>Let's say you're dealt <span class="pip-group"><span class="pip pip--c">K<span class="suit-c"></span></span> <span class="pip pip--c">7<span class="suit-c"></span></span></span> in the Hi-Jack. Big Blind defends. A <span class="pip-board"><span class="pip pip--d">8<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">2<span class="suit-c"></span></span></span> flop is dealt.</p>
+          <p>They check. What's your play?</p>
+          <p>Let's ask Lucid.</p>
+          <p class="c-img-caption"><em>Lucid GTO Hi-Jack strategy for K7s combos on <span class="pip-group"><span class="pip pip--d">8<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">2<span class="suit-c"></span></span></span>. The highest frequency check is the club variant.</em></p>
+          <p>It's natural to want to bluff a hand like K7s. You have a good overcard and a backdoor straight draw. Half the time you have a flush draw to go with them.</p>
+          <p><em>But <span class="pip-group"><span class="pip pip--c">K<span class="suit-c"></span></span> <span class="pip pip--c">7<span class="suit-c"></span></span></span> is special.</em></p>
+          <p><span class="pip-group"><span class="pip pip--c">K<span class="suit-c"></span></span> <span class="pip pip--c">7<span class="suit-c"></span></span></span> doesn't want to get check-raised and blown off their equity. And on this board, you're going to see a lot of check-raising. That's on top of how frequently your opponent will be calling your bet.</p>
+          <p class="c-img-caption"><em>Lucid GTO actions breakdown for OOP: Big Blind vs Hi-Jack, 25bb effective on <span class="pip-group"><span class="pip pip--d">8<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">2<span class="suit-c"></span></span></span>. Big Blind check-raises 24% frequency combined, calls 48%, and folds 29%.</em></p>
+          <p>What happens when they check-raise to their dominant size (50% pot)?</p>
+          <p>Take a look.</p>
+          <p class="c-img-caption"><em>Lucid GTO Hi-Jack strategy for K7s combos on <span class="pip-group"><span class="pip pip--d">8<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">2<span class="suit-c"></span></span></span> facing Big Blind's 50% pot check-raise. Only the front door flush draw combo continues.</em></p>
+          <p>Womp womp womp.</p>
+          <p>Remember, this is facing a non-all in check-raise. If your opponent starts check-raising all-in, that's extremely bad for your middle of range c-bets.</p>
+          <p>How about this instead:</p>
+          <p><em>Check.</em></p>
+          <p>For more on this, you should watch: <a href="https://www.youtube.com/watch?v=s3_36RlmwBs">DO NOT C-BET in Poker Tournaments</a>.</p>
+          <p>For more on c-betting, see: <a href="https://upswingpoker.com/check-back-bet-strategies/">How to Build Strong Flop Check-Back Strategies in Tournaments</a>. You can also study <a href="https://upswingpoker.com/delayed-continuation-bet-c-bet-strategy/">delayed c-bet strategy</a> and <a href="https://upswingpoker.com/bet-size-strategy-tips-rules/">bet sizing rules</a> to round out your flop game.</p>
+          <p>And if you haven't yet, check out Lucid GTO <a href="http://www.lucidpoker.com">here</a>.</p>
+          <p>Good luck!</p>
+        </div>
+      </div>
+
+      <!-- QUIZ 3: Check-Raise Vulnerability -->
+      <div class="c-quiz" id="quiz3">
+        <div class="c-quiz__header">
+          <span class="c-quiz__header-title">Test Your Knowledge</span>
+          <span class="c-quiz__header-step">Spot #5 Quiz</span>
+        </div>
+        <div class="c-quiz__progress"><div class="c-quiz__progress-bar" style="width:100%"></div></div>
+        <div class="c-quiz__body">
+          <div class="c-quiz__context">
+            <strong>Scenario:</strong> You open <span class="pip-group"><span class="pip pip--c">K<span class="suit-c"></span></span> <span class="pip pip--c">7<span class="suit-c"></span></span></span> in the Hi-Jack, 25bb effective. Big Blind calls. Flop: <span class="pip-board"><span class="pip pip--d">8<span class="suit-d"></span></span> <span class="pip pip--d">6<span class="suit-d"></span></span> <span class="pip pip--c">2<span class="suit-c"></span></span></span>. Big Blind checks. According to Lucid GTO solvers, the Big Blind check-raises 24% of the time on this board.
+          </div>
+          <p class="c-quiz__question">Why does the solver prefer checking <span class="pip-group"><span class="pip pip--c">K<span class="suit-c"></span></span> <span class="pip pip--c">7<span class="suit-c"></span></span></span> here instead of other K7 combos?</p>
+          <div class="c-quiz__options" role="radiogroup">
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> Club combos are always weaker than other suits</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> The solver randomly assigns check frequencies across suits</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="correct"><span class="c-quiz__option-dot"></span> It has the backdoor flush draw in clubs, giving it more equity when checking, so it does not need to bet to build the pot</button>
+            <button class="c-quiz__option" role="radio" aria-checked="false" data-answer="wrong"><span class="c-quiz__option-dot"></span> The 2 of clubs on the board blocks its flush draw potential</button>
+          </div>
+          <div class="c-quiz__explain" id="quiz3Explain">
+            <strong>Correct: Backdoor flush draw equity.</strong> <span class="pip-group"><span class="pip pip--c">K<span class="suit-c"></span></span> <span class="pip pip--c">7<span class="suit-c"></span></span></span> has a backdoor flush draw (two clubs on the flop match its suit). This gives it additional equity when checking - if a club comes on the turn, it picks up a flush draw. Other K7 combos (like K7 of hearts or spades) lack this backdoor equity, so the solver is more willing to bet with those since they need to generate fold equity to compensate. The club combo can afford to check because it has better equity realization through the backdoor draw.
+          </div>
+        </div>
+      </div>
+
+      <!-- Related concepts row #2 (end of article) -->
+      <div class="c-related-concepts">
+        <span class="c-related-concepts__label">Go deeper:</span>
+        <a href="https://upswingpoker.com/delayed-continuation-bet-c-bet-strategy/">Delayed C-Bets</a>
+        <a href="https://upswingpoker.com/turn-probe-kanu7/">Turn Probes</a>
+        <a href="https://upswingpoker.com/bet-size-strategy-tips-rules/">Bet Sizing Rules</a>
+      </div>
+
+      <!-- DEFINITIONS / GLOSSARY -->
+      <div class="c-definitions" id="glossary">
+        <button class="c-definitions__header" aria-expanded="false">
+          <span class="c-definitions__title">&#128218; Terms in This Article</span>
+          <span class="c-definitions__toggle">+</span>
+        </button>
+        <div class="c-definitions__list">
+          <div class="c-definitions__entry"><span class="c-definitions__dt">C-Bet</span><span class="c-definitions__dd">A continuation bet made on the flop by the preflop aggressor.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">ICM</span><span class="c-definitions__dd">Independent Chip Model. Assigns monetary value to tournament chips based on prize distribution.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">MDF</span><span class="c-definitions__dd">Minimum Defense Frequency. The minimum percentage of your range you must continue with to prevent your opponent from auto-profiting.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">Equity</span><span class="c-definitions__dd">Your share of the pot based on your chances of winning at showdown.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">Equity Realization</span><span class="c-definitions__dd">How much of your raw equity you actually realize considering future streets, position, and opponent aggression.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">Range</span><span class="c-definitions__dd">The complete set of hands you could hold based on your preflop actions.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">OOP</span><span class="c-definitions__dd">Out of Position. Acting first on each postflop street, a significant disadvantage.</span></div>
+          <div class="c-definitions__entry"><span class="c-definitions__dt">IP</span><span class="c-definitions__dd">In Position. Acting last on each postflop street, giving you more information before deciding.</span></div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="c-article-faq" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="c-article-faq__header"><h3 class="c-article-faq__header-title">Frequently Asked Questions</h3></div>
+        <div class="c-article-faq__item is-open" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="c-article-faq__q" aria-expanded="true" itemprop="name"><span>How often should I c-bet in poker tournaments?</span><span class="c-article-faq__q-icon">+</span></button>
+          <div class="c-article-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">On average, after you open-raise in MTTs, you'll c-bet 60-70% of the time. But this varies significantly based on position, board texture, stack depth, and the number of players in the pot.</div></div>
+        </div>
+        <div class="c-article-faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="c-article-faq__q" aria-expanded="false" itemprop="name"><span>Should I c-bet less under ICM pressure?</span><span class="c-article-faq__q-icon">+</span></button>
+          <div class="c-article-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes. When a bigger stack can leverage ICM against you, check more often with marginal hands and draws. Getting raised puts you in brutal spots where you risk busting or folding away equity.</div></div>
+        </div>
+        <div class="c-article-faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="c-article-faq__q" aria-expanded="false" itemprop="name"><span>Why does position matter so much for c-betting in tournaments?</span><span class="c-article-faq__q-icon">+</span></button>
+          <div class="c-article-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">When OOP with a wide range (like the Cutoff vs Button), you check about two-thirds of the time. Earlier positions like UTG c-bet more because their tighter ranges naturally have more strong hands.</div></div>
+        </div>
+        <div class="c-article-faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="c-article-faq__q" aria-expanded="false" itemprop="name"><span>Should I c-bet in multiway pots?</span><span class="c-article-faq__q-icon">+</span></button>
+          <div class="c-article-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Much less often. Your equity drops ~20% with each additional player. The exception: when both opponents are in the blinds, where wider ranges and being capped work in your favor.</div></div>
+        </div>
+        <div class="c-article-faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="c-article-faq__q" aria-expanded="false" itemprop="name"><span>What are low connected flops and why should I avoid c-betting them?</span><span class="c-article-faq__q-icon">+</span></button>
+          <div class="c-article-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Boards like 7-6-5 heavily favor the Big Blind's range. Solvers show the BB should lead nearly 42% of the time on these textures. In practice, opponents carry even more strength in their checking range, so you should check behind when they check.</div></div>
+        </div>
+      </div>
+
+      <!-- CONTENT UPGRADE CTA -->
+      <div class="c-upgrade">
+        <div class="c-upgrade__header">
+          <span class="c-upgrade__icon">&#9989;</span>
+          <div>
+            <span class="c-upgrade__label">Free Resource</span>
+            <div class="c-upgrade__title">MTT Flop Strategy Cheatsheet</div>
+          </div>
+        </div>
+        <div class="c-upgrade__body">
+          <p class="c-upgrade__desc">Get a quick-reference guide covering when to c-bet and when to check in the most common tournament spots. Built for 15-50bb stack depths.</p>
+          <div class="c-upgrade__form">
+            <input type="email" placeholder="Your email..." aria-label="Email address">
+            <button class="c-btn c-btn--primary c-btn--sm">Send Cheatsheet</button>
+          </div>
+          <p class="c-upgrade__privacy">&#128274; No spam. Unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <!-- RELATED HUB -->
+      <div class="c-related-hub">
+        <div class="c-related-hub__header"><h3 class="c-related-hub__title">Continue Learning</h3></div>
+        <div class="c-related-hub__grid">
+          <a class="c-related-hub__card" href="https://upswingpoker.com/minimum-defense-frequency-vs-pot-odds/">
+            <span class="c-related-hub__card-type">Related Article</span>
+            <span class="c-related-hub__card-title">How to Make Profitable Decisions Against Any Bet Size (MDF vs Pot Odds)</span>
+            <div class="c-related-hub__card-meta"><span>By Dan B.</span><span>Aug 2018</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/mixed-strategy-random-poker-decisions/">
+            <span class="c-related-hub__card-type">Related Article</span>
+            <span class="c-related-hub__card-title">Why The Very Best Poker Players Make Decisions At Random (Mixed Strategy)</span>
+            <div class="c-related-hub__card-meta"><span>By George Mathias</span><span>Aug 2017</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/aggressive-poker-strategy-beat/">
+            <span class="c-related-hub__card-type">Related Article</span>
+            <span class="c-related-hub__card-title">How to Beat the Guy Who Is Always Betting</span>
+            <div class="c-related-hub__card-meta"><span>By Dan B.</span><span>Jul 2018</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/poker-cheat-code-leading/">
+            <span class="c-related-hub__card-type">Related Article</span>
+            <span class="c-related-hub__card-title">This Poker "Cheat Code" Will Help You Win More Hands</span>
+            <div class="c-related-hub__card-meta"><span>By Mike Brady</span><span>Feb 2019</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/equity-distribution/">
+            <span class="c-related-hub__card-type">Related Article</span>
+            <span class="c-related-hub__card-title">What Is Equity Distribution &amp; Why Does It Matter?</span>
+            <div class="c-related-hub__card-meta"><span>By Dan B.</span><span>Feb 2021</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/poker-game-tree/">
+            <span class="c-related-hub__card-type">Related Article</span>
+            <span class="c-related-hub__card-title">What is the Poker Game Tree &amp; Why Does It Matter?</span>
+            <div class="c-related-hub__card-meta"><span>By Dan B.</span><span>Jun 2021</span></div>
+          </a>
+          <!-- Next steps internal links -->
+          <a class="c-related-hub__card" href="https://upswingpoker.com/check-back-bet-strategies/">
+            <span class="c-related-hub__card-type">Next Step</span>
+            <span class="c-related-hub__card-title">How to Build Strong Flop Check-Back Strategies in Tournaments</span>
+            <div class="c-related-hub__card-meta"><span>Upswing Poker</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/c-bet-3-bet-pots-ip/">
+            <span class="c-related-hub__card-type">Next Step</span>
+            <span class="c-related-hub__card-title">C-Betting in 3-Bet Pots (In Position)</span>
+            <div class="c-related-hub__card-meta"><span>Upswing Poker</span></div>
+          </a>
+          <a class="c-related-hub__card" href="https://upswingpoker.com/turn-probe-kanu7/">
+            <span class="c-related-hub__card-type">Next Step</span>
+            <span class="c-related-hub__card-title">Turn Probe Bets Explained</span>
+            <div class="c-related-hub__card-meta"><span>Upswing Poker</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- AUTHOR BOX -->
+      <div class="c-author-box">
+        <div class="c-author-box__avatar">LS</div>
+        <div>
+          <div class="c-author-box__name">Leo Song-Carrillo</div>
+          <p class="c-author-box__bio">Leonardo Song-Carrillo is a tournament player with two ACR Online Super Series (OSS) titles, including a win in the $215 1.5 Million GTD event for $185,000 in 2023 and a win in the Sunday $109 400K win for $63,000 in 2024. In 2021, he finished 8th in the 96,000-runner $55 PokerStars Big 20 Finale for $57,000. He has recently moved up in stakes, taking shots at $630s and higher, highlighted by a runner-up finish in the $630 $150K Guaranteed for $26,000 last fall. His success extends to live poker, with two final tables in $1K events in Montreal and Las Vegas late 2024. With deep runs across both online and live arenas, he continues to establish himself as a fierce MTT competitor.</p>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- DESKTOP RAIL (sticky TOC) -->
+    <aside class="l-article__rail" aria-label="Table of contents sidebar">
+      <div class="c-toc c-toc--rail" id="tocDesktop">
+        <div class="c-toc__header">
+          <span class="c-toc__title">In This Article <span class="c-toc__count">5</span></span>
+        </div>
+        <div class="c-toc__progress"><div class="c-toc__progress-bar"></div></div>
+        <nav class="c-toc__list" aria-label="Table of contents">
+          <a class="c-toc__link" href="#spot-1"><span class="c-toc__link-num">1</span> ICM Pressure</a>
+          <a class="c-toc__link" href="#spot-2"><span class="c-toc__link-num">2</span> OOP Wide Range</a>
+          <a class="c-toc__link" href="#spot-3"><span class="c-toc__link-num">3</span> Multiway Pots</a>
+          <a class="c-toc__link" href="#spot-4"><span class="c-toc__link-num">4</span> Low Connected Flops</a>
+          <a class="c-toc__link" href="#spot-5"><span class="c-toc__link-num">5</span> Shove Would Ruin You</a>
+        </nav>
+        <div style="padding:var(--space-3) var(--space-4);border-top:1px solid var(--border-default);">
+          <a href="http://lucidpoker.com" class="c-btn c-btn--accent c-btn--sm" style="width:100%;text-align:center">Practice on Lucid &#8594;</a>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /l-article__grid -->
+</div><!-- /l-article -->
+
+<!-- === MINIMAL JS === -->
+<script>
+(function(){
+  'use strict';
+
+  /* TOC active highlighting + progress */
+  var spots = document.querySelectorAll('.c-spot[id]');
+  var tocLinks = document.querySelectorAll('.c-toc__link');
+  var progressBars = document.querySelectorAll('.c-toc__progress-bar');
+
+  function updateToc(){
+    var scrollY = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? Math.min(100,(scrollY/docH)*100) : 0;
+    progressBars.forEach(function(b){b.style.width = pct+'%';});
+
+    var active = null;
+    spots.forEach(function(s){
+      if(s.getBoundingClientRect().top < window.innerHeight * 0.3) active = s.id;
+    });
+    tocLinks.forEach(function(l){
+      l.classList.toggle('is-active', l.getAttribute('href') === '#'+active);
+    });
+  }
+  window.addEventListener('scroll', updateToc, {passive:true});
+  updateToc();
+
+  /* Mobile TOC collapse */
+  document.querySelectorAll('.c-toc__header').forEach(function(h){
+    h.addEventListener('click',function(){
+      var toc = h.closest('.c-toc');
+      if(toc){
+        toc.classList.toggle('is-collapsed');
+        h.setAttribute('aria-expanded', !toc.classList.contains('is-collapsed'));
+      }
+    });
+    h.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();h.click();}
+    });
+  });
+
+  /* Methodology toggle */
+  document.querySelectorAll('.c-methodology__header').forEach(function(b){
+    b.addEventListener('click',function(){
+      var m = b.closest('.c-methodology');
+      if(m){m.classList.toggle('is-open');b.setAttribute('aria-expanded',m.classList.contains('is-open'));}
+    });
+  });
+
+  /* Definitions glossary toggle */
+  document.querySelectorAll('.c-definitions__header').forEach(function(b){
+    b.addEventListener('click',function(){
+      var d = b.closest('.c-definitions');
+      if(d){d.classList.toggle('is-open');b.setAttribute('aria-expanded',d.classList.contains('is-open'));}
+    });
+  });
+
+  /* Definition tooltips (tap to open on mobile) */
+  document.querySelectorAll('.c-def-term').forEach(function(t){
+    t.addEventListener('click',function(e){
+      e.stopPropagation();
+      var was = t.classList.contains('is-active');
+      document.querySelectorAll('.c-def-term.is-active').forEach(function(x){x.classList.remove('is-active');});
+      if(!was) t.classList.add('is-active');
+    });
+  });
+  document.addEventListener('click',function(){
+    document.querySelectorAll('.c-def-term.is-active').forEach(function(x){x.classList.remove('is-active');});
+  });
+
+  /* FAQ accordion */
+  document.querySelectorAll('.c-article-faq__q').forEach(function(b){
+    b.addEventListener('click',function(){
+      var item = b.closest('.c-article-faq__item');
+      if(item){
+        var open = item.classList.contains('is-open');
+        item.classList.toggle('is-open',!open);
+        b.setAttribute('aria-expanded',!open);
+      }
+    });
+  });
+  /* QUIZ interactions */
+  document.querySelectorAll('.c-quiz').forEach(function(quiz){
+    var opts = quiz.querySelectorAll('.c-quiz__option');
+    var explain = quiz.querySelector('.c-quiz__explain');
+    var answered = false;
+
+    opts.forEach(function(opt){
+      opt.addEventListener('click',function(){
+        if(answered) return;
+        answered = true;
+        var isCorrect = opt.getAttribute('data-answer') === 'correct';
+
+        // Mark all options
+        opts.forEach(function(o){
+          o.setAttribute('disabled','true');
+          if(o.getAttribute('data-answer') === 'correct'){
+            o.classList.add('is-correct');
+            o.setAttribute('aria-checked','true');
+          } else if(o === opt && !isCorrect){
+            o.classList.add('is-incorrect');
+            o.setAttribute('aria-checked','true');
+          }
+        });
+
+        // Show explanation
+        if(explain) explain.classList.add('is-visible');
+      });
+    });
+  });
+})();
+</script>
+
+<!-- Internal links added:
+  "c-betting works in and out of position" -> https://upswingpoker.com/continuation-bet-c-bet-strategy-position/
+  "tournament c-betting fundamentals" -> https://upswingpoker.com/tournament-c-betting-strategy/
+  "C-Betting IP vs OOP" (chip) -> https://upswingpoker.com/continuation-bet-c-bet-strategy-position/
+  "Tournament C-Bet Guide" (chip) -> https://upswingpoker.com/tournament-c-betting-strategy/
+  "Modern C-Bet Mechanics" (chip) -> https://upswingpoker.com/mechanics-of-c-betting-phemo/
+  "equity of the middle and bottom of your range" -> https://upswingpoker.com/tim-jenkins-range-bet/
+  "minimum defense frequency" -> https://upswingpoker.com/glossary/minimum-defense-frequency-mdf/
+  "check after they do" -> https://upswingpoker.com/check-back-bet-strategies/
+  "Check-Back Strategies in Tournaments" -> https://upswingpoker.com/check-back-bet-strategies/
+  "delayed c-bet strategy" -> https://upswingpoker.com/delayed-continuation-bet-c-bet-strategy/
+  "bet sizing rules" -> https://upswingpoker.com/bet-size-strategy-tips-rules/
+  "Delayed C-Bets" (chip) -> https://upswingpoker.com/delayed-continuation-bet-c-bet-strategy/
+  "Turn Probes" (chip) -> https://upswingpoker.com/turn-probe-kanu7/
+  "Bet Sizing Rules" (chip) -> https://upswingpoker.com/bet-size-strategy-tips-rules/
+  Related Hub "Next Step": check-back-bet-strategies, c-bet-3-bet-pots-ip, turn-probe-kanu7
+-->
+</body>
+</html>

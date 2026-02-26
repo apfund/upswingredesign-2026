@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Upswing Poker - Advanced Poker Components v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ========================================================================
+   UPSWING DESIGN SYSTEM v2.1 - ADVANCED POKER COMPONENTS
+   Scoped under #upswing-ds to avoid WordPress conflicts
+   ======================================================================== */
+
+#upswing-ds {
+  /* --- Core Tokens (inherited from DS v2.1) --- */
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: clamp(0.6875rem,0.65rem + 0.15vw,0.75rem);
+  --text-sm: clamp(0.8125rem,0.78rem + 0.15vw,0.875rem);
+  --text-base: clamp(0.9375rem,0.9rem + 0.18vw,1rem);
+  --text-lg: clamp(1.0625rem,1rem + 0.25vw,1.125rem);
+  --text-xl: clamp(1.1875rem,1.1rem + 0.4vw,1.3125rem);
+  --text-2xl: clamp(1.4375rem,1.3rem + 0.6vw,1.6875rem);
+  --text-3xl: clamp(1.75rem,1.5rem + 1vw,2.25rem);
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semi: 600;
+  --weight-bold: 700;
+  --weight-extra: 800;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-loose: 1.8;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wider: 0.04em;
+  --tracking-widest: 0.08em;
+
+  --color-primary-50: #FFF1F0;
+  --color-primary-100: #FFE0DE;
+  --color-primary-200: #FFC1BC;
+  --color-primary-300: #FF8F87;
+  --color-primary-400: #FF5C52;
+  --color-primary-500: #FF2C1F;
+  --color-primary-600: #E01A0E;
+  --color-primary-700: #B81209;
+  --color-primary-800: #8C0E07;
+  --color-primary-900: #6B0B05;
+
+  --color-secondary-50: #FFF9E6;
+  --color-secondary-100: #FFF0BF;
+  --color-secondary-200: #FFE080;
+  --color-secondary-300: #FFD040;
+  --color-secondary-400: #FFC200;
+  --color-secondary-500: #FFB800;
+  --color-secondary-600: #E0A200;
+  --color-secondary-700: #B88400;
+
+  --color-accent-100: #D0F9E3;
+  --color-accent-200: #A3F2CA;
+  --color-accent-400: #33C687;
+  --color-accent-500: #00A651;
+
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-50: #F8F9FA;
+  --color-neutral-100: #F1F2F4;
+  --color-neutral-200: #E4E6E9;
+  --color-neutral-300: #CDD1D6;
+  --color-neutral-400: #9DA3AB;
+  --color-neutral-500: #6E7681;
+  --color-neutral-600: #4D545E;
+  --color-neutral-700: #343A42;
+  --color-neutral-800: #22272E;
+  --color-neutral-900: #14171B;
+
+  --surface-primary: var(--color-neutral-0);
+  --surface-secondary: var(--color-neutral-50);
+  --surface-dark: var(--color-neutral-800);
+  --surface-darkest: var(--color-neutral-900);
+  --border-default: var(--color-neutral-200);
+  --border-subtle: var(--color-neutral-100);
+  --text-strong: var(--color-neutral-900);
+  --text-default: var(--color-neutral-700);
+  --text-muted: var(--color-neutral-500);
+  --text-subtle: var(--color-neutral-400);
+
+  --suit-heart: #E5243F;
+  --suit-diamond: #3B7DDD;
+  --suit-club: #1B8A4E;
+  --suit-spade: var(--color-neutral-800);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem; --space-20: 5rem;
+
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* --- NEW: Component-Specific Tokens --- */
+  --range-raise: var(--color-primary-500);
+  --range-call: var(--color-accent-500);
+  --range-fold: var(--color-neutral-200);
+  --range-3bet: #9B59B6;
+  --range-allin: var(--color-primary-800);
+  --range-cell-size: 32px;
+  --range-gap: 1px;
+
+  --bet-slider-track: var(--color-neutral-200);
+  --bet-slider-fill: var(--color-primary-500);
+
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text-default);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================================================
+   PAGE-LEVEL DEMO STYLES (not part of components)
+   ======================================================================== */
+#upswing-ds .sg-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+#upswing-ds .sg-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--border-default);
+}
+#upswing-ds .sg-header h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-extra);
+  color: var(--text-strong);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-2);
+}
+#upswing-ds .sg-header p {
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+  margin: 0;
+}
+#upswing-ds .sg-section {
+  margin-bottom: var(--space-16);
+}
+#upswing-ds .sg-section-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-primary-500);
+  margin: 0 0 var(--space-2);
+}
+#upswing-ds .sg-section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-extra);
+  color: var(--text-strong);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-2);
+}
+#upswing-ds .sg-section-desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-6);
+  max-width: 640px;
+}
+#upswing-ds .sg-code {
+  background: var(--surface-darkest);
+  color: #e1e4e8;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-4);
+  border-radius: var(--radius-xs);
+  overflow-x: auto;
+  margin: var(--space-4) 0;
+  line-height: 1.6;
+  white-space: pre;
+}
+#upswing-ds .sg-embed-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+}
+#upswing-ds .sg-embed-note code {
+  color: var(--color-primary-500);
+  font-weight: var(--weight-semi);
+}
+
+/* ========================================================================
+   SHARED COMPONENT PRIMITIVES
+   ======================================================================== */
+
+/* Component container */
+#upswing-ds .pk-block {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  margin: var(--space-6) 0;
+}
+
+/* Component header bar */
+#upswing-ds .pk-block__header {
+  background: var(--surface-darkest);
+  color: #fff;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+#upswing-ds .pk-block__title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+#upswing-ds .pk-block__title-icon {
+  font-size: var(--text-base);
+  line-height: 1;
+}
+#upswing-ds .pk-block__badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--weight-semi);
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+#upswing-ds .pk-block__body {
+  padding: var(--space-4);
+}
+@media(min-width:640px) {
+  #upswing-ds .pk-block__body { padding: var(--space-5); }
+}
+
+/* Tabs */
+#upswing-ds .pk-tabs {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+#upswing-ds .pk-tabs__btn {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  white-space: nowrap;
+}
+#upswing-ds .pk-tabs__btn:hover {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.25);
+}
+#upswing-ds .pk-tabs__btn[aria-selected="true"],
+#upswing-ds .pk-tabs__btn.is-active {
+  background: var(--color-primary-500);
+  color: #fff;
+  border-color: var(--color-primary-500);
+}
+#upswing-ds .pk-tabs__btn:focus-visible {
+  outline: 2px solid var(--color-secondary-400);
+  outline-offset: 2px;
+}
+
+/* Toggle switch */
+#upswing-ds .pk-toggle {
+  display: inline-flex;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  gap: 2px;
+}
+#upswing-ds .pk-toggle__btn {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+#upswing-ds .pk-toggle__btn[aria-selected="true"],
+#upswing-ds .pk-toggle__btn.is-active {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+#upswing-ds .pk-toggle__btn:focus-visible {
+  outline: 2px solid var(--color-secondary-400);
+  outline-offset: 1px;
+}
+
+/* Inline card display (reused from DS 2.1 suit system) */
+#upswing-ds .suit-h::after { content: "\2665"; color: var(--suit-heart); }
+#upswing-ds .suit-d::after { content: "\2666"; color: var(--suit-diamond); }
+#upswing-ds .suit-c::after { content: "\2663"; color: var(--suit-club); }
+#upswing-ds .suit-s::after { content: "\2660"; color: var(--suit-spade); }
+#upswing-ds [class*="suit-"]::after { margin-left: 1px; font-style: normal; }
+
+/* Mini card pip */
+#upswing-ds .pip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+  min-width: 28px; padding: 0 4px;
+  height: 22px;
+  border-radius: 3px;
+  background: var(--surface-primary);
+  border: 1.5px solid;
+  line-height: 1;
+}
+#upswing-ds .pip-h { border-color: var(--suit-heart); color: var(--suit-heart); }
+#upswing-ds .pip-d { border-color: var(--suit-diamond); color: var(--suit-diamond); }
+#upswing-ds .pip-c { border-color: var(--suit-club); color: var(--suit-club); }
+#upswing-ds .pip-s { border-color: var(--suit-spade); color: var(--suit-spade); }
+
+/* ========================================================================
+   1. RANGE VIEWER
+   ======================================================================== */
+
+#upswing-ds .range-viewer .pk-block__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grid container */
+#upswing-ds .range-grid {
+  display: grid;
+  grid-template-columns: repeat(13, var(--range-cell-size));
+  gap: var(--range-gap);
+  font-family: var(--font-mono);
+  margin: 0 auto;
+}
+#upswing-ds .range-grid__cell {
+  width: var(--range-cell-size);
+  height: var(--range-cell-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: var(--weight-semi);
+  border-radius: 2px;
+  cursor: default;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+  position: relative;
+  user-select: none;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+#upswing-ds .range-grid__cell:hover {
+  transform: scale(1.2);
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
+
+/* Action colors */
+#upswing-ds .range-grid__cell[data-action="raise"] {
+  background: var(--range-raise);
+  color: #fff;
+}
+#upswing-ds .range-grid__cell[data-action="call"] {
+  background: var(--range-call);
+  color: #fff;
+}
+#upswing-ds .range-grid__cell[data-action="3bet"] {
+  background: var(--range-3bet);
+  color: #fff;
+}
+#upswing-ds .range-grid__cell[data-action="allin"] {
+  background: var(--range-allin);
+  color: #fff;
+}
+#upswing-ds .range-grid__cell[data-action="fold"] {
+  background: var(--range-fold);
+  color: var(--text-muted);
+}
+/* Mixed / frequency shading */
+#upswing-ds .range-grid__cell[data-action="mixed"] {
+  background: linear-gradient(135deg, var(--range-raise) 50%, var(--range-call) 50%);
+  color: #fff;
+}
+
+/* Legend */
+#upswing-ds .range-legend {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+#upswing-ds .range-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+#upswing-ds .range-legend__swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Responsive: shrink cells on small screens */
+@media(max-width:480px) {
+  #upswing-ds { --range-cell-size: 24px; }
+  #upswing-ds .range-grid__cell { font-size: 7px; }
+}
+
+/* Stats row below grid */
+#upswing-ds .range-stats {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+#upswing-ds .range-stats__item {
+  text-align: center;
+}
+#upswing-ds .range-stats__value {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--text-strong);
+  display: block;
+}
+#upswing-ds .range-stats__label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+
+/* ========================================================================
+   2. BOARD TEXTURE EXPLORER
+   ======================================================================== */
+
+#upswing-ds .board-explorer__families {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+#upswing-ds .board-explorer__card {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  background: var(--surface-primary);
+}
+#upswing-ds .board-explorer__card:hover {
+  border-color: var(--color-primary-300);
+}
+#upswing-ds .board-explorer__card.is-active {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 1px var(--color-primary-500);
+}
+#upswing-ds .board-explorer__card-label {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--text-strong);
+  margin-bottom: 4px;
+}
+#upswing-ds .board-explorer__card-board {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--space-2);
+}
+#upswing-ds .board-explorer__card-tag {
+  font-size: 10px;
+  font-weight: var(--weight-semi);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Detail panel */
+#upswing-ds .board-explorer__detail {
+  margin-top: var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  background: var(--surface-secondary);
+  overflow: hidden;
+  display: none;
+}
+#upswing-ds .board-explorer__detail.is-visible {
+  display: block;
+  animation: pk-slideDown var(--duration-base) ease;
+}
+@keyframes pk-slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#upswing-ds .board-explorer__detail-header {
+  background: var(--surface-darkest);
+  color: #fff;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+#upswing-ds .board-explorer__detail-title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+#upswing-ds .board-explorer__detail-body {
+  padding: var(--space-4);
+}
+#upswing-ds .board-explorer__strat-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+#upswing-ds .board-explorer__strat-row:last-child { border-bottom: none; }
+#upswing-ds .board-explorer__strat-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-muted);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+#upswing-ds .board-explorer__strat-value {
+  font-size: var(--text-sm);
+  color: var(--text-strong);
+  font-weight: var(--weight-medium);
+}
+#upswing-ds .board-explorer__strat-value strong {
+  color: var(--color-primary-500);
+  font-weight: var(--weight-bold);
+}
+
+
+/* ========================================================================
+   3. BET SIZING SLIDER
+   ======================================================================== */
+
+#upswing-ds .bet-slider__controls {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+#upswing-ds .bet-slider__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 140px;
+}
+#upswing-ds .bet-slider__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semi);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+#upswing-ds .bet-slider__field {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  color: var(--text-strong);
+  width: 100%;
+  box-sizing: border-box;
+}
+#upswing-ds .bet-slider__field:focus {
+  outline: none;
+  border-color: var(--color-primary-400);
+  box-shadow: 0 0 0 3px rgba(255,44,31,0.1);
+}
+
+/* The slider itself */
+#upswing-ds .bet-slider__range-wrap {
+  position: relative;
+  margin: var(--space-4) 0 var(--space-2);
+}
+#upswing-ds .bet-slider__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bet-slider-track);
+  outline: none;
+}
+#upswing-ds .bet-slider__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-500);
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--duration-fast);
+}
+#upswing-ds .bet-slider__range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+#upswing-ds .bet-slider__range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-500);
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: var(--shadow-md);
+}
+
+/* Preset chips */
+#upswing-ds .bet-slider__presets {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+#upswing-ds .bet-slider__preset {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+  color: var(--text-default);
+  transition: all var(--duration-fast);
+}
+#upswing-ds .bet-slider__preset:hover {
+  border-color: var(--color-primary-300);
+  color: var(--color-primary-500);
+}
+#upswing-ds .bet-slider__preset.is-active {
+  background: var(--color-primary-500);
+  color: #fff;
+  border-color: var(--color-primary-500);
+}
+
+/* Results grid */
+#upswing-ds .bet-slider__results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+#upswing-ds .bet-slider__result {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-xs);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+}
+#upswing-ds .bet-slider__result-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-strong);
+  display: block;
+}
+#upswing-ds .bet-slider__result-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  margin-top: 2px;
+}
+
+
+/* ========================================================================
+   4. ACTION LINE BUILDER
+   ======================================================================== */
+
+#upswing-ds .action-builder__stepper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: var(--space-4);
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+}
+#upswing-ds .action-builder__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  position: relative;
+  flex-shrink: 0;
+}
+#upswing-ds .action-builder__step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  background: var(--surface-secondary);
+  border: 2px solid var(--border-default);
+  color: var(--text-muted);
+  transition: all var(--duration-base);
+  z-index: 1;
+}
+#upswing-ds .action-builder__step.is-active .action-builder__step-dot {
+  background: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  color: #fff;
+}
+#upswing-ds .action-builder__step.is-complete .action-builder__step-dot {
+  background: var(--color-accent-500);
+  border-color: var(--color-accent-500);
+  color: #fff;
+}
+#upswing-ds .action-builder__step-label {
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-muted);
+  margin-top: 6px;
+  text-align: center;
+}
+#upswing-ds .action-builder__step.is-active .action-builder__step-label {
+  color: var(--text-strong);
+}
+/* Connector line */
+#upswing-ds .action-builder__connector {
+  flex: 1;
+  height: 2px;
+  background: var(--border-default);
+  margin-top: 15px;
+  min-width: 20px;
+}
+#upswing-ds .action-builder__connector.is-complete {
+  background: var(--color-accent-500);
+}
+
+/* Action choices */
+#upswing-ds .action-builder__choices {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+#upswing-ds .action-builder__choice {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-default);
+  background: var(--surface-primary);
+  color: var(--text-default);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+#upswing-ds .action-builder__choice:hover {
+  border-color: var(--color-primary-300);
+  color: var(--color-primary-500);
+}
+#upswing-ds .action-builder__choice.is-selected {
+  background: var(--color-primary-500);
+  color: #fff;
+  border-color: var(--color-primary-500);
+}
+#upswing-ds .action-builder__choice[data-action="check"] { }
+#upswing-ds .action-builder__choice[data-action="bet"],
+#upswing-ds .action-builder__choice[data-action="raise"] { }
+#upswing-ds .action-builder__choice[data-action="fold"] { }
+#upswing-ds .action-builder__choice:focus-visible {
+  outline: 2px solid var(--color-secondary-400);
+  outline-offset: 2px;
+}
+
+/* Reveal card */
+#upswing-ds .action-builder__reveal {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-left: 3px solid var(--color-accent-500);
+  border-radius: var(--radius-xs);
+  padding: var(--space-4);
+  display: none;
+}
+#upswing-ds .action-builder__reveal.is-visible { display: block; animation: pk-slideDown var(--duration-base) ease; }
+#upswing-ds .action-builder__reveal-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-accent-500);
+  margin-bottom: var(--space-2);
+}
+#upswing-ds .action-builder__reveal-text {
+  font-size: var(--text-sm);
+  color: var(--text-default);
+  line-height: var(--leading-loose);
+}
+#upswing-ds .action-builder__reveal-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary-500);
+  margin-bottom: var(--space-2);
+}
+
+
+/* ========================================================================
+   5. MDF / EXPLOIT TOGGLE
+   ======================================================================== */
+
+#upswing-ds .mdf-block__mode-bar {
+  display: flex;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  margin-bottom: var(--space-4);
+}
+#upswing-ds .mdf-block__mode-btn {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  text-align: center;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+#upswing-ds .mdf-block__mode-btn.is-active {
+  background: var(--surface-primary);
+  color: var(--text-strong);
+  box-shadow: var(--shadow-sm);
+}
+#upswing-ds .mdf-block__mode-btn:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 1px;
+}
+
+#upswing-ds .mdf-block__panel { display: none; }
+#upswing-ds .mdf-block__panel.is-visible { display: block; animation: pk-slideDown var(--duration-base) ease; }
+
+/* GTO panel */
+#upswing-ds .mdf-block__stat-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+#upswing-ds .mdf-block__stat-big {
+  text-align: center;
+  padding: var(--space-4);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-xs);
+  flex: 1;
+  min-width: 120px;
+}
+#upswing-ds .mdf-block__stat-big-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-strong);
+  display: block;
+}
+#upswing-ds .mdf-block__stat-big-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Defense bar (visual meter) */
+#upswing-ds .mdf-block__bar {
+  height: 10px;
+  background: var(--color-neutral-200);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+#upswing-ds .mdf-block__bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--color-accent-500);
+  transition: width var(--duration-slow) ease;
+}
+
+/* Fold list */
+#upswing-ds .mdf-block__fold-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#upswing-ds .mdf-block__fold-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--text-sm);
+}
+#upswing-ds .mdf-block__fold-item:last-child { border-bottom: none; }
+#upswing-ds .mdf-block__fold-hand {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-semi);
+  color: var(--text-strong);
+}
+#upswing-ds .mdf-block__fold-reason {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+#upswing-ds .mdf-block__fold-tag {
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-50);
+  color: var(--color-primary-600);
+}
+#upswing-ds .mdf-block__fold-tag--keep {
+  background: var(--color-accent-100);
+  color: var(--color-accent-500);
+}
+
+
+/* ========================================================================
+   6. COMBO BREAKDOWN
+   ======================================================================== */
+
+#upswing-ds .combo-block__summary {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+#upswing-ds .combo-block__bucket {
+  flex: 1;
+  min-width: 120px;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-xs);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+}
+#upswing-ds .combo-block__bucket-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  display: block;
+}
+#upswing-ds .combo-block__bucket-count--value {
+  color: var(--color-accent-500);
+}
+#upswing-ds .combo-block__bucket-count--bluff {
+  color: var(--color-primary-500);
+}
+#upswing-ds .combo-block__bucket-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Ratio bar */
+#upswing-ds .combo-block__ratio-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+#upswing-ds .combo-block__ratio-seg--value {
+  background: var(--color-accent-500);
+}
+#upswing-ds .combo-block__ratio-seg--bluff {
+  background: var(--color-primary-500);
+}
+
+/* Hand class list */
+#upswing-ds .combo-block__classes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+@media(max-width:480px) {
+  #upswing-ds .combo-block__classes { grid-template-columns: 1fr; }
+}
+#upswing-ds .combo-block__class {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  font-size: var(--text-sm);
+}
+#upswing-ds .combo-block__class-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+#upswing-ds .combo-block__class-dot--value { background: var(--color-accent-500); }
+#upswing-ds .combo-block__class-dot--bluff { background: var(--color-primary-500); }
+#upswing-ds .combo-block__class-name {
+  font-weight: var(--weight-medium);
+  color: var(--text-strong);
+  flex: 1;
+}
+#upswing-ds .combo-block__class-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+
+/* ========================================================================
+   7. TERMINOLOGY TOOLTIP
+   ======================================================================== */
+
+#upswing-ds .pk-term {
+  color: var(--text-strong);
+  font-weight: var(--weight-semi);
+  border-bottom: 1px dashed var(--color-primary-300);
+  cursor: help;
+  position: relative;
+  display: inline;
+}
+#upswing-ds .pk-term__popup {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  background: var(--surface-darkest);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-fast), visibility var(--duration-fast);
+  pointer-events: none;
+  z-index: 100;
+}
+#upswing-ds .pk-term__popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--surface-darkest);
+}
+#upswing-ds .pk-term:hover .pk-term__popup,
+#upswing-ds .pk-term:focus .pk-term__popup,
+#upswing-ds .pk-term.is-active .pk-term__popup {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+#upswing-ds .pk-term__popup-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  color: var(--color-secondary-400);
+  margin-bottom: 4px;
+}
+
+/* Adjust tooltip positioning near edges */
+@media(max-width:640px) {
+  #upswing-ds .pk-term__popup {
+    position: fixed;
+    bottom: auto;
+    top: auto;
+    left: var(--space-4);
+    right: var(--space-4);
+    transform: none;
+    width: auto;
+    bottom: var(--space-4);
+  }
+  #upswing-ds .pk-term__popup::after { display: none; }
+}
+
+</style>
+</head>
+<body style="margin:0;padding:0;background:#F8F9FA;">
+
+<div id="upswing-ds">
+<div class="sg-page">
+
+<!-- ====================================================================
+     STYLE GUIDE HEADER
+     ==================================================================== -->
+<header class="sg-header">
+  <h1>Advanced Poker Components</h1>
+  <p>Interactive blocks for Upswing Poker articles (built on Design System v2.1)</p>
+</header>
+
+
+<!-- ====================================================================
+     1. POSITION SELECTOR RANGE VIEWER
+     ==================================================================== -->
+<section class="sg-section" id="range-viewer">
+  <p class="sg-section-label">Component 1</p>
+  <h2 class="sg-section-title">Position Selector Range Viewer</h2>
+  <p class="sg-section-desc">
+    A 13x13 grid showing preflop ranges by position.
+    Tabs switch between positions, cells are color-coded by action,
+    and a stack-depth toggle switches between 100bb and 40bb charts.
+    Hover any cell to see the hand highlighted.
+  </p>
+
+  <!-- LIVE DEMO -->
+  <div class="pk-block range-viewer" id="rangeDemo">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#127183;</span> Range Viewer
+      </div>
+      <div style="display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap;">
+        <div class="pk-tabs" role="tablist" aria-label="Position selector">
+          <button class="pk-tabs__btn is-active" role="tab" aria-selected="true" data-pos="UTG">UTG</button>
+          <button class="pk-tabs__btn" role="tab" aria-selected="false" data-pos="HJ">HJ</button>
+          <button class="pk-tabs__btn" role="tab" aria-selected="false" data-pos="CO">CO</button>
+          <button class="pk-tabs__btn" role="tab" aria-selected="false" data-pos="BTN">BTN</button>
+          <button class="pk-tabs__btn" role="tab" aria-selected="false" data-pos="SB">SB</button>
+        </div>
+        <div class="pk-toggle" role="radiogroup" aria-label="Stack depth">
+          <button class="pk-toggle__btn is-active" role="radio" aria-selected="true" data-depth="100">100bb</button>
+          <button class="pk-toggle__btn" role="radio" aria-selected="false" data-depth="40">40bb</button>
+        </div>
+      </div>
+    </div>
+    <div class="pk-block__body">
+      <div class="range-grid" id="rangeGrid" role="grid" aria-label="Preflop range chart"></div>
+      <div class="range-legend">
+        <div class="range-legend__item"><span class="range-legend__swatch" style="background:var(--range-raise)"></span> Raise</div>
+        <div class="range-legend__item"><span class="range-legend__swatch" style="background:var(--range-call)"></span> Call</div>
+        <div class="range-legend__item"><span class="range-legend__swatch" style="background:var(--range-3bet)"></span> 3-Bet</div>
+        <div class="range-legend__item"><span class="range-legend__swatch" style="background:var(--range-allin)"></span> All-In</div>
+        <div class="range-legend__item"><span class="range-legend__swatch" style="background:var(--range-fold)"></span> Fold</div>
+        <div class="range-legend__item"><span class="range-legend__swatch" style="background:linear-gradient(135deg,var(--range-raise) 50%,var(--range-call) 50%)"></span> Mixed</div>
+      </div>
+      <div class="range-stats" id="rangeStats">
+        <div class="range-stats__item">
+          <span class="range-stats__value" id="statVPIP">15.4%</span>
+          <span class="range-stats__label">VPIP</span>
+        </div>
+        <div class="range-stats__item">
+          <span class="range-stats__value" id="statPFR">12.7%</span>
+          <span class="range-stats__label">PFR</span>
+        </div>
+        <div class="range-stats__item">
+          <span class="range-stats__value" id="statCombos">84</span>
+          <span class="range-stats__label">Combos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;div data-pk-range data-config='{"position":"UTG","depth":100}'&gt;&lt;/div&gt;</code>
+  </div>
+
+  <div class="sg-code" aria-label="JSON input format">// Example JSON input for Range Viewer
+{
+  "component": "range-viewer",
+  "positions": {
+    "UTG": {
+      "100bb": {
+        "AA": "raise", "AKs": "raise", "AKo": "raise",
+        "AQs": "raise", "AQo": "fold", "KQs": "raise",
+        "JTs": "raise", "T9s": "fold", "76s": "fold"
+      },
+      "40bb": { ... }
+    },
+    "BTN": { ... }
+  }
+}</div>
+</section>
+
+
+<!-- ====================================================================
+     2. BOARD TEXTURE EXPLORER
+     ==================================================================== -->
+<section class="sg-section" id="board-explorer">
+  <p class="sg-section-label">Component 2</p>
+  <h2 class="sg-section-title">Board Texture Explorer</h2>
+  <p class="sg-section-desc">
+    Preset flop families (dry, monotone, paired, connected, etc.)
+    that the reader clicks to reveal strategy notes, recommended
+    bet sizes, and key considerations for each texture.
+  </p>
+
+  <div class="pk-block board-explorer" id="boardDemo">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#127922;</span> Board Texture Explorer
+      </div>
+      <span class="pk-block__badge">SRP (IP vs BB)</span>
+    </div>
+    <div class="pk-block__body">
+      <div class="board-explorer__families" id="boardFamilies">
+        <!-- Filled by JS -->
+      </div>
+      <div class="board-explorer__detail" id="boardDetail">
+        <div class="board-explorer__detail-header">
+          <span id="boardDetailTitle" class="board-explorer__detail-title"></span>
+        </div>
+        <div class="board-explorer__detail-body" id="boardDetailBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;div data-pk-board-explorer data-spot="srp-ip"&gt;&lt;/div&gt;</code>
+  </div>
+
+  <div class="sg-code">// Example JSON input for Board Texture Explorer
+{
+  "component": "board-texture-explorer",
+  "spot": "SRP (IP vs BB)",
+  "families": [
+    {
+      "label": "Dry Rainbow",
+      "board": ["K","7","2"],
+      "suits": ["s","h","d"],
+      "tag": "Low SPR Friendly",
+      "strategy": {
+        "C-bet freq": "75-80%",
+        "Preferred size": "33% pot",
+        "Key concept": "Range advantage. Bet small with wide range.",
+        "Avoid": "Overbetting dry boards without nutted hands."
+      }
+    }
+  ]
+}</div>
+</section>
+
+
+<!-- ====================================================================
+     3. BET SIZING SLIDER
+     ==================================================================== -->
+<section class="sg-section" id="bet-slider">
+  <p class="sg-section-label">Component 3</p>
+  <h2 class="sg-section-title">Bet Sizing Slider</h2>
+  <p class="sg-section-desc">
+    An interactive tool that calculates pot odds, required fold equity,
+    and SPR after a bet. Editors can set the pot and stack sizes.
+    Readers drag the slider or click presets to explore sizing options.
+  </p>
+
+  <div class="pk-block" id="betDemo">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#128178;</span> Bet Sizing Calculator
+      </div>
+      <span class="pk-block__badge">Interactive</span>
+    </div>
+    <div class="pk-block__body">
+      <div class="bet-slider__controls">
+        <div class="bet-slider__input-group">
+          <label class="bet-slider__label" for="betPot">Pot Size</label>
+          <input class="bet-slider__field" id="betPot" type="number" value="100" min="1" step="1">
+        </div>
+        <div class="bet-slider__input-group">
+          <label class="bet-slider__label" for="betStack">Effective Stack</label>
+          <input class="bet-slider__field" id="betStack" type="number" value="500" min="1" step="1">
+        </div>
+      </div>
+
+      <div class="bet-slider__presets" id="betPresets">
+        <button class="bet-slider__preset" data-pct="25">25%</button>
+        <button class="bet-slider__preset" data-pct="33">33%</button>
+        <button class="bet-slider__preset" data-pct="50">50%</button>
+        <button class="bet-slider__preset is-active" data-pct="67">67%</button>
+        <button class="bet-slider__preset" data-pct="75">75%</button>
+        <button class="bet-slider__preset" data-pct="100">100%</button>
+        <button class="bet-slider__preset" data-pct="150">150%</button>
+      </div>
+
+      <div class="bet-slider__range-wrap">
+        <input class="bet-slider__range" id="betRange" type="range" min="10" max="200" value="67" step="1" aria-label="Bet size as percent of pot">
+      </div>
+
+      <div class="bet-slider__results" id="betResults">
+        <div class="bet-slider__result">
+          <span class="bet-slider__result-value" id="resBetSize">$67</span>
+          <span class="bet-slider__result-label">Bet Size</span>
+        </div>
+        <div class="bet-slider__result">
+          <span class="bet-slider__result-value" id="resPotOdds">28.6%</span>
+          <span class="bet-slider__result-label">Pot Odds (Villain)</span>
+        </div>
+        <div class="bet-slider__result">
+          <span class="bet-slider__result-value" id="resFoldEq">40.1%</span>
+          <span class="bet-slider__result-label">Req. Fold Equity</span>
+        </div>
+        <div class="bet-slider__result">
+          <span class="bet-slider__result-value" id="resSPR">2.59</span>
+          <span class="bet-slider__result-label">SPR After Bet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;div data-pk-bet-slider data-pot="100" data-stack="500"&gt;&lt;/div&gt;</code>
+  </div>
+
+  <div class="sg-code">// Example JSON input for Bet Sizing Slider
+{
+  "component": "bet-sizing-slider",
+  "pot": 100,
+  "effectiveStack": 500,
+  "defaultPct": 67,
+  "presets": [25, 33, 50, 67, 75, 100, 150]
+}</div>
+</section>
+
+
+<!-- ====================================================================
+     4. ACTION LINE BUILDER
+     ==================================================================== -->
+<section class="sg-section" id="action-builder">
+  <p class="sg-section-label">Component 4</p>
+  <h2 class="sg-section-title">Action Line Builder</h2>
+  <p class="sg-section-desc">
+    A street-by-street stepper where the reader picks an action
+    (check, bet, call, raise, fold) at each decision point.
+    After completing the line, a reveal shows the recommended
+    play and explanation.
+  </p>
+
+  <div class="pk-block" id="actionDemo">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#9654;</span> Action Line Builder
+      </div>
+      <span class="pk-block__badge">A<span class="suit-h"></span>K<span class="suit-h"></span> on K<span class="suit-d"></span>9<span class="suit-c"></span>4<span class="suit-h"></span></span>
+    </div>
+    <div class="pk-block__body">
+      <!-- Stepper -->
+      <div class="action-builder__stepper" id="actionStepper">
+        <div class="action-builder__step is-active" data-street="preflop">
+          <div class="action-builder__step-dot">PF</div>
+          <span class="action-builder__step-label">Preflop</span>
+        </div>
+        <div class="action-builder__connector"></div>
+        <div class="action-builder__step" data-street="flop">
+          <div class="action-builder__step-dot">F</div>
+          <span class="action-builder__step-label">Flop</span>
+        </div>
+        <div class="action-builder__connector"></div>
+        <div class="action-builder__step" data-street="turn">
+          <div class="action-builder__step-dot">T</div>
+          <span class="action-builder__step-label">Turn</span>
+        </div>
+        <div class="action-builder__connector"></div>
+        <div class="action-builder__step" data-street="river">
+          <div class="action-builder__step-dot">R</div>
+          <span class="action-builder__step-label">River</span>
+        </div>
+      </div>
+
+      <!-- Current decision prompt -->
+      <div id="actionPrompt" style="margin-bottom:var(--space-3);">
+        <p style="font-size:var(--text-sm);color:var(--text-muted);margin:0 0 var(--space-2);">
+          <strong style="color:var(--text-strong);">Preflop:</strong> You are in the CO with
+          <span class="pip pip-h">A♥</span> <span class="pip pip-h">K♥</span>. UTG opens 2.5x. Your action?
+        </p>
+      </div>
+
+      <!-- Choices (dynamically updated by JS) -->
+      <div class="action-builder__choices" id="actionChoices">
+        <button class="action-builder__choice" data-action="fold">Fold</button>
+        <button class="action-builder__choice" data-action="call">Call</button>
+        <button class="action-builder__choice" data-action="raise">3-Bet to 8x</button>
+      </div>
+
+      <!-- Reveal (hidden until complete) -->
+      <div class="action-builder__reveal" id="actionReveal">
+        <div class="action-builder__reveal-label">Recommended Line</div>
+        <div class="action-builder__reveal-action" id="actionRevealAction"></div>
+        <div class="action-builder__reveal-text" id="actionRevealText"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;div data-pk-action-builder data-config='action-line-1.json'&gt;&lt;/div&gt;</code>
+  </div>
+
+  <div class="sg-code">// Example JSON input for Action Line Builder
+{
+  "component": "action-line-builder",
+  "hero": { "hand": "AhKh", "position": "CO" },
+  "board": { "flop": "Kd9c4h", "turn": "7s", "river": "2d" },
+  "streets": [
+    {
+      "street": "preflop",
+      "prompt": "UTG opens 2.5x. Your action?",
+      "options": ["Fold", "Call", "3-Bet to 8x"],
+      "recommended": 2
+    },
+    {
+      "street": "flop",
+      "prompt": "UTG checks to you on Kd9c4h. Your action?",
+      "options": ["Check", "Bet 33%", "Bet 67%"],
+      "recommended": 2
+    }
+  ],
+  "reveal": {
+    "action": "3-Bet preflop, Bet 67% flop, Bet 75% turn, Check river",
+    "explanation": "With TPTK on a dry-ish board..."
+  }
+}</div>
+</section>
+
+
+<!-- ====================================================================
+     5. MDF / EXPLOIT TOGGLE
+     ==================================================================== -->
+<section class="sg-section" id="mdf-block">
+  <p class="sg-section-label">Component 5</p>
+  <h2 class="sg-section-title">MDF and Exploit Toggle</h2>
+  <p class="sg-section-desc">
+    A two-mode switch that shows GTO defense frequencies on one side
+    and exploitative adjustments on the other. The GTO panel shows
+    the minimum defense frequency and which hands to continue with.
+    The exploit panel shows which hands to drop or add based on
+    opponent tendencies.
+  </p>
+
+  <div class="pk-block" id="mdfDemo">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#9878;</span> Defense Strategy
+      </div>
+      <span class="pk-block__badge">Facing 75% Pot Bet</span>
+    </div>
+    <div class="pk-block__body">
+      <div class="mdf-block__mode-bar" role="tablist">
+        <button class="mdf-block__mode-btn is-active" role="tab" aria-selected="true" data-mode="gto">GTO Defense</button>
+        <button class="mdf-block__mode-btn" role="tab" aria-selected="false" data-mode="exploit">Exploit Adjust</button>
+      </div>
+
+      <!-- GTO Panel -->
+      <div class="mdf-block__panel is-visible" id="mdfGTO" role="tabpanel">
+        <div class="mdf-block__stat-row">
+          <div class="mdf-block__stat-big">
+            <span class="mdf-block__stat-big-value">57.1%</span>
+            <span class="mdf-block__stat-big-label">Min. Defense Freq.</span>
+          </div>
+          <div class="mdf-block__stat-big">
+            <span class="mdf-block__stat-big-value">42.9%</span>
+            <span class="mdf-block__stat-big-label">Max Fold Freq.</span>
+          </div>
+          <div class="mdf-block__stat-big">
+            <span class="mdf-block__stat-big-value">1 : 1.33</span>
+            <span class="mdf-block__stat-big-label">Pot Odds (Ratio)</span>
+          </div>
+        </div>
+        <div class="mdf-block__bar"><div class="mdf-block__bar-fill" style="width:57.1%"></div></div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);margin:0;">You must defend at least <strong style="color:var(--text-strong);">57.1%</strong> of your range to prevent villain from profiting with any two cards. Hands to fold first (ordered by weakest):</p>
+        <ul class="mdf-block__fold-list" style="margin-top:var(--space-3);">
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">9<span class="suit-d"></span>4<span class="suit-c"></span></span>
+            <span class="mdf-block__fold-reason">No pair, no draw, no blocker</span>
+            <span class="mdf-block__fold-tag">Fold</span>
+          </li>
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">7<span class="suit-h"></span>3<span class="suit-d"></span></span>
+            <span class="mdf-block__fold-reason">Weak backdoor only</span>
+            <span class="mdf-block__fold-tag">Fold</span>
+          </li>
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">J<span class="suit-c"></span>T<span class="suit-d"></span></span>
+            <span class="mdf-block__fold-reason">Two overcards, BDSD</span>
+            <span class="mdf-block__fold-tag mdf-block__fold-tag--keep">Keep</span>
+          </li>
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">A<span class="suit-h"></span>5<span class="suit-h"></span></span>
+            <span class="mdf-block__fold-reason">Nut blocker + BDFD</span>
+            <span class="mdf-block__fold-tag mdf-block__fold-tag--keep">Keep</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Exploit Panel -->
+      <div class="mdf-block__panel" id="mdfExploit" role="tabpanel">
+        <div class="mdf-block__stat-row">
+          <div class="mdf-block__stat-big" style="border-left:3px solid var(--color-primary-500);">
+            <span class="mdf-block__stat-big-value">72%</span>
+            <span class="mdf-block__stat-big-label">Actual Defense Freq.</span>
+          </div>
+          <div class="mdf-block__stat-big" style="border-left:3px solid var(--color-accent-500);">
+            <span class="mdf-block__stat-big-value">+15%</span>
+            <span class="mdf-block__stat-big-label">Over-defending by</span>
+          </div>
+        </div>
+        <div style="background:var(--color-secondary-50);border:1px solid var(--color-secondary-200);border-radius:var(--radius-xs);padding:var(--space-3) var(--space-4);margin-bottom:var(--space-4);">
+          <p style="font-size:var(--text-sm);color:var(--text-default);margin:0;">
+            <strong style="color:var(--color-secondary-700);">Exploit adjustment:</strong>
+            Villain over-folds to c-bets by roughly 15%. This means you should bet wider for value and add more bluffs.
+            The hands below shift from "fold" to "bet" in the exploitative strategy.
+          </p>
+        </div>
+        <ul class="mdf-block__fold-list">
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">Q<span class="suit-c"></span>J<span class="suit-d"></span></span>
+            <span class="mdf-block__fold-reason">GTO: check. Exploit: bet 33% as bluff</span>
+            <span class="mdf-block__fold-tag" style="background:var(--color-secondary-100);color:var(--color-secondary-700);">Add Bluff</span>
+          </li>
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">K<span class="suit-s"></span>8<span class="suit-s"></span></span>
+            <span class="mdf-block__fold-reason">GTO: check sometimes. Exploit: always bet</span>
+            <span class="mdf-block__fold-tag" style="background:var(--color-secondary-100);color:var(--color-secondary-700);">Size Up</span>
+          </li>
+          <li class="mdf-block__fold-item">
+            <span class="mdf-block__fold-hand">A<span class="suit-d"></span>A<span class="suit-c"></span></span>
+            <span class="mdf-block__fold-reason">GTO: bet 67%. Exploit: overbet 125%</span>
+            <span class="mdf-block__fold-tag" style="background:var(--color-secondary-100);color:var(--color-secondary-700);">Size Up</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;div data-pk-mdf data-bet-pct="75" data-villain-folds="72"&gt;&lt;/div&gt;</code>
+  </div>
+
+  <div class="sg-code">// Example JSON input for MDF / Exploit Toggle
+{
+  "component": "mdf-exploit",
+  "betSizePct": 75,
+  "gto": {
+    "mdf": 57.1,
+    "maxFold": 42.9,
+    "potOdds": "1:1.33",
+    "foldOrder": [
+      { "hand": "9d4c", "reason": "No pair, no draw, no blocker", "verdict": "fold" },
+      { "hand": "JcTd", "reason": "Two overcards, BDSD", "verdict": "keep" }
+    ]
+  },
+  "exploit": {
+    "actualDefense": 72,
+    "adjustment": "+15% over-defending",
+    "note": "Villain over-folds to c-bets by ~15%.",
+    "changes": [
+      { "hand": "QcJd", "action": "Add Bluff", "note": "GTO: check. Exploit: bet 33%" }
+    ]
+  }
+}</div>
+</section>
+
+
+<!-- ====================================================================
+     6. COMBO BREAKDOWN CARD
+     ==================================================================== -->
+<section class="sg-section" id="combo-block">
+  <p class="sg-section-label">Component 6</p>
+  <h2 class="sg-section-title">Combo Breakdown Card</h2>
+  <p class="sg-section-desc">
+    Shows a betting or checking range broken into value and bluff combos.
+    Displays counts, a visual ratio bar, and categorized hand classes.
+    Useful for illustrating bet/check/raise range composition.
+  </p>
+
+  <div class="pk-block" id="comboDemo">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#128200;</span> Combo Breakdown
+      </div>
+      <span class="pk-block__badge">River Bet Range</span>
+    </div>
+    <div class="pk-block__body">
+      <div class="combo-block__summary">
+        <div class="combo-block__bucket">
+          <span class="combo-block__bucket-count combo-block__bucket-count--value">24</span>
+          <span class="combo-block__bucket-label">Value Combos</span>
+        </div>
+        <div class="combo-block__bucket">
+          <span class="combo-block__bucket-count combo-block__bucket-count--bluff">12</span>
+          <span class="combo-block__bucket-label">Bluff Combos</span>
+        </div>
+        <div class="combo-block__bucket">
+          <span class="combo-block__bucket-count" style="color:var(--text-strong);">36</span>
+          <span class="combo-block__bucket-label">Total Combos</span>
+        </div>
+        <div class="combo-block__bucket">
+          <span class="combo-block__bucket-count" style="color:var(--text-strong);">2:1</span>
+          <span class="combo-block__bucket-label">V:B Ratio</span>
+        </div>
+      </div>
+
+      <div class="combo-block__ratio-bar">
+        <div class="combo-block__ratio-seg--value" style="width:66.7%"></div>
+        <div class="combo-block__ratio-seg--bluff" style="width:33.3%"></div>
+      </div>
+
+      <div class="combo-block__classes">
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--value"></span>
+          <span class="combo-block__class-name">Sets (KK, 99, 44)</span>
+          <span class="combo-block__class-count">9 combos</span>
+        </div>
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--value"></span>
+          <span class="combo-block__class-name">Two Pair (K9, K4)</span>
+          <span class="combo-block__class-count">6 combos</span>
+        </div>
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--value"></span>
+          <span class="combo-block__class-name">Straights (87s, 86s)</span>
+          <span class="combo-block__class-count">5 combos</span>
+        </div>
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--value"></span>
+          <span class="combo-block__class-name">Nut Flush (A<span class="suit-h"></span>x<span class="suit-h"></span>)</span>
+          <span class="combo-block__class-count">4 combos</span>
+        </div>
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--bluff"></span>
+          <span class="combo-block__class-name">Missed FD (Q<span class="suit-h"></span>J<span class="suit-h"></span>)</span>
+          <span class="combo-block__class-count">5 combos</span>
+        </div>
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--bluff"></span>
+          <span class="combo-block__class-name">Missed OESD (JTs, T8s)</span>
+          <span class="combo-block__class-count">4 combos</span>
+        </div>
+        <div class="combo-block__class">
+          <span class="combo-block__class-dot combo-block__class-dot--bluff"></span>
+          <span class="combo-block__class-name">Ace-high blockers</span>
+          <span class="combo-block__class-count">3 combos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;div data-pk-combo data-config='combo-river-1.json'&gt;&lt;/div&gt;</code>
+  </div>
+
+  <div class="sg-code">// Example JSON input for Combo Breakdown
+{
+  "component": "combo-breakdown",
+  "context": "River Bet Range",
+  "value": [
+    { "class": "Sets (KK, 99, 44)", "combos": 9 },
+    { "class": "Two Pair (K9, K4)", "combos": 6 },
+    { "class": "Straights (87s, 86s)", "combos": 5 },
+    { "class": "Nut Flush", "combos": 4 }
+  ],
+  "bluffs": [
+    { "class": "Missed FD (QhJh)", "combos": 5 },
+    { "class": "Missed OESD (JTs, T8s)", "combos": 4 },
+    { "class": "Ace-high blockers", "combos": 3 }
+  ]
+}</div>
+</section>
+
+
+<!-- ====================================================================
+     7. TERMINOLOGY TOOLTIP SYSTEM
+     ==================================================================== -->
+<section class="sg-section" id="tooltip-system">
+  <p class="sg-section-label">Component 7</p>
+  <h2 class="sg-section-title">Terminology Tooltip System</h2>
+  <p class="sg-section-desc">
+    Hover or tap to see poker term definitions inline. Works on
+    desktop (hover) and mobile (tap to toggle). Definitions are
+    stored as data attributes for easy editing.
+  </p>
+
+  <div class="pk-block">
+    <div class="pk-block__header">
+      <div class="pk-block__title">
+        <span class="pk-block__title-icon">&#128218;</span> Tooltips in Context
+      </div>
+      <span class="pk-block__badge">Demo Article Text</span>
+    </div>
+    <div class="pk-block__body" style="font-size:var(--text-lg);line-height:var(--leading-loose);">
+      <p style="margin:0 0 var(--space-4);">
+        When we face a bet on the river, we need to think about our
+        <span class="pk-term" tabindex="0" data-term="MDF" data-def="Minimum Defense Frequency. The percentage of your range you must continue with to prevent your opponent from profiting by bluffing with any two cards. Calculated as: 1 / (1 + bet/pot).">
+          MDF
+          <span class="pk-term__popup" role="tooltip">
+            <span class="pk-term__popup-title">MDF</span>
+            Minimum Defense Frequency. The percentage of your range you must continue with to prevent your opponent from profiting by bluffing with any two cards. Calculated as: 1 / (1 + bet/pot).
+          </span>
+        </span>
+        to avoid being exploited. If we're folding too often, villain can print money by
+        <span class="pk-term" tabindex="0" data-term="Over-bluffing" data-def="Betting or raising with a bluffing range that is larger than what GTO strategy prescribes. Profitable against opponents who fold too frequently.">
+          over-bluffing
+          <span class="pk-term__popup" role="tooltip">
+            <span class="pk-term__popup-title">Over-bluffing</span>
+            Betting or raising with a bluffing range that is larger than what GTO strategy prescribes. Profitable against opponents who fold too frequently.
+          </span>
+        </span>.
+      </p>
+      <p style="margin:0 0 var(--space-4);">
+        The key question on this
+        <span class="pk-term" tabindex="0" data-term="Monotone board" data-def="A board where all three flop cards share the same suit. These boards significantly change range interactions because flush draws and made flushes become a larger part of the hand distribution.">
+          monotone board
+          <span class="pk-term__popup" role="tooltip">
+            <span class="pk-term__popup-title">Monotone Board</span>
+            A board where all three flop cards share the same suit. These boards significantly change range interactions because flush draws and made flushes become a larger part of the hand distribution.
+          </span>
+        </span>
+        is whether our
+        <span class="pk-term" tabindex="0" data-term="Equity realization" data-def="How effectively a hand can convert its raw equity (expected share of the pot) into actual profit. Position, implied odds, and playability all affect equity realization.">
+          equity realization
+          <span class="pk-term__popup" role="tooltip">
+            <span class="pk-term__popup-title">Equity Realization</span>
+            How effectively a hand can convert its raw equity (expected share of the pot) into actual profit. Position, implied odds, and playability all affect equity realization.
+          </span>
+        </span>
+        justifies continuing. Hands with strong
+        <span class="pk-term" tabindex="0" data-term="Blocker" data-def="A card in your hand that 'blocks' or reduces the number of possible combinations of a specific hand your opponent could hold. For example, holding the Ace of hearts blocks nut flush combos.">
+          blockers
+          <span class="pk-term__popup" role="tooltip">
+            <span class="pk-term__popup-title">Blocker</span>
+            A card in your hand that "blocks" or reduces the number of possible combinations of a specific hand your opponent could hold. For example, holding the Ace of hearts blocks nut flush combos.
+          </span>
+        </span>
+        gain priority.
+      </p>
+    </div>
+  </div>
+
+  <div class="sg-embed-note">
+    <strong>Editor embed:</strong> <code>&lt;span class="pk-term" tabindex="0" data-term="MDF" data-def="Minimum Defense Frequency..."&gt;MDF&lt;/span&gt;</code>
+  </div>
+
+  <div class="sg-code">// Example JSON glossary (loaded globally or per-article)
+{
+  "component": "terminology-tooltips",
+  "terms": {
+    "MDF": "Minimum Defense Frequency. The percentage of your range...",
+    "SPR": "Stack-to-Pot Ratio. Effective stack divided by the pot...",
+    "EV": "Expected Value. The average outcome of a decision...",
+    "Blocker": "A card in your hand that reduces combinations of..."
+  }
+}</div>
+</section>
+
+
+</div><!-- /sg-page -->
+</div><!-- /#upswing-ds -->
+
+
+<!-- ====================================================================
+     JAVASCRIPT (scoped, vanilla, minimal)
+     ==================================================================== -->
+<script>
+(function() {
+  'use strict';
+
+  /* ==================================================================
+     UTILITY HELPERS
+     ================================================================== */
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $$ = (sel, root) => [...(root || document).querySelectorAll(sel)];
+
+  const RANKS = ['A','K','Q','J','T','9','8','7','6','5','4','3','2'];
+
+  function handLabel(r, c) {
+    if (r === c) return RANKS[r] + RANKS[c];
+    if (r < c) return RANKS[r] + RANKS[c] + 's'; // suited (above diagonal)
+    return RANKS[c] + RANKS[r] + 'o'; // offsuit (below diagonal)
+  }
+
+  /* ==================================================================
+     1. RANGE VIEWER
+     ================================================================== */
+  const RANGE_DATA = {
+    UTG: {
+      '100': 'AA KK QQ JJ TT 99|raise; AKs AQs AJs ATs KQs|raise; AKo|raise; 88 77|raise; KJs KTs QJs QTs JTs|raise; A9s A5s A4s|raise; T9s 98s 87s|call; KQo AQo|mixed',
+      '40': 'AA KK QQ JJ TT|raise; AKs AQs AKo|raise; 99|raise; AJs KQs|raise; AQo|mixed'
+    },
+    HJ: {
+      '100': 'AA KK QQ JJ TT 99 88|raise; AKs AQs AJs ATs A9s KQs KJs KTs QJs QTs JTs T9s 98s|raise; AKo AQo KQo|raise; 77 66|raise; A8s A5s A4s A3s|raise; 87s 76s 65s|call',
+      '40': 'AA KK QQ JJ TT 99|raise; AKs AQs AJs AKo AQo|raise; 88|raise; KQs KJs|raise; ATs|raise'
+    },
+    CO: {
+      '100': 'AA KK QQ JJ TT 99 88 77 66|raise; AKs AQs AJs ATs A9s A8s A7s A5s A4s A3s A2s|raise; KQs KJs KTs K9s QJs QTs Q9s JTs J9s T9s T8s 98s 97s 87s 86s 76s 75s 65s 54s|raise; AKo AQo AJo ATo KQo KJo QJo|raise; 55|raise',
+      '40': 'AA KK QQ JJ TT 99 88|raise; AKs AQs AJs ATs AKo AQo AJo|raise; KQs KJs KQo|raise; 77|raise; A9s KTs QJs|raise'
+    },
+    BTN: {
+      '100': 'AA KK QQ JJ TT 99 88 77 66 55 44 33 22|raise; AKs AQs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s|raise; KQs KJs KTs K9s K8s K7s K6s K5s QJs QTs Q9s Q8s JTs J9s J8s T9s T8s T7s 98s 97s 96s 87s 86s 76s 75s 65s 64s 54s 53s 43s|raise; AKo AQo AJo ATo A9o KQo KJo KTo QJo QTo JTo|raise',
+      '40': 'AA KK QQ JJ TT 99 88 77 66|raise; AKs AQs AJs ATs A9s A8s A5s A4s|raise; KQs KJs KTs QJs QTs JTs T9s|raise; AKo AQo AJo ATo KQo KJo QJo|raise; 55|raise'
+    },
+    SB: {
+      '100': 'AA KK QQ|raise; JJ TT 99 88 77|3bet; AKs AQs AJs|raise; AKo|raise; ATs A9s A8s A5s|3bet; KQs KJs KTs QJs QTs JTs|3bet; AQo AJo|3bet; T9s 98s 87s 76s 65s|call',
+      '40': 'AA KK QQ JJ|allin; TT 99|raise; AKs AQs AKo|allin; AJs ATs|raise; KQs|raise; AQo|raise'
+    }
+  };
+
+  function parseRangeString(str) {
+    const map = {};
+    if (!str) return map;
+    str.split(';').forEach(chunk => {
+      chunk = chunk.trim();
+      if (!chunk) return;
+      const parts = chunk.split('|');
+      if (parts.length < 2) return;
+      const action = parts[1].trim();
+      parts[0].trim().split(/\s+/).forEach(h => { map[h] = action; });
+    });
+    return map;
+  }
+
+  function buildGrid(rangeMap) {
+    const grid = $('#rangeGrid');
+    grid.innerHTML = '';
+    let raiseCount = 0, vpipCount = 0, totalCombos = 0;
+
+    for (let r = 0; r < 13; r++) {
+      for (let c = 0; c < 13; c++) {
+        const label = handLabel(r, c);
+        const action = rangeMap[label] || 'fold';
+        const cell = document.createElement('div');
+        cell.className = 'range-grid__cell';
+        cell.dataset.action = action;
+        cell.textContent = label;
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('aria-label', label + ' - ' + action);
+        cell.title = label + ': ' + action;
+        grid.appendChild(cell);
+
+        // Count combos
+        let combos = 0;
+        if (r === c) combos = 6;       // pair
+        else if (r < c) combos = 4;    // suited
+        else combos = 12;              // offsuit
+
+        if (action !== 'fold') {
+          vpipCount += combos;
+          if (action === 'raise' || action === '3bet' || action === 'allin') raiseCount += combos;
+          totalCombos += combos;
+        }
+      }
+    }
+
+    const totalHands = 1326;
+    $('#statVPIP').textContent = (vpipCount / totalHands * 100).toFixed(1) + '%';
+    $('#statPFR').textContent = (raiseCount / totalHands * 100).toFixed(1) + '%';
+    $('#statCombos').textContent = totalCombos;
+  }
+
+  // Position tab clicks
+  $$('#rangeDemo .pk-tabs__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('#rangeDemo .pk-tabs__btn').forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected','true');
+      updateRange();
+    });
+  });
+
+  // Depth toggle
+  $$('#rangeDemo .pk-toggle__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('#rangeDemo .pk-toggle__btn').forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected','true');
+      updateRange();
+    });
+  });
+
+  function updateRange() {
+    const pos = $('#rangeDemo .pk-tabs__btn.is-active').dataset.pos;
+    const depth = $('#rangeDemo .pk-toggle__btn.is-active').dataset.depth;
+    const rangeStr = (RANGE_DATA[pos] && RANGE_DATA[pos][depth]) || '';
+    buildGrid(parseRangeString(rangeStr));
+  }
+
+  updateRange();
+
+
+  /* ==================================================================
+     2. BOARD TEXTURE EXPLORER
+     ================================================================== */
+  const BOARD_DATA = [
+    {
+      label: 'Dry Rainbow',
+      board: [{ r:'K', s:'s' }, { r:'7', s:'h' }, { r:'2', s:'d' }],
+      tag: 'High Card Heavy',
+      strategy: {
+        'C-bet freq': '75-80% of range',
+        'Preferred size': '<strong>33% pot</strong> (small, wide)',
+        'Key concept': 'You have a major range advantage. Bet small with a wide range, since villain will fold a lot of air.',
+        'Avoid': 'Overbetting without nutted hands. Villain has very few strong hands here but neither do you beyond top pair.'
+      }
+    },
+    {
+      label: 'Monotone',
+      board: [{ r:'T', s:'h' }, { r:'7', s:'h' }, { r:'3', s:'h' }],
+      tag: 'Flush Draw Heavy',
+      strategy: {
+        'C-bet freq': '40-50% of range',
+        'Preferred size': '<strong>67% pot</strong> (polarized)',
+        'Key concept': 'Equity runs close. Your non-flush hands lose a lot of value. Only bet with made flushes, strong draws, or overpairs you can barrel.',
+        'Avoid': 'Betting with one-pair no-redraw hands. Check frequently and reassess on the turn.'
+      }
+    },
+    {
+      label: 'Paired Board',
+      board: [{ r:'9', s:'d' }, { r:'9', s:'c' }, { r:'5', s:'h' }],
+      tag: 'Trips or Air',
+      strategy: {
+        'C-bet freq': '55-65% of range',
+        'Preferred size': '<strong>25-33% pot</strong> (small, frequent)',
+        'Key concept': 'Neither player connects often. Bet small with your entire range minus the worst hands. If villain has a 9, you will find out by the turn.',
+        'Avoid': 'Using large sizes without trips or better. Overpairs can bet small but should not commit big stacks.'
+      }
+    },
+    {
+      label: 'Connected Low',
+      board: [{ r:'6', s:'c' }, { r:'5', s:'d' }, { r:'4', s:'h' }],
+      tag: 'Straight Draw Heavy',
+      strategy: {
+        'C-bet freq': '30-40% of range',
+        'Preferred size': '<strong>67-75% pot</strong> or check',
+        'Key concept': 'This board hits the BB range hard (suited connectors, small pairs). Use a polarized strategy: bet big with strong hands and good draws, check everything else.',
+        'Avoid': 'Betting small with the whole range. AK/AQ type hands should check here most of the time.'
+      }
+    },
+    {
+      label: 'Two-Tone High',
+      board: [{ r:'A', s:'h' }, { r:'K', s:'d' }, { r:'8', s:'h' }],
+      tag: 'Nut Advantage',
+      strategy: {
+        'C-bet freq': '65-75% of range',
+        'Preferred size': '<strong>50% pot</strong> (medium, balanced)',
+        'Key concept': 'You have a significant nut advantage with AK, AA, KK, AQ. Bet medium-sized with a wide range to deny equity from flush draws and middle pairs.',
+        'Avoid': 'Checking too much on this board where your range advantage is clear.'
+      }
+    },
+    {
+      label: 'Broadway Heavy',
+      board: [{ r:'Q', s:'s' }, { r:'J', s:'d' }, { r:'T', s:'c' }],
+      tag: 'Highly Connected',
+      strategy: {
+        'C-bet freq': '35-45% of range',
+        'Preferred size': '<strong>50-67% pot</strong> (selective)',
+        'Key concept': 'Both ranges connect hard. Straights, two-pairs, and big draws are common. Only bet with hands that can withstand a raise. Check and realize equity with marginal hands.',
+        'Avoid': 'Betting blindly with top pair only. QJ and JT are common in BB range. Be prepared for aggression.'
+      }
+    }
+  ];
+
+  const SUIT_SYMBOLS = { h: '\u2665', d: '\u2666', c: '\u2663', s: '\u2660' };
+  const SUIT_COLORS = { h: '#E5243F', d: '#3B7DDD', c: '#1B8A4E', s: '#22272E' };
+
+  function renderMiniCard(rank, suit) {
+    return `<span class="pip pip-${suit}">${rank}${SUIT_SYMBOLS[suit] || ''}</span>`;
+  }
+
+  function buildBoardExplorer() {
+    const container = $('#boardFamilies');
+    container.innerHTML = '';
+
+    BOARD_DATA.forEach((fam, i) => {
+      const card = document.createElement('div');
+      card.className = 'board-explorer__card';
+      card.dataset.index = i;
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', fam.label + ' board texture');
+
+      const boardHtml = fam.board.map(c => renderMiniCard(c.r, c.s)).join(' ');
+      card.innerHTML = `
+        <div class="board-explorer__card-label">${fam.label}</div>
+        <div class="board-explorer__card-board">${boardHtml}</div>
+        <div class="board-explorer__card-tag">${fam.tag}</div>
+      `;
+
+      card.addEventListener('click', () => selectBoard(i));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectBoard(i); }});
+      container.appendChild(card);
+    });
+  }
+
+  function selectBoard(index) {
+    const fam = BOARD_DATA[index];
+    $$('.board-explorer__card').forEach(c => c.classList.remove('is-active'));
+    $$(`.board-explorer__card[data-index="${index}"]`).forEach(c => c.classList.add('is-active'));
+
+    const detail = $('#boardDetail');
+    const boardStr = fam.board.map(c => renderMiniCard(c.r, c.s)).join(' ');
+    $('#boardDetailTitle').innerHTML = fam.label + '  - ' + boardStr;
+
+    let bodyHtml = '';
+    for (const [label, value] of Object.entries(fam.strategy)) {
+      bodyHtml += `
+        <div class="board-explorer__strat-row">
+          <span class="board-explorer__strat-label">${label}</span>
+          <span class="board-explorer__strat-value">${value}</span>
+        </div>`;
+    }
+    $('#boardDetailBody').innerHTML = bodyHtml;
+    detail.classList.add('is-visible');
+  }
+
+  buildBoardExplorer();
+
+
+  /* ==================================================================
+     3. BET SIZING SLIDER
+     ================================================================== */
+  const betRange = $('#betRange');
+  const betPot = $('#betPot');
+  const betStack = $('#betStack');
+
+  function updateBetCalc() {
+    const pot = parseFloat(betPot.value) || 100;
+    const stack = parseFloat(betStack.value) || 500;
+    const pct = parseFloat(betRange.value) || 67;
+    const bet = (pot * pct / 100);
+    const newPot = pot + bet;
+    const potOdds = (bet / (newPot + bet)) * 100;  // villain's pot odds
+    const foldEq = bet / (pot + bet) * 100;
+    const remainStack = stack - bet;
+    const spr = remainStack > 0 ? (remainStack / newPot) : 0;
+
+    $('#resBetSize').textContent = '$' + bet.toFixed(0);
+    $('#resPotOdds').textContent = potOdds.toFixed(1) + '%';
+    $('#resFoldEq').textContent = foldEq.toFixed(1) + '%';
+    $('#resSPR').textContent = spr.toFixed(2);
+
+    // Update presets active state
+    $$('.bet-slider__preset').forEach(p => {
+      p.classList.toggle('is-active', parseInt(p.dataset.pct) === Math.round(pct));
+    });
+  }
+
+  betRange.addEventListener('input', updateBetCalc);
+  betPot.addEventListener('input', updateBetCalc);
+  betStack.addEventListener('input', updateBetCalc);
+
+  $$('.bet-slider__preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      betRange.value = btn.dataset.pct;
+      updateBetCalc();
+    });
+  });
+
+  updateBetCalc();
+
+
+  /* ==================================================================
+     4. ACTION LINE BUILDER
+     ================================================================== */
+  const ACTION_SCRIPT = [
+    {
+      street: 'preflop',
+      prompt: '<strong>Preflop:</strong> You are in the CO with <span class="pip pip-h">A♥</span> <span class="pip pip-h">K♥</span>. UTG opens 2.5x. Your action?',
+      options: [
+        { label: 'Fold', action: 'fold' },
+        { label: 'Call', action: 'call' },
+        { label: '3-Bet to 8x', action: 'raise' }
+      ],
+      recommended: 2
+    },
+    {
+      street: 'flop',
+      prompt: '<strong>Flop:</strong> <span class="pip pip-d">K♦</span> <span class="pip pip-c">9♣</span> <span class="pip pip-h">4♥</span>  - UTG checks. Your action?',
+      options: [
+        { label: 'Check', action: 'check' },
+        { label: 'Bet 33%', action: 'bet' },
+        { label: 'Bet 67%', action: 'bet' }
+      ],
+      recommended: 2
+    },
+    {
+      street: 'turn',
+      prompt: '<strong>Turn:</strong> <span class="pip pip-d">K♦</span> <span class="pip pip-c">9♣</span> <span class="pip pip-h">4♥</span> <span class="pip pip-s">7♠</span>  - UTG checks again. Your action?',
+      options: [
+        { label: 'Check', action: 'check' },
+        { label: 'Bet 67%', action: 'bet' },
+        { label: 'Bet 75%', action: 'bet' }
+      ],
+      recommended: 2
+    },
+    {
+      street: 'river',
+      prompt: '<strong>River:</strong> <span class="pip pip-d">K♦</span> <span class="pip pip-c">9♣</span> <span class="pip pip-h">4♥</span> <span class="pip pip-s">7♠</span> <span class="pip pip-d">2♦</span>  - UTG checks a third time. Your action?',
+      options: [
+        { label: 'Check', action: 'check' },
+        { label: 'Bet 75%', action: 'bet' },
+        { label: 'Overbet 150%', action: 'bet' }
+      ],
+      recommended: 1
+    }
+  ];
+
+  let currentStep = 0;
+  let userChoices = [];
+
+  function renderActionStep() {
+    const step = ACTION_SCRIPT[currentStep];
+    if (!step) return showActionReveal();
+
+    // Update stepper dots
+    $$('.action-builder__step').forEach((el, i) => {
+      el.classList.remove('is-active', 'is-complete');
+      if (i < currentStep) el.classList.add('is-complete');
+      else if (i === currentStep) el.classList.add('is-active');
+    });
+    $$('.action-builder__connector').forEach((el, i) => {
+      el.classList.toggle('is-complete', i < currentStep);
+    });
+
+    // Update prompt
+    $('#actionPrompt').innerHTML = `<p style="font-size:var(--text-sm);color:var(--text-muted);margin:0 0 var(--space-2);">${step.prompt}</p>`;
+
+    // Update choices
+    const choicesEl = $('#actionChoices');
+    choicesEl.innerHTML = '';
+    step.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'action-builder__choice';
+      btn.dataset.action = opt.action;
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => {
+        userChoices.push({ street: step.street, choice: opt.label, index: i, wasCorrect: i === step.recommended });
+        btn.classList.add('is-selected');
+        setTimeout(() => {
+          currentStep++;
+          renderActionStep();
+        }, 400);
+      });
+      choicesEl.appendChild(btn);
+    });
+
+    $('#actionReveal').classList.remove('is-visible');
+  }
+
+  function showActionReveal() {
+    // Mark all steps complete
+    $$('.action-builder__step').forEach(el => { el.classList.remove('is-active'); el.classList.add('is-complete'); });
+    $$('.action-builder__connector').forEach(el => el.classList.add('is-complete'));
+
+    $('#actionPrompt').innerHTML = '';
+    $('#actionChoices').innerHTML = '';
+
+    const correctCount = userChoices.filter(c => c.wasCorrect).length;
+    const lineStr = userChoices.map(c => c.choice).join(' / ');
+    const recLine = ACTION_SCRIPT.map(s => s.options[s.recommended].label).join(' / ');
+
+    const reveal = $('#actionReveal');
+    $('#actionRevealAction').innerHTML = `Your line: ${lineStr} (${correctCount}/${ACTION_SCRIPT.length} matched)`;
+    $('#actionRevealText').innerHTML = `
+      <p style="margin:0 0 var(--space-3);">
+        <strong>Recommended line:</strong> ${recLine}
+      </p>
+      <p style="margin:0;">
+        With A<span class="suit-h"></span>K<span class="suit-h"></span> in position against UTG,
+        3-betting preflop is standard. On K<span class="suit-d"></span>9<span class="suit-c"></span>4<span class="suit-h"></span>,
+        you flop top pair top kicker with the nut flush draw.
+        Betting 67% on the flop and turn extracts value while building the pot.
+        On a blank 2<span class="suit-d"></span> river, a 75% bet targets the top of villain's
+        check-calling range (QQ, JJ, TT, 99) while occasionally getting paid by Kx.
+      </p>
+    `;
+    reveal.classList.add('is-visible');
+
+    // Add reset button
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Try Again';
+    resetBtn.className = 'action-builder__choice';
+    resetBtn.style.marginTop = 'var(--space-3)';
+    resetBtn.addEventListener('click', () => {
+      currentStep = 0;
+      userChoices = [];
+      renderActionStep();
+    });
+    reveal.appendChild(resetBtn);
+  }
+
+  renderActionStep();
+
+
+  /* ==================================================================
+     5. MDF / EXPLOIT TOGGLE
+     ================================================================== */
+  $$('#mdfDemo .mdf-block__mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('#mdfDemo .mdf-block__mode-btn').forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected','true');
+
+      if (btn.dataset.mode === 'gto') {
+        $('#mdfGTO').classList.add('is-visible');
+        $('#mdfExploit').classList.remove('is-visible');
+      } else {
+        $('#mdfGTO').classList.remove('is-visible');
+        $('#mdfExploit').classList.add('is-visible');
+      }
+    });
+  });
+
+
+  /* ==================================================================
+     7. TERMINOLOGY TOOLTIPS (mobile tap support)
+     ================================================================== */
+  $$('.pk-term').forEach(term => {
+    term.addEventListener('click', function(e) {
+      // Close others
+      $$('.pk-term.is-active').forEach(t => { if (t !== this) t.classList.remove('is-active'); });
+      this.classList.toggle('is-active');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', () => {
+    $$('.pk-term.is-active').forEach(t => t.classList.remove('is-active'));
+  });
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upswing Poker — Design System v2.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   UPSWING POKER DESIGN SYSTEM v2.1
+   Modern, scalable design system for poker education
+   ================================================================ */
+
+/* MINIMAL RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+button,input,textarea,select{font:inherit}
+a{color:inherit}
+ul,ol{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════ */
+:root{
+  /* Primary Red */
+  --color-primary-50:#FFF1F0;--color-primary-100:#FFE0DE;--color-primary-200:#FFC1BC;
+  --color-primary-300:#FF8F87;--color-primary-400:#FF5C52;--color-primary-500:#FF2C1F;
+  --color-primary-600:#E01A0E;--color-primary-700:#B81209;--color-primary-800:#8C0E07;--color-primary-900:#6B0B05;
+
+  /* Secondary Gold */
+  --color-secondary-50:#FFF9E6;--color-secondary-100:#FFF0BF;--color-secondary-200:#FFE080;
+  --color-secondary-300:#FFD040;--color-secondary-400:#FFC200;--color-secondary-500:#FFB800;
+  --color-secondary-600:#E0A200;--color-secondary-700:#B88400;--color-secondary-800:#8C6500;--color-secondary-900:#604500;
+
+  /* Accent CTA Green */
+  --color-accent-50:#EDFDF4;--color-accent-100:#D0F9E3;--color-accent-200:#A3F2CA;
+  --color-accent-300:#5FE6A5;--color-accent-400:#33C687;--color-accent-500:#00A651;
+  --color-accent-600:#008B46;--color-accent-700:#006F38;--color-accent-800:#005A2E;--color-accent-900:#004422;
+
+  /* Neutrals */
+  --color-neutral-0:#FFFFFF;--color-neutral-50:#F8F9FA;--color-neutral-100:#F1F2F4;
+  --color-neutral-200:#E4E6E9;--color-neutral-300:#CDD1D6;--color-neutral-400:#9DA3AB;
+  --color-neutral-500:#6E7681;--color-neutral-600:#4D545E;--color-neutral-700:#343A42;
+  --color-neutral-800:#22272E;--color-neutral-900:#14171B;--color-neutral-950:#0C0D0F;
+
+  /* Semantic */
+  --color-success-50:#EDFDF4;--color-success-500:#16A34A;--color-success-700:#15803D;
+  --color-warn-50:#FFFBEB;--color-warn-500:#F59E0B;--color-warn-700:#B45309;
+  --color-error-50:#FFF1F0;--color-error-500:#DC2626;--color-error-700:#B91C1C;
+  --color-info-50:#EFF6FF;--color-info-500:#3B82F6;--color-info-700:#1D4ED8;
+
+  /* Typography */
+  --font-display:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --font-body:'DM Sans',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code',monospace;
+
+  --text-xs:clamp(0.6875rem,0.65rem + 0.15vw,0.75rem);
+  --text-sm:clamp(0.8125rem,0.78rem + 0.15vw,0.875rem);
+  --text-base:clamp(0.9375rem,0.9rem + 0.18vw,1rem);
+  --text-lg:clamp(1.0625rem,1rem + 0.25vw,1.125rem);
+  --text-xl:clamp(1.1875rem,1.1rem + 0.4vw,1.3125rem);
+  --text-2xl:clamp(1.4375rem,1.3rem + 0.6vw,1.6875rem);
+  --text-3xl:clamp(1.75rem,1.5rem + 1vw,2.25rem);
+  --text-4xl:clamp(2.125rem,1.75rem + 1.5vw,3rem);
+  --text-5xl:clamp(2.625rem,2rem + 2.5vw,4rem);
+
+  --leading-tight:1.15;--leading-snug:1.3;--leading-normal:1.5;
+  --leading-relaxed:1.65;--leading-loose:1.8;
+  --tracking-tighter:-0.03em;--tracking-tight:-0.015em;--tracking-normal:0;
+  --tracking-wide:0.025em;--tracking-wider:0.05em;--tracking-widest:0.1em;
+  --weight-regular:400;--weight-medium:500;--weight-semi:600;--weight-bold:700;--weight-extra:800;
+
+  /* Spacing */
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;
+
+  /* Layout */
+  --grid-max:1280px;--grid-narrow:720px;--grid-gutter:1.5rem;
+
+  /* Shadows */
+  --shadow-xs:0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 6px -1px rgba(0,0,0,0.08),0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.08),0 4px 6px -4px rgba(0,0,0,0.04);
+  --shadow-xl:0 20px 25px -5px rgba(0,0,0,0.1),0 8px 10px -6px rgba(0,0,0,0.05);
+  --shadow-2xl:0 25px 50px -12px rgba(0,0,0,0.2);
+  --shadow-red-glow:0 0 20px rgba(255,44,31,0.15),0 0 40px rgba(255,44,31,0.05);
+  --shadow-green-glow:0 4px 14px rgba(0,166,81,0.25);
+
+  /* BORDER RADIUS — sharp containers, softer interactive elements */
+  --radius-none:0;
+  --radius-xs:2px;      /* containers, boxes, alerts */
+  --radius-sm:3px;      /* tags, cards */
+  --radius-md:8px;      /* buttons, inputs, interactive */
+  --radius-lg:10px;     /* large buttons */
+  --radius-xl:3px;      /* card containers — kept sharp */
+  --radius-2xl:3px;     /* promo blocks — kept sharp */
+  --radius-full:9999px; /* pills, badges, chips */
+
+  /* Transitions */
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --duration-fast:120ms;--duration-base:200ms;--duration-slow:350ms;
+
+  /* Semantic surfaces */
+  --surface-primary:var(--color-neutral-0);--surface-secondary:var(--color-neutral-50);
+  --surface-tertiary:var(--color-neutral-100);--surface-elevated:var(--color-neutral-0);
+  --text-strong:var(--color-neutral-900);--text-default:var(--color-neutral-700);
+  --text-subtle:var(--color-neutral-500);--text-muted:var(--color-neutral-400);
+  --border-default:var(--color-neutral-200);--border-subtle:var(--color-neutral-100);
+  --border-strong:var(--color-neutral-300);
+
+  /* Suit colors */
+  --suit-heart:#E5243F;
+  --suit-diamond:#3B7DDD;
+  --suit-club:#1B8A4E;
+  --suit-spade:var(--color-neutral-800);
+}
+
+/* Dark Mode */
+[data-theme="dark"]{
+  --surface-primary:var(--color-neutral-950);--surface-secondary:var(--color-neutral-900);
+  --surface-tertiary:var(--color-neutral-800);--surface-elevated:var(--color-neutral-800);
+  --text-strong:var(--color-neutral-0);--text-default:var(--color-neutral-200);
+  --text-subtle:var(--color-neutral-400);--text-muted:var(--color-neutral-600);
+  --border-default:var(--color-neutral-700);--border-subtle:var(--color-neutral-800);
+  --border-strong:var(--color-neutral-600);
+  --suit-spade:var(--color-neutral-200);
+}
+
+/* ═══════════════════════════════════════════════
+   GLOBAL TYPOGRAPHY
+   ═══════════════════════════════════════════════ */
+body{font-family:var(--font-body);font-size:var(--text-base);line-height:var(--leading-relaxed);color:var(--text-default);background:var(--surface-primary)}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-strong);line-height:var(--leading-tight);font-weight:var(--weight-bold)}
+h1{font-size:var(--text-5xl);letter-spacing:var(--tracking-tighter);font-weight:var(--weight-extra)}
+h2{font-size:var(--text-4xl);letter-spacing:var(--tracking-tighter)}
+h3{font-size:var(--text-3xl);letter-spacing:var(--tracking-tight)}
+h4{font-size:var(--text-2xl);letter-spacing:var(--tracking-tight)}
+h5{font-size:var(--text-xl);font-weight:var(--weight-semi)}
+h6{font-size:var(--text-lg);font-weight:var(--weight-semi);text-transform:uppercase;letter-spacing:var(--tracking-wide)}
+
+/* ═══════════════════════════════════════════════
+   ARTICLE TYPOGRAPHY
+   ═══════════════════════════════════════════════ */
+.article-content{font-family:var(--font-body);font-size:var(--text-lg);line-height:var(--leading-loose);color:var(--text-default);max-width:var(--grid-narrow)}
+.article-content h2{margin:var(--space-10) 0 var(--space-5)}
+.article-content h3{margin:var(--space-8) 0 var(--space-4)}
+.article-content h4{margin:var(--space-6) 0 var(--space-3);font-size:var(--text-lg);font-weight:var(--weight-bold);color:var(--text-strong)}
+.article-content h4{margin:var(--space-6) 0 var(--space-3)}
+.article-content p{margin-bottom:var(--space-5)}
+.article-content strong{font-weight:var(--weight-semi);color:var(--text-strong)}
+.article-content a{color:var(--color-primary-500);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;transition:color var(--duration-fast) var(--ease-out)}
+.article-content a:hover{color:var(--color-primary-700);text-decoration-thickness:2px}
+.article-content ul,.article-content ol{margin:0 0 var(--space-5) var(--space-6)}
+.article-content ul{list-style:disc}.article-content ol{list-style:decimal}
+.article-content li{margin-bottom:var(--space-2);line-height:var(--leading-relaxed)}
+.article-content li::marker{color:var(--color-primary-500)}
+.article-content blockquote{border-left:4px solid var(--color-primary-500);padding:var(--space-4) var(--space-6);margin:var(--space-6) 0;background:var(--surface-secondary);border-radius:0 var(--radius-xs) var(--radius-xs) 0;font-style:italic;color:var(--text-subtle)}
+.article-content blockquote p:last-child{margin-bottom:0}
+.article-content code{font-family:var(--font-mono);font-size:0.9em;background:var(--surface-tertiary);padding:0.15em 0.4em;border-radius:var(--radius-xs);color:var(--color-primary-600)}
+.article-content pre{background:var(--color-neutral-900);color:var(--color-neutral-100);padding:var(--space-5);border-radius:var(--radius-xs);overflow-x:auto;margin:var(--space-6) 0;font-size:var(--text-sm);line-height:var(--leading-relaxed)}
+.article-content pre code{background:none;padding:0;color:inherit}
+.article-content hr{border:none;height:1px;background:var(--border-default);margin:var(--space-10) 0}
+.article-content table{width:100%;margin:var(--space-6) 0;font-size:var(--text-base);line-height:var(--leading-normal)}
+.article-content thead th{background:var(--color-neutral-900);color:var(--color-neutral-0);font-family:var(--font-display);font-weight:var(--weight-semi);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-wide);padding:var(--space-3) var(--space-4);text-align:left}
+.article-content thead th:first-child{border-radius:var(--radius-xs) 0 0 0}
+.article-content thead th:last-child{border-radius:0 var(--radius-xs) 0 0}
+.article-content tbody td{padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--border-default)}
+.article-content tbody tr:hover{background:var(--surface-secondary)}
+.article-content figcaption{font-size:var(--text-sm);color:var(--text-subtle);margin-top:var(--space-2);text-align:center;font-style:italic}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════ */
+.l-container{width:100%;max-width:var(--grid-max);margin:0 auto;padding:0 var(--grid-gutter)}
+.l-container--narrow{max-width:var(--grid-narrow)}
+.l-section{padding:var(--space-16) 0}
+.l-grid{display:grid;gap:var(--grid-gutter)}
+.l-grid--2{grid-template-columns:repeat(2,1fr)}
+.l-grid--3{grid-template-columns:repeat(3,1fr)}
+.l-grid--4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1024px){.l-grid--3,.l-grid--4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.l-grid--2,.l-grid--3,.l-grid--4{grid-template-columns:1fr}.l-container{padding:0 var(--space-4)}}
+
+/* ═══════════════════════════════════════════════
+   BUTTONS — keep softer radius (interactive elements)
+   ═══════════════════════════════════════════════ */
+.c-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-family:var(--font-display);font-weight:var(--weight-semi);font-size:var(--text-base);line-height:1;padding:var(--space-3) var(--space-6);border:2px solid transparent;border-radius:var(--radius-md);cursor:pointer;text-decoration:none;transition:all var(--duration-base) var(--ease-out);min-height:44px;white-space:nowrap;position:relative;overflow:hidden}
+.c-btn:focus-visible{outline:2px solid var(--color-primary-500);outline-offset:2px}
+.c-btn:disabled,.c-btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.c-btn--primary{background:var(--color-accent-500);color:#fff;border-color:var(--color-accent-500)}
+.c-btn--primary:hover{background:var(--color-accent-600);border-color:var(--color-accent-600);transform:translateY(-1px);box-shadow:var(--shadow-green-glow)}
+.c-btn--primary:active{transform:translateY(0)}
+.c-btn--secondary{background:var(--color-primary-500);color:#fff;border-color:var(--color-primary-500)}
+.c-btn--secondary:hover{background:var(--color-primary-600);border-color:var(--color-primary-600);transform:translateY(-1px);box-shadow:var(--shadow-red-glow)}
+.c-btn--tertiary{background:transparent;color:var(--text-strong);border-color:var(--border-strong)}
+.c-btn--tertiary:hover{background:var(--surface-secondary);border-color:var(--text-default)}
+.c-btn--ghost{background:transparent;color:var(--color-primary-500);border-color:transparent}
+.c-btn--ghost:hover{background:var(--color-primary-50)}
+.c-btn--dark{background:var(--color-neutral-900);color:var(--color-neutral-0);border-color:var(--color-neutral-900)}
+.c-btn--dark:hover{background:var(--color-neutral-800);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.c-btn--sm{font-size:var(--text-sm);padding:var(--space-2) var(--space-4);min-height:36px}
+.c-btn--lg{font-size:var(--text-xl);padding:var(--space-4) var(--space-8);min-height:52px;border-radius:var(--radius-lg);font-weight:var(--weight-bold)}
+.c-btn--xl{font-size:var(--text-2xl);padding:var(--space-5) var(--space-10);min-height:60px;border-radius:var(--radius-lg);font-weight:var(--weight-bold)}
+.c-btn--loading{pointer-events:none;color:transparent !important}
+.c-btn--loading::after{content:"";position:absolute;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ═══════════════════════════════════════════════
+   FORMS — inputs keep radius-md (interactive)
+   ═══════════════════════════════════════════════ */
+.c-form-group{display:flex;flex-direction:column;gap:var(--space-2)}
+.c-label{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-semi);color:var(--text-strong);letter-spacing:var(--tracking-wide)}
+.c-label__required{color:var(--color-error-500);margin-left:2px}
+.c-input,.c-textarea,.c-select{font-family:var(--font-body);font-size:var(--text-base);line-height:var(--leading-normal);color:var(--text-strong);background:var(--surface-primary);border:1.5px solid var(--border-default);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);min-height:44px;width:100%;transition:border-color var(--duration-fast) var(--ease-out),box-shadow var(--duration-fast) var(--ease-out)}
+.c-input:hover,.c-textarea:hover,.c-select:hover{border-color:var(--border-strong)}
+.c-input:focus,.c-textarea:focus,.c-select:focus{outline:none;border-color:var(--color-primary-500);box-shadow:0 0 0 3px rgba(255,44,31,.1)}
+.c-input::placeholder,.c-textarea::placeholder{color:var(--text-muted)}
+.c-textarea{min-height:120px;resize:vertical}
+.c-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E7681' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.c-input--error{border-color:var(--color-error-500)}.c-input--error:focus{box-shadow:0 0 0 3px rgba(220,38,38,.1)}
+.c-input--success{border-color:var(--color-success-500)}
+.c-form-hint{font-size:var(--text-sm);color:var(--text-subtle)}
+.c-form-error{font-size:var(--text-sm);color:var(--color-error-500);font-weight:var(--weight-medium)}
+.c-check{display:flex;align-items:center;gap:var(--space-3);cursor:pointer;font-size:var(--text-base);color:var(--text-default);min-height:44px}
+.c-check input[type="checkbox"],.c-check input[type="radio"]{width:20px;height:20px;accent-color:var(--color-primary-500);cursor:pointer;flex-shrink:0}
+.c-toggle{display:flex;align-items:center;gap:var(--space-3);cursor:pointer}
+.c-toggle__track{position:relative;width:44px;height:24px;background:var(--color-neutral-300);border-radius:var(--radius-full);transition:background var(--duration-base) var(--ease-out)}
+.c-toggle__thumb{position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:var(--shadow-sm);transition:transform var(--duration-base) var(--ease-out)}
+.c-toggle input:checked+.c-toggle__track{background:var(--color-accent-500)}
+.c-toggle input:checked+.c-toggle__track .c-toggle__thumb{transform:translateX(20px)}
+.c-toggle input{position:absolute;opacity:0;width:0;height:0}
+
+/* ═══════════════════════════════════════════════
+   BADGES / TAGS / CHIPS
+   ═══════════════════════════════════════════════ */
+.c-badge{display:inline-flex;align-items:center;gap:var(--space-1);font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-semi);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);letter-spacing:var(--tracking-wide);text-transform:uppercase;line-height:1.4}
+.c-badge--red{background:var(--color-primary-50);color:var(--color-primary-700)}
+.c-badge--green{background:var(--color-success-50);color:var(--color-success-700)}
+.c-badge--gold{background:var(--color-secondary-50);color:var(--color-secondary-800)}
+.c-badge--blue{background:var(--color-info-50);color:var(--color-info-700)}
+.c-badge--neutral{background:var(--surface-tertiary);color:var(--text-subtle)}
+.c-badge--solid-red{background:var(--color-primary-500);color:#fff}
+.c-badge--solid-green{background:var(--color-accent-500);color:#fff}
+.c-badge--solid-dark{background:var(--color-neutral-900);color:var(--color-neutral-0)}
+.c-tag{display:inline-flex;align-items:center;gap:var(--space-1);font-size:var(--text-sm);font-weight:var(--weight-medium);padding:var(--space-1) var(--space-3);border-radius:var(--radius-xs);border:1px solid var(--border-default);color:var(--text-default);background:var(--surface-primary)}
+.c-chip{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:var(--weight-medium);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1.5px solid var(--border-default);color:var(--text-default);cursor:pointer;transition:all var(--duration-fast) var(--ease-out)}
+.c-chip:hover{border-color:var(--color-primary-500);color:var(--color-primary-500)}
+.c-chip--active{background:var(--color-primary-500);border-color:var(--color-primary-500);color:#fff}
+
+/* ═══════════════════════════════════════════════
+   ALERTS — sharp radius
+   ═══════════════════════════════════════════════ */
+.c-alert{display:flex;gap:var(--space-3);padding:var(--space-4) var(--space-5);border-radius:var(--radius-xs);border:1px solid;font-size:var(--text-base);line-height:var(--leading-normal)}
+.c-alert__icon{flex-shrink:0;width:20px;height:20px;margin-top:2px}
+.c-alert__content{flex:1}
+.c-alert__title{font-family:var(--font-display);font-weight:var(--weight-semi);margin-bottom:var(--space-1)}
+.c-alert--info{background:var(--color-info-50);border-color:rgba(59,130,246,.2);color:var(--color-info-700)}
+.c-alert--success{background:var(--color-success-50);border-color:rgba(22,163,74,.2);color:var(--color-success-700)}
+.c-alert--warn{background:var(--color-warn-50);border-color:rgba(245,158,11,.2);color:var(--color-warn-700)}
+.c-alert--error{background:var(--color-error-50);border-color:rgba(220,38,38,.2);color:var(--color-error-700)}
+
+/* ═══════════════════════════════════════════════
+   CARDS — sharp container radius
+   ═══════════════════════════════════════════════ */
+.c-card{background:var(--surface-primary);border:1px solid var(--border-default);border-radius:var(--radius-xs);overflow:hidden;transition:box-shadow var(--duration-base) var(--ease-out),transform var(--duration-base) var(--ease-out)}
+.c-card:hover{box-shadow:var(--shadow-lg)}
+.c-card--clickable{cursor:pointer}
+.c-card--clickable:hover{transform:translateY(-2px);box-shadow:var(--shadow-xl)}
+.c-card__media{aspect-ratio:16/9;overflow:hidden;background:var(--surface-tertiary)}
+.c-card__media img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-out)}
+.c-card--clickable:hover .c-card__media img{transform:scale(1.03)}
+.c-card__body{padding:var(--space-5)}
+.c-card__eyebrow{font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-semi);text-transform:uppercase;letter-spacing:var(--tracking-wider);color:var(--color-primary-500);margin-bottom:var(--space-2)}
+.c-card__title{font-family:var(--font-display);font-size:var(--text-xl);font-weight:var(--weight-bold);color:var(--text-strong);line-height:var(--leading-snug);margin-bottom:var(--space-2)}
+.c-card__desc{font-size:var(--text-base);color:var(--text-subtle);line-height:var(--leading-relaxed);margin-bottom:var(--space-4)}
+.c-card__footer{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-5);border-top:1px solid var(--border-subtle)}
+.c-card__meta{font-size:var(--text-sm);color:var(--text-muted)}
+
+/* Card: Horizontal */
+.c-card--horizontal{display:grid;grid-template-columns:240px 1fr}
+.c-card--horizontal .c-card__media{aspect-ratio:auto;height:100%}
+@media(max-width:640px){.c-card--horizontal{grid-template-columns:1fr}.c-card--horizontal .c-card__media{aspect-ratio:16/9}}
+
+/* Card: Compact */
+.c-card--compact .c-card__body{padding:var(--space-3) var(--space-4)}
+.c-card--compact .c-card__title{font-size:var(--text-base)}
+
+/* Card: Course */
+.c-card--course .c-card__media{aspect-ratio:3/2;background:var(--color-neutral-900);position:relative}
+.c-card--course .c-card__price{font-family:var(--font-display);font-weight:var(--weight-extra);font-size:var(--text-2xl);color:var(--color-accent-500)}
+.c-card--course .c-card__instructor{font-size:var(--text-sm);color:var(--text-subtle)}
+
+/* Card: Featured (no inner padding on media) */
+.c-card--featured{border:2px solid var(--color-primary-500);position:relative}
+.c-card--featured::after{content:"Featured";position:absolute;top:var(--space-3);right:var(--space-3);background:var(--color-primary-500);color:#fff;font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-bold);text-transform:uppercase;letter-spacing:var(--tracking-wider);padding:2px 10px;border-radius:var(--radius-full)}
+
+/* Card: Dark */
+.c-card--dark{background:var(--color-neutral-900);border-color:var(--color-neutral-800);color:var(--color-neutral-200)}
+.c-card--dark .c-card__title{color:#fff}
+.c-card--dark .c-card__desc{color:var(--color-neutral-400)}
+.c-card--dark .c-card__footer{border-color:var(--color-neutral-800)}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+.c-nav{display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-6);background:var(--surface-primary);border-bottom:1px solid var(--border-subtle)}
+.c-nav__brand{font-family:var(--font-display);font-weight:var(--weight-extra);font-size:var(--text-xl);color:var(--text-strong);text-decoration:none}
+.c-nav__links{display:flex;gap:var(--space-1)}
+.c-nav__link{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-semi);color:var(--text-subtle);text-decoration:none;padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);transition:all var(--duration-fast) var(--ease-out)}
+.c-nav__link:hover,.c-nav__link--active{color:var(--text-strong);background:var(--surface-secondary)}
+.c-breadcrumbs{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);color:var(--text-subtle)}
+.c-breadcrumbs__sep{color:var(--text-muted)}
+.c-breadcrumbs a{color:var(--text-subtle);text-decoration:none}
+.c-breadcrumbs a:hover{color:var(--color-primary-500);text-decoration:underline}
+
+/* ═══════════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════════ */
+.c-tabs{display:flex;border-bottom:2px solid var(--border-subtle);gap:var(--space-1)}
+.c-tabs__tab{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-semi);color:var(--text-subtle);padding:var(--space-3) var(--space-4);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all var(--duration-fast) var(--ease-out)}
+.c-tabs__tab:hover{color:var(--text-strong)}
+.c-tabs__tab--active{color:var(--color-primary-500);border-bottom-color:var(--color-primary-500)}
+
+/* ═══════════════════════════════════════════════
+   MODAL — sharp
+   ═══════════════════════════════════════════════ */
+.c-modal{background:var(--surface-primary);border-radius:var(--radius-xs);box-shadow:var(--shadow-2xl);max-width:560px;width:100%;max-height:85vh;overflow-y:auto}
+.c-modal__header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-5) var(--space-6);border-bottom:1px solid var(--border-subtle)}
+.c-modal__title{font-family:var(--font-display);font-size:var(--text-xl);font-weight:var(--weight-bold);color:var(--text-strong)}
+.c-modal__close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--text-subtle);cursor:pointer;border-radius:var(--radius-md);transition:background var(--duration-fast) var(--ease-out);font-size:20px}
+.c-modal__close:hover{background:var(--surface-secondary);color:var(--text-strong)}
+.c-modal__body{padding:var(--space-6)}
+.c-modal__footer{display:flex;justify-content:flex-end;gap:var(--space-3);padding:var(--space-4) var(--space-6);border-top:1px solid var(--border-subtle)}
+
+/* ═══════════════════════════════════════════════
+   ACCORDION
+   ═══════════════════════════════════════════════ */
+.c-accordion__item{border-bottom:1px solid var(--border-default)}
+.c-accordion__trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:var(--space-5) 0;background:none;border:none;font-family:var(--font-display);font-size:var(--text-lg);font-weight:var(--weight-semi);color:var(--text-strong);cursor:pointer;text-align:left}
+.c-accordion__trigger:hover{color:var(--color-primary-500)}
+.c-accordion__icon{transition:transform var(--duration-base) var(--ease-out);font-size:20px;color:var(--text-muted);flex-shrink:0}
+.c-accordion__item--open .c-accordion__icon{transform:rotate(45deg)}
+.c-accordion__content{padding:0 0 var(--space-5);color:var(--text-default);line-height:var(--leading-relaxed)}
+
+/* ═══════════════════════════════════════════════
+   TABLE — sharp
+   ═══════════════════════════════════════════════ */
+.c-table{width:100%;border:1px solid var(--border-default);border-radius:var(--radius-xs);overflow:hidden;font-size:var(--text-base)}
+.c-table thead th{background:var(--color-neutral-900);color:var(--color-neutral-0);font-family:var(--font-display);font-weight:var(--weight-semi);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-wide);padding:var(--space-3) var(--space-4);text-align:left}
+.c-table tbody td{padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--border-subtle);vertical-align:middle}
+.c-table tbody tr:last-child td{border-bottom:none}
+.c-table tbody tr:hover{background:var(--surface-secondary)}
+
+/* ═══════════════════════════════════════════════
+   PAGINATION
+   ═══════════════════════════════════════════════ */
+.c-pagination{display:flex;align-items:center;gap:var(--space-1)}
+.c-pagination__item{display:flex;align-items:center;justify-content:center;width:40px;height:40px;font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-medium);color:var(--text-subtle);background:none;border:1.5px solid transparent;border-radius:var(--radius-md);cursor:pointer;text-decoration:none;transition:all var(--duration-fast) var(--ease-out)}
+.c-pagination__item:hover{border-color:var(--border-strong);color:var(--text-strong)}
+.c-pagination__item--active{background:var(--color-primary-500);color:#fff;border-color:var(--color-primary-500)}
+
+/* ═══════════════════════════════════════════════
+   TOOLTIP
+   ═══════════════════════════════════════════════ */
+.c-tooltip{position:relative;display:inline-block}
+.c-tooltip__content{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--color-neutral-900);color:var(--color-neutral-0);font-size:var(--text-xs);font-weight:var(--weight-medium);padding:var(--space-2) var(--space-3);border-radius:var(--radius-xs);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--duration-fast) var(--ease-out),transform var(--duration-fast) var(--ease-out);z-index:500}
+.c-tooltip__content::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--color-neutral-900)}
+.c-tooltip:hover .c-tooltip__content{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ═══════════════════════════════════════════════
+   ARTICLE CALLOUTS — sharp
+   ═══════════════════════════════════════════════ */
+.c-callout{border-radius:var(--radius-xs);padding:var(--space-5) var(--space-6);margin:var(--space-8) 0;border-left:4px solid;position:relative}
+.c-callout--has-icon{padding-left:calc(var(--space-6) + 28px)}
+.c-callout__icon{position:absolute;top:var(--space-5);left:var(--space-6);font-size:20px}
+.c-callout__title{font-family:var(--font-display);font-weight:var(--weight-bold);font-size:var(--text-base);margin-bottom:var(--space-2)}
+.c-callout__body{font-size:var(--text-base);line-height:var(--leading-relaxed)}
+.c-callout--tip{background:var(--color-accent-50);border-color:var(--color-accent-500)}
+.c-callout--tip .c-callout__title{color:var(--color-accent-700)}
+.c-callout--mistake{background:var(--color-error-50);border-color:var(--color-error-500)}
+.c-callout--mistake .c-callout__title{color:var(--color-error-700)}
+.c-callout--solver{background:var(--color-info-50);border-color:var(--color-info-500)}
+.c-callout--solver .c-callout__title{color:var(--color-info-700)}
+.c-callout--key{background:var(--color-secondary-50);border-color:var(--color-secondary-500)}
+.c-callout--key .c-callout__title{color:var(--color-secondary-800)}
+
+/* ═══════════════════════════════════════════════
+   POKER SUIT SYSTEM — visual, colorful, unmistakable
+   ═══════════════════════════════════════════════ */
+.suit{font-weight:var(--weight-bold);display:inline-flex;align-items:center;gap:2px}
+.suit-h{color:var(--suit-heart)}.suit-h::after{content:"♥"}
+.suit-d{color:var(--suit-diamond)}.suit-d::after{content:"♦"}
+.suit-c{color:var(--suit-club)}.suit-c::after{content:"♣"}
+.suit-s{color:var(--suit-spade)}.suit-s::after{content:"♠"}
+
+/* Poker card pip — the card-like inline display */
+.pip{display:inline-flex;align-items:center;gap:1px;font-family:var(--font-display);font-weight:var(--weight-extra);font-size:inherit;padding:1px 5px;border-radius:3px;background:var(--surface-primary);border:1px solid var(--border-default);white-space:nowrap;line-height:1.3;vertical-align:baseline}
+.pip--h{color:var(--suit-heart);border-color:rgba(229,36,63,.2);background:rgba(229,36,63,.04)}
+.pip--d{color:var(--suit-diamond);border-color:rgba(59,125,221,.2);background:rgba(59,125,221,.04)}
+.pip--c{color:var(--suit-club);border-color:rgba(27,138,78,.2);background:rgba(27,138,78,.04)}
+.pip--s{color:var(--suit-spade);border-color:rgba(52,58,66,.2);background:rgba(52,58,66,.04)}
+
+/* ═══════════════════════════════════════════════
+   HAND HISTORY BLOCK — unique visual design
+   ═══════════════════════════════════════════════ */
+.c-hand{border-radius:var(--radius-xs);margin:var(--space-6) 0;overflow:hidden;border:1px solid var(--color-neutral-200);font-family:var(--font-body);font-size:var(--text-base)}
+
+/* Hand header — dark bar */
+.c-hand__header{background:var(--color-neutral-900);padding:var(--space-3) var(--space-5);display:flex;align-items:center;justify-content:space-between}
+.c-hand__header-title{font-family:var(--font-display);font-weight:var(--weight-bold);font-size:var(--text-sm);color:#fff;text-transform:uppercase;letter-spacing:var(--tracking-wider)}
+.c-hand__header-badge{font-size:var(--text-xs);font-weight:var(--weight-semi);padding:2px 10px;border-radius:var(--radius-full);background:var(--color-primary-500);color:#fff;text-transform:uppercase;letter-spacing:var(--tracking-wider)}
+.c-hand__header-meta{font-size:var(--text-xs);color:var(--color-neutral-400);font-family:var(--font-mono)}
+
+/* Hand hero card display */
+.c-hand__hero{background:var(--surface-secondary);padding:var(--space-5);display:flex;align-items:center;gap:var(--space-5);border-bottom:1px solid var(--border-default)}
+.c-hand__hero-label{font-family:var(--font-display);font-weight:var(--weight-bold);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-wider);color:var(--text-subtle);min-width:70px}
+.c-hand__cards{display:flex;gap:var(--space-2)}
+.c-hand__card{display:flex;flex-direction:column;align-items:center;justify-content:center;width:56px;height:78px;border-radius:6px;background:#fff;border:2px solid var(--border-default);box-shadow:var(--shadow-sm);font-family:var(--font-display);font-weight:var(--weight-extra);position:relative}
+.c-hand__card-rank{font-size:22px;line-height:1}
+.c-hand__card-suit{font-size:18px;line-height:1;margin-top:-2px}
+.c-hand__card--heart{border-color:rgba(229,36,63,.25);color:var(--suit-heart)}
+.c-hand__card--diamond{border-color:rgba(59,125,221,.25);color:var(--suit-diamond)}
+.c-hand__card--club{border-color:rgba(27,138,78,.25);color:var(--suit-club)}
+.c-hand__card--spade{border-color:rgba(52,58,66,.25);color:var(--suit-spade)}
+.c-hand__hero-stack{font-family:var(--font-mono);font-size:var(--text-sm);color:var(--text-subtle);margin-left:auto}
+.c-hand__hero-stack strong{color:var(--text-strong);font-weight:var(--weight-bold)}
+
+/* Hand action lines */
+.c-hand__body{padding:var(--space-4) var(--space-5)}
+.c-hand__street{margin-bottom:var(--space-4)}
+.c-hand__street:last-child{margin-bottom:0}
+.c-hand__street-header{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-2)}
+.c-hand__street-name{font-family:var(--font-display);font-weight:var(--weight-extra);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-strong)}
+.c-hand__street-pot{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);background:var(--surface-tertiary);padding:1px 8px;border-radius:var(--radius-full)}
+.c-hand__board{display:flex;gap:var(--space-1);margin-bottom:var(--space-2)}
+.c-hand__board-card{display:inline-flex;align-items:center;gap:1px;font-family:var(--font-display);font-weight:var(--weight-extra);font-size:var(--text-base);padding:3px 7px;border-radius:4px;background:#fff;border:1.5px solid var(--border-default);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.c-hand__board-card--h{color:var(--suit-heart);border-color:rgba(229,36,63,.2)}
+.c-hand__board-card--d{color:var(--suit-diamond);border-color:rgba(59,125,221,.2)}
+.c-hand__board-card--c{color:var(--suit-club);border-color:rgba(27,138,78,.2)}
+.c-hand__board-card--s{color:var(--suit-spade);border-color:rgba(52,58,66,.2)}
+.c-hand__action{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-1) 0;font-size:var(--text-base);color:var(--text-default);line-height:var(--leading-normal)}
+.c-hand__player{font-weight:var(--weight-semi);color:var(--text-strong)}
+.c-hand__player--hero{color:var(--color-secondary-600);font-weight:var(--weight-bold)}
+.c-hand__verb{color:var(--text-subtle)}
+.c-hand__amount{font-family:var(--font-mono);font-weight:var(--weight-bold);color:var(--color-accent-600)}
+.c-hand__divider{height:1px;background:var(--border-subtle);margin:var(--space-3) 0}
+
+/* Hand result / question */
+.c-hand__result{background:var(--color-secondary-50);border-top:2px solid var(--color-secondary-500);padding:var(--space-4) var(--space-5);font-family:var(--font-display);font-weight:var(--weight-bold);color:var(--color-secondary-800);font-size:var(--text-lg);text-align:center}
+
+/* ═══════════════════════════════════════════════
+   ARTICLE PROMOS — sharp radius
+   ═══════════════════════════════════════════════ */
+.c-article-promo{border-radius:var(--radius-xs);padding:var(--space-8);margin:var(--space-10) 0;text-align:center;position:relative;overflow:hidden}
+.c-article-promo--optin{background:linear-gradient(135deg,var(--color-neutral-900) 0%,#1a1b20 100%);border:1px solid var(--color-neutral-700);color:var(--color-neutral-100)}
+.c-article-promo--optin::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--color-primary-500),var(--color-secondary-500))}
+.c-article-promo__eyebrow{font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-bold);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--color-primary-400);margin-bottom:var(--space-3)}
+.c-article-promo__title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:var(--weight-extra);margin-bottom:var(--space-3)}
+.c-article-promo--optin .c-article-promo__title{color:#fff}
+.c-article-promo__desc{font-size:var(--text-base);color:var(--color-neutral-400);margin-bottom:var(--space-6);max-width:480px;margin-left:auto;margin-right:auto}
+.c-article-promo__form{display:flex;gap:var(--space-3);max-width:420px;margin:0 auto}
+.c-article-promo__form .c-input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff;flex:1}
+.c-article-promo__form .c-input::placeholder{color:var(--color-neutral-500)}
+.c-article-promo__form .c-input:focus{border-color:var(--color-primary-500);box-shadow:0 0 0 3px rgba(255,44,31,.15)}
+
+/* Course promo — edge-to-edge image, same padding for text */
+.c-article-promo--course{background:var(--surface-primary);border:1px solid var(--border-default);color:var(--text-strong);text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;align-items:stretch}
+.c-article-promo--course .c-article-promo__visual{background:var(--color-neutral-900);display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:280px}
+.c-article-promo--course .c-article-promo__visual img{width:100%;height:100%;object-fit:cover}
+.c-article-promo--course .c-article-promo__content{padding:var(--space-8)}
+.c-article-promo__price{font-family:var(--font-display);font-weight:var(--weight-extra);font-size:var(--text-3xl);color:var(--color-accent-500);margin-bottom:var(--space-1)}
+.c-article-promo__price-note{font-size:var(--text-sm);color:var(--text-subtle);margin-bottom:var(--space-4)}
+.c-article-promo__features{list-style:none;margin:0 0 var(--space-5);padding:0}
+.c-article-promo__features li{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);color:var(--text-default);padding:var(--space-1) 0}
+.c-article-promo__features li::before{content:"✓";color:var(--color-accent-500);font-weight:var(--weight-bold)}
+
+/* Partner ad */
+.c-article-promo--partner{background:linear-gradient(135deg,#0f1114,#1a1d24);border:1px solid var(--color-secondary-700);color:#fff}
+.c-article-promo--partner::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--color-secondary-500)}
+.c-article-promo__sponsor-label{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-neutral-400);margin-bottom:var(--space-4);text-transform:uppercase;letter-spacing:var(--tracking-widest)}
+
+/* Inline */
+.c-article-promo--inline{background:var(--color-primary-50);border:1px solid rgba(255,44,31,.15);padding:var(--space-5) var(--space-6);display:flex;align-items:center;gap:var(--space-5);text-align:left;border-radius:var(--radius-xs)}
+.c-article-promo--inline .c-article-promo__title{font-size:var(--text-lg);color:var(--text-strong);margin-bottom:var(--space-1)}
+.c-article-promo--inline .c-article-promo__desc{font-size:var(--text-sm);color:var(--text-subtle);margin:0;max-width:none}
+
+@media(max-width:768px){
+  .c-article-promo--course{grid-template-columns:1fr}
+  .c-article-promo__form{flex-direction:column}
+  .c-article-promo--inline{flex-direction:column;text-align:center}
+}
+
+/* ═══════════════════════════════════════════════
+   PRICING — sharp
+   ═══════════════════════════════════════════════ */
+.c-pricing{text-align:center;border:2px solid var(--border-default);border-radius:var(--radius-xs);padding:var(--space-8);background:var(--surface-primary);position:relative;transition:box-shadow var(--duration-base) var(--ease-out)}
+.c-pricing:hover{box-shadow:var(--shadow-xl)}
+.c-pricing--featured{border-color:var(--color-primary-500);box-shadow:var(--shadow-red-glow)}
+.c-pricing--featured::before{content:"Most Popular";position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--color-primary-500);color:#fff;font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-bold);text-transform:uppercase;letter-spacing:var(--tracking-wider);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full)}
+.c-pricing__name{font-family:var(--font-display);font-size:var(--text-xl);font-weight:var(--weight-bold);color:var(--text-strong);margin-bottom:var(--space-2)}
+.c-pricing__price{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:var(--weight-extra);color:var(--text-strong);line-height:1;margin-bottom:var(--space-1)}
+.c-pricing__price span{font-size:var(--text-xl);font-weight:var(--weight-regular);color:var(--text-subtle)}
+.c-pricing__desc{font-size:var(--text-sm);color:var(--text-subtle);margin-bottom:var(--space-6)}
+.c-pricing__features{text-align:left;margin:0 0 var(--space-6);padding:0;list-style:none}
+.c-pricing__features li{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) 0;font-size:var(--text-base);color:var(--text-default)}
+.c-pricing__features li::before{content:"✓";color:var(--color-accent-500);font-weight:var(--weight-bold);flex-shrink:0}
+
+/* ═══════════════════════════════════════════════
+   CTA BANNER
+   ═══════════════════════════════════════════════ */
+.c-cta-banner{background:var(--color-neutral-900);padding:var(--space-16) var(--space-6);text-align:center;position:relative;overflow:hidden}
+.c-cta-banner::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,44,31,.08),transparent 50%),radial-gradient(ellipse at 80% 50%,rgba(255,184,0,.06),transparent 50%);pointer-events:none}
+.c-cta-banner__content{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.c-cta-banner__title{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:var(--weight-extra);color:#fff;line-height:var(--leading-tight);margin-bottom:var(--space-4);letter-spacing:var(--tracking-tighter)}
+.c-cta-banner__desc{font-size:var(--text-lg);color:var(--color-neutral-400);margin-bottom:var(--space-8);line-height:var(--leading-relaxed)}
+
+/* ═══════════════════════════════════════════════
+   STYLE GUIDE PAGE
+   ═══════════════════════════════════════════════ */
+.sg-page{background:var(--surface-primary);min-height:100vh}
+.sg-header{background:var(--color-neutral-900);padding:var(--space-12) var(--space-6);text-align:center;position:relative;overflow:hidden}
+.sg-header::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,44,31,.12),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(255,184,0,.08),transparent 50%);pointer-events:none}
+.sg-header *{position:relative;z-index:1}
+.sg-header h1{color:#fff;margin-bottom:var(--space-3)}
+.sg-header p{color:var(--color-neutral-400);font-size:var(--text-lg);max-width:600px;margin:0 auto}
+.sg-section{padding:var(--space-16) 0;border-bottom:1px solid var(--border-subtle)}
+.sg-section:last-child{border-bottom:none}
+.sg-section__title{font-family:var(--font-display);font-size:var(--text-3xl);font-weight:var(--weight-extra);color:var(--text-strong);margin-bottom:var(--space-2);letter-spacing:var(--tracking-tighter)}
+.sg-section__subtitle{font-size:var(--text-base);color:var(--text-subtle);margin-bottom:var(--space-8);max-width:600px}
+.sg-subsection{margin-bottom:var(--space-10)}
+.sg-subsection:last-child{margin-bottom:0}
+.sg-subsection__label{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);margin-bottom:var(--space-4)}
+.sg-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:var(--space-3)}
+.sg-swatch{border-radius:var(--radius-xs);overflow:hidden;border:1px solid var(--border-subtle)}
+.sg-swatch__color{height:64px}
+.sg-swatch__info{padding:var(--space-2) var(--space-3);font-size:var(--text-xs)}
+.sg-swatch__name{font-weight:var(--weight-semi);color:var(--text-strong);display:block}
+.sg-swatch__hex{color:var(--text-muted);font-family:var(--font-mono);font-size:10px}
+.sg-preview{border:1px solid var(--border-default);border-radius:var(--radius-xs);overflow:hidden}
+.sg-preview__bar{background:var(--surface-tertiary);padding:var(--space-2) var(--space-4);font-family:var(--font-display);font-size:var(--text-xs);font-weight:var(--weight-semi);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);border-bottom:1px solid var(--border-default)}
+.sg-preview__body{padding:var(--space-6)}
+.sg-preview__body--dark{background:var(--color-neutral-900)}
+.sg-row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+.sg-stack{display:flex;flex-direction:column;gap:var(--space-4)}
+
+/* Code block for embed examples */
+.sg-code{background:var(--color-neutral-950);color:var(--color-neutral-200);padding:var(--space-5);border-radius:var(--radius-xs);overflow-x:auto;font-family:var(--font-mono);font-size:var(--text-sm);line-height:var(--leading-relaxed);margin-top:var(--space-4);border:1px solid var(--color-neutral-800);white-space:pre;tab-size:2}
+.sg-code .tag{color:#E06C75}.sg-code .attr{color:#D19A66}.sg-code .val{color:#98C379}.sg-code .cmt{color:#5C6370;font-style:italic}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</head>
+<body class="sg-page">
+
+<!-- HEADER -->
+<header class="sg-header">
+  <p style="font-family:var(--font-display);font-weight:800;font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--color-primary-500);margin-bottom:var(--space-4);">Design System v2.1</p>
+  <h1>Upswing Poker</h1>
+  <p>Sharp containers. Soft interactions. Built for readability, trust, and conversion.</p>
+</header>
+<main>
+
+<!-- SUIT COLORS -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Poker Suit System</h2>
+  <p class="sg-section__subtitle">4-color suit system: Hearts (red), Diamonds (blue), Clubs (green), Spades (dark). Instantly identifiable at any size.</p>
+  <div class="sg-subsection"><p class="sg-subsection__label">Suit Color Tokens</p>
+    <div class="sg-swatches" style="grid-template-columns:repeat(4,1fr);">
+      <div class="sg-swatch"><div class="sg-swatch__color" style="background:#E5243F;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;">&#9829;</div><div class="sg-swatch__info"><span class="sg-swatch__name">Hearts</span><span class="sg-swatch__hex">#E5243F</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__color" style="background:#3B7DDD;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;">&#9830;</div><div class="sg-swatch__info"><span class="sg-swatch__name">Diamonds</span><span class="sg-swatch__hex">#3B7DDD</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__color" style="background:#1B8A4E;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;">&#9827;</div><div class="sg-swatch__info"><span class="sg-swatch__name">Clubs</span><span class="sg-swatch__hex">#1B8A4E</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__color" style="background:#22272E;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;">&#9824;</div><div class="sg-swatch__info"><span class="sg-swatch__name">Spades</span><span class="sg-swatch__hex">#22272E</span></div></div>
+    </div>
+  </div>
+  <div class="sg-subsection"><p class="sg-subsection__label">Inline Suit Notation (.suit-* auto-appends symbol)</p>
+    <div class="sg-preview"><div class="sg-preview__bar">In Article Text</div><div class="sg-preview__body">
+      <p style="font-size:var(--text-lg);line-height:2;">Hero holds <span class="suit suit-h">A</span><span class="suit suit-s">K</span> on a board of <span class="suit suit-s">K</span><span class="suit suit-h">9</span><span class="suit suit-d">4</span> &#8212; top pair, top kicker.</p>
+    </div></div>
+  </div>
+  <div class="sg-subsection"><p class="sg-subsection__label">Pip Cards &#8212; Card-Like Inline Display</p>
+    <div class="sg-preview"><div class="sg-preview__bar">Mini Card Pips</div><div class="sg-preview__body">
+      <p style="font-size:var(--text-lg);line-height:2.2;">Villain 3-bets with <span class="pip pip--h">A&#9829;</span> <span class="pip pip--h">K&#9829;</span> and the flop comes <span class="pip pip--s">Q&#9824;</span> <span class="pip pip--c">J&#9827;</span> <span class="pip pip--d">T&#9830;</span></p>
+      <div style="margin-top:var(--space-4);display:flex;gap:var(--space-2);flex-wrap:wrap;">
+        <span class="pip pip--h">A&#9829;</span> <span class="pip pip--d">K&#9830;</span> <span class="pip pip--c">Q&#9827;</span> <span class="pip pip--s">J&#9824;</span> <span class="pip pip--h">T&#9829;</span> <span class="pip pip--d">9&#9830;</span> <span class="pip pip--c">8&#9827;</span> <span class="pip pip--s">7&#9824;</span>
+      </div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- HAND HISTORY BLOCKS -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Hand History Blocks</h2>
+  <p class="sg-section__subtitle">Visual, readable hand histories with card displays, color-coded suits, and structured street actions. Not code &#8212; a readable poker narrative.</p>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Full Hand Example</p>
+    <div style="max-width:var(--grid-narrow);">
+      <div class="c-hand">
+        <div class="c-hand__header">
+          <span class="c-hand__header-title">Cash Game Hand</span>
+          <span class="c-hand__header-meta">NL500 &#183; 6-max &#183; #44281</span>
+          <span class="c-hand__header-badge">Key Hand</span>
+        </div>
+        <div class="c-hand__hero">
+          <span class="c-hand__hero-label">Hero (BTN)</span>
+          <div class="c-hand__cards">
+            <div class="c-hand__card c-hand__card--heart"><span class="c-hand__card-rank">A</span><span class="c-hand__card-suit">&#9829;</span></div>
+            <div class="c-hand__card c-hand__card--spade"><span class="c-hand__card-rank">K</span><span class="c-hand__card-suit">&#9824;</span></div>
+          </div>
+          <div class="c-hand__hero-stack">Stack: <strong>$512.40</strong></div>
+        </div>
+        <div class="c-hand__body">
+          <div class="c-hand__street">
+            <div class="c-hand__street-header"><span class="c-hand__street-name">Preflop</span></div>
+            <div class="c-hand__action"><span class="c-hand__player c-hand__player--hero">Hero</span> <span class="c-hand__verb">raises to</span> <span class="c-hand__amount">$12</span></div>
+            <div class="c-hand__action"><span class="c-hand__player">Villain (BB)</span> <span class="c-hand__verb">3-bets to</span> <span class="c-hand__amount">$42</span></div>
+            <div class="c-hand__action"><span class="c-hand__player c-hand__player--hero">Hero</span> <span class="c-hand__verb">calls</span></div>
+          </div>
+          <div class="c-hand__divider"></div>
+          <div class="c-hand__street">
+            <div class="c-hand__street-header"><span class="c-hand__street-name">Flop</span><span class="c-hand__street-pot">Pot: $85</span></div>
+            <div class="c-hand__board">
+              <span class="c-hand__board-card c-hand__board-card--s">K&#9824;</span>
+              <span class="c-hand__board-card c-hand__board-card--h">9&#9829;</span>
+              <span class="c-hand__board-card c-hand__board-card--d">4&#9830;</span>
+            </div>
+            <div class="c-hand__action"><span class="c-hand__player">Villain</span> <span class="c-hand__verb">checks.</span> <span class="c-hand__player c-hand__player--hero">Hero</span> <span class="c-hand__verb">bets</span> <span class="c-hand__amount">$28</span>. <span class="c-hand__player">Villain</span> <span class="c-hand__verb">calls.</span></div>
+          </div>
+          <div class="c-hand__divider"></div>
+          <div class="c-hand__street">
+            <div class="c-hand__street-header"><span class="c-hand__street-name">Turn</span><span class="c-hand__street-pot">Pot: $141</span></div>
+            <div class="c-hand__board">
+              <span class="c-hand__board-card c-hand__board-card--s">K&#9824;</span>
+              <span class="c-hand__board-card c-hand__board-card--h">9&#9829;</span>
+              <span class="c-hand__board-card c-hand__board-card--d">4&#9830;</span>
+              <span class="c-hand__board-card c-hand__board-card--c" style="border-width:2px;box-shadow:0 0 0 2px rgba(27,138,78,.15);">7&#9827;</span>
+            </div>
+            <div class="c-hand__action"><span class="c-hand__player">Villain</span> <span class="c-hand__verb">checks.</span> <span class="c-hand__player c-hand__player--hero">Hero</span> <span class="c-hand__verb">bets</span> <span class="c-hand__amount">$68</span>. <span class="c-hand__player">Villain</span> <span class="c-hand__verb">raises to</span> <span class="c-hand__amount">$186</span>.</div>
+          </div>
+        </div>
+        <div class="c-hand__result">What should Hero do?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Compact &#8212; Quiz Style</p>
+    <div style="max-width:var(--grid-narrow);">
+      <div class="c-hand">
+        <div class="c-hand__header">
+          <span class="c-hand__header-title">Quick Quiz</span>
+          <span class="c-hand__header-badge" style="background:var(--color-secondary-500);color:var(--color-neutral-900);">Quiz</span>
+        </div>
+        <div class="c-hand__hero">
+          <span class="c-hand__hero-label">You Hold</span>
+          <div class="c-hand__cards">
+            <div class="c-hand__card c-hand__card--diamond"><span class="c-hand__card-rank">J</span><span class="c-hand__card-suit">&#9830;</span></div>
+            <div class="c-hand__card c-hand__card--diamond"><span class="c-hand__card-rank">T</span><span class="c-hand__card-suit">&#9830;</span></div>
+          </div>
+        </div>
+        <div class="c-hand__body" style="padding-bottom:0;">
+          <div class="c-hand__street">
+            <div class="c-hand__street-header"><span class="c-hand__street-name">River</span><span class="c-hand__street-pot">Pot: $240</span></div>
+            <div class="c-hand__board">
+              <span class="c-hand__board-card c-hand__board-card--h">Q&#9829;</span>
+              <span class="c-hand__board-card c-hand__board-card--c">9&#9827;</span>
+              <span class="c-hand__board-card c-hand__board-card--s">3&#9824;</span>
+              <span class="c-hand__board-card c-hand__board-card--d">8&#9830;</span>
+              <span class="c-hand__board-card c-hand__board-card--h">2&#9829;</span>
+            </div>
+            <div class="c-hand__action"><span class="c-hand__player">Villain</span> <span class="c-hand__verb">bets</span> <span class="c-hand__amount">$180</span> <span class="c-hand__verb">(75% pot)</span></div>
+          </div>
+        </div>
+        <div class="c-hand__result">Call, raise, or fold?</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CARDS -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Cards</h2>
+  <p class="sg-section__subtitle">Article, course, horizontal, dark, featured, and compact cards with real imagery.</p>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Article Cards</p>
+    <div class="l-grid l-grid--3">
+      <div class="c-card c-card--clickable">
+        <div class="c-card__media"><img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=600&h=340&fit=crop" alt="Poker chips"></div>
+        <div class="c-card__body"><div class="c-card__eyebrow">Strategy</div><div class="c-card__title">How to Play AK When You Miss the Flop</div><div class="c-card__desc">The #1 hand that players misplay postflop. Here is the correct approach by position.</div></div>
+        <div class="c-card__footer"><span class="c-card__meta">8 min read</span><span class="c-badge c-badge--red">New</span></div>
+      </div>
+      <div class="c-card c-card--clickable">
+        <div class="c-card__media"><img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=600&h=340&fit=crop" alt="Cards"></div>
+        <div class="c-card__body"><div class="c-card__eyebrow">GTO Theory</div><div class="c-card__title">Understanding Mixed Strategies in Solver Output</div><div class="c-card__desc">Why the solver splits between actions and what it means for your game.</div></div>
+        <div class="c-card__footer"><span class="c-card__meta">14 min read</span><span class="c-badge c-badge--blue">Updated</span></div>
+      </div>
+      <div class="c-card c-card--clickable">
+        <div class="c-card__media"><img src="https://images.unsplash.com/photo-1541278107931-e006523892df?w=600&h=340&fit=crop" alt="Tournament"></div>
+        <div class="c-card__body"><div class="c-card__eyebrow">Live Play</div><div class="c-card__title">5 Exploits That Print Money at $1/$2</div><div class="c-card__desc">Stop overthinking. Start exploiting your opponents&#39; most common leaks.</div></div>
+        <div class="c-card__footer"><span class="c-card__meta">10 min read</span><span class="c-badge c-badge--gold">Featured</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Horizontal Card</p>
+    <div class="c-card c-card--clickable c-card--horizontal" style="max-width:640px;">
+      <div class="c-card__media"><img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?w=480&h=320&fit=crop" alt="Cards dealt"></div>
+      <div class="c-card__body"><div class="c-card__eyebrow">Preflop</div><div class="c-card__title">The Complete Guide to 3-Betting Ranges</div><div class="c-card__desc">When, why, and which hands to 3-bet from every position at the table.</div><span class="c-card__meta">22 min read &#183; Advanced</span></div>
+    </div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Course Cards (Featured + Standard + Dark)</p>
+    <div class="l-grid l-grid--3">
+      <div class="c-card c-card--course c-card--featured">
+        <div class="c-card__media" style="background:linear-gradient(135deg,#0c0c0e,#1a1b20);display:flex;align-items:center;justify-content:center;"><img src="https://images.unsplash.com/photo-1529480780361-9e5d64cbab5f?w=400&h=260&fit=crop" alt="Lab" style="opacity:.6;"></div>
+        <div class="c-card__body"><div class="c-card__eyebrow">Subscription</div><div class="c-card__title">Upswing Lab 2.0</div><div class="c-card__instructor">By Doug Polk, Uri Peleg &amp; More</div><div style="margin-top:var(--space-3);"><span class="c-card__price">$99</span><span style="color:var(--text-subtle);font-size:var(--text-sm);"> / month</span></div></div>
+      </div>
+      <div class="c-card c-card--course">
+        <div class="c-card__media" style="background:linear-gradient(135deg,#0c0c0e,#1a1b20);display:flex;align-items:center;justify-content:center;"><img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=260&fit=crop" alt="Blueprint" style="opacity:.6;"></div>
+        <div class="c-card__body"><div class="c-card__eyebrow">One-Time</div><div class="c-card__title">The Poker Blueprint</div><div class="c-card__instructor">By Uri Peleg</div><div style="margin-top:var(--space-3);"><span class="c-card__price">$499</span></div></div>
+      </div>
+      <div class="c-card c-card--course c-card--dark">
+        <div class="c-card__media" style="background:linear-gradient(135deg,#0c0c0e,#1a1b20);display:flex;align-items:center;justify-content:center;"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=260&fit=crop" alt="PLO" style="opacity:.5;"></div>
+        <div class="c-card__body"><div class="c-card__eyebrow" style="color:var(--color-secondary-400);">One-Time</div><div class="c-card__title">PLO Launch Pad</div><div class="c-card__instructor" style="color:var(--color-neutral-400);">By Dylan Weisman</div><div style="margin-top:var(--space-3);"><span class="c-card__price">$99</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Compact Cards (4-grid)</p>
+    <div class="l-grid l-grid--4">
+      <div class="c-card c-card--clickable c-card--compact"><div class="c-card__media" style="aspect-ratio:16/10;"><img src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=300&h=190&fit=crop" alt=""></div><div class="c-card__body"><div class="c-card__title">River Bluffing 101</div><span class="c-card__meta">5 min</span></div></div>
+      <div class="c-card c-card--clickable c-card--compact"><div class="c-card__media" style="aspect-ratio:16/10;"><img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=300&h=190&fit=crop" alt=""></div><div class="c-card__body"><div class="c-card__title">Check-Raise Strategy</div><span class="c-card__meta">7 min</span></div></div>
+      <div class="c-card c-card--clickable c-card--compact"><div class="c-card__media" style="aspect-ratio:16/10;"><img src="https://images.unsplash.com/photo-1517232115160-ff93364542dd?w=300&h=190&fit=crop" alt=""></div><div class="c-card__body"><div class="c-card__title">Pot Odds Explained</div><span class="c-card__meta">4 min</span></div></div>
+      <div class="c-card c-card--clickable c-card--compact"><div class="c-card__media" style="aspect-ratio:16/10;"><img src="https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=300&h=190&fit=crop" alt=""></div><div class="c-card__body"><div class="c-card__title">Position Advantage</div><span class="c-card__meta">6 min</span></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ALERTS + CALLOUTS -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Alerts &amp; Callouts</h2>
+  <p class="sg-section__subtitle">Sharp-cornered containers for system alerts and article strategy callouts.</p>
+  <div class="sg-stack" style="max-width:640px;">
+    <div class="c-alert c-alert--info"><span class="c-alert__icon">&#8505;&#65039;</span><div class="c-alert__content"><div class="c-alert__title">New Content Available</div>3 new modules added to The Lab this week.</div></div>
+    <div class="c-alert c-alert--success"><span class="c-alert__icon">&#9989;</span><div class="c-alert__content"><div class="c-alert__title">Enrollment Confirmed</div>You now have full access to The Poker Blueprint.</div></div>
+    <div class="c-alert c-alert--warn"><span class="c-alert__icon">&#9888;&#65039;</span><div class="c-alert__content"><div class="c-alert__title">Subscription Expiring</div>Your membership renews in 3 days.</div></div>
+    <div class="c-alert c-alert--error"><span class="c-alert__icon">&#128683;</span><div class="c-alert__content"><div class="c-alert__title">Payment Failed</div>Could not process card ending in 4242.</div></div>
+  </div>
+  <div style="max-width:var(--grid-narrow);margin-top:var(--space-8);">
+    <div class="c-callout c-callout--tip c-callout--has-icon"><span class="c-callout__icon">&#128161;</span><div class="c-callout__title">Pro Tip</div><div class="c-callout__body">When facing a 3-bet OOP, tighten your continuing range by ~15%. Positional disadvantage costs roughly 3bb/100 postflop.</div></div>
+    <div class="c-callout c-callout--mistake c-callout--has-icon"><span class="c-callout__icon">&#9940;</span><div class="c-callout__title">Common Mistake</div><div class="c-callout__body">Don&#39;t auto c-bet on wet connected boards with air. Check back and protect your checking range instead.</div></div>
+    <div class="c-callout c-callout--solver c-callout--has-icon"><span class="c-callout__icon">&#128300;</span><div class="c-callout__title">Solver Note</div><div class="c-callout__body">The solver prefers 33% pot c-bets on A-high dry boards at ~85% frequency. The small size makes your range very hard to exploit.</div></div>
+    <div class="c-callout c-callout--key c-callout--has-icon"><span class="c-callout__icon">&#128273;</span><div class="c-callout__title">Key Concept</div><div class="c-callout__body"><strong>Equity realization</strong> &#8212; how much of your raw equity you can actually capture given position, stack depth, and range interactions.</div></div>
+  </div>
+</div></section>
+
+<!-- PROMOS -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Article Promos</h2>
+  <p class="sg-section__subtitle">Opt-ins, course promos (edge-to-edge image, matching padding on text), partner ads, inline banners.</p>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Email Opt-In</p>
+    <div class="c-article-promo c-article-promo--optin">
+      <div class="c-article-promo__eyebrow">Free Strategy Guide</div>
+      <div class="c-article-promo__title">Get Doug&#39;s Top 10 Preflop Tips</div>
+      <div class="c-article-promo__desc">Join 150,000+ players who get free poker strategy every week.</div>
+      <div class="c-article-promo__form"><input class="c-input" type="email" placeholder="Enter your email"><button class="c-btn c-btn--primary">Get Free Tips &#8594;</button></div>
+    </div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Course Promo &#8212; Edge-to-Edge Image</p>
+    <div class="c-article-promo c-article-promo--course">
+      <div class="c-article-promo__visual"><img src="https://images.unsplash.com/photo-1529480780361-9e5d64cbab5f?w=700&h=500&fit=crop" alt="Lab 2.0"></div>
+      <div class="c-article-promo__content">
+        <div class="c-article-promo__eyebrow" style="color:var(--color-primary-500);">Featured Course</div>
+        <div class="c-article-promo__title" style="font-size:var(--text-2xl);color:var(--text-strong);margin-bottom:var(--space-2);">The Upswing Lab 2.0</div>
+        <div class="c-article-promo__price">$99<span style="font-size:var(--text-base);font-weight:400;color:var(--text-subtle);"> / month</span></div>
+        <div class="c-article-promo__price-note">By Doug Polk, Uri Peleg &amp; More</div>
+        <ul class="c-article-promo__features"><li>200+ hours of training</li><li>New modules weekly</li><li>Full preflop chart suite</li><li>Private community access</li></ul>
+        <button class="c-btn c-btn--primary c-btn--lg">Learn More &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Partner Ad + Inline Banner</p>
+    <div class="c-article-promo c-article-promo--partner">
+      <div class="c-article-promo__sponsor-label">Sponsored by ClubWPT Gold</div>
+      <div class="c-article-promo__title" style="color:#fff;">Play Real Poker. Win Real Prizes.</div>
+      <div class="c-article-promo__desc" style="color:var(--color-neutral-300);">ClubWPT Gold members get Upswing training benefits + 25 bonus chips.</div>
+      <button class="c-btn c-btn--primary c-btn--lg" style="background:var(--color-secondary-500);border-color:var(--color-secondary-500);color:var(--color-neutral-900);">Claim Your Bonus &#8594;</button>
+    </div>
+    <div class="c-article-promo c-article-promo--inline" style="margin-top:var(--space-6);">
+      <div style="font-size:36px;flex-shrink:0;">&#127183;</div>
+      <div style="flex:1;"><div class="c-article-promo__title">Want to practice these ranges?</div><div class="c-article-promo__desc">Try Lucid Poker&#39;s Daily Cardle &#8212; free daily poker puzzles.</div></div>
+      <button class="c-btn c-btn--secondary c-btn--sm" style="flex-shrink:0;">Try Free &#8594;</button>
+    </div>
+  </div>
+</div></section>
+
+<!-- EMBEDDABLE HAND FRAMEWORK -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Embeddable Hand Framework</h2>
+  <p class="sg-section__subtitle">Copy-paste HTML/CSS for embedding hand histories, board displays, and poker scenarios into any article. No dependencies &#8212; just CSS classes.</p>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Board Display &#8212; Inline Embed</p>
+    <p style="color:var(--text-default);margin-bottom:var(--space-3);">Show any board inline with <code style="font-family:var(--font-mono);font-size:.85em;background:var(--surface-tertiary);padding:2px 6px;border-radius:2px;">.c-hand__board-card</code>:</p>
+    <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-4);">
+      <span class="c-hand__board-card c-hand__board-card--h">A&#9829;</span>
+      <span class="c-hand__board-card c-hand__board-card--s">K&#9824;</span>
+      <span class="c-hand__board-card c-hand__board-card--d">Q&#9830;</span>
+      <span class="c-hand__board-card c-hand__board-card--c">J&#9827;</span>
+      <span class="c-hand__board-card c-hand__board-card--h">T&#9829;</span>
+    </div>
+<div class="sg-code"><span class="cmt">&lt;!-- Board cards: --h heart, --s spade, --d diamond, --c club --&gt;</span>
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__board"</span>&gt;
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__board-card c-hand__board-card--h"</span>&gt;A&amp;#9829;&lt;/<span class="tag">span</span>&gt;
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__board-card c-hand__board-card--s"</span>&gt;K&amp;#9824;&lt;/<span class="tag">span</span>&gt;
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__board-card c-hand__board-card--d"</span>&gt;Q&amp;#9830;&lt;/<span class="tag">span</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Hero Cards &#8212; Visual Card Display</p>
+<div class="sg-code"><span class="cmt">&lt;!-- Suits: --heart, --diamond, --club, --spade --&gt;</span>
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__cards"</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__card c-hand__card--heart"</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__card-rank"</span>&gt;A&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__card-suit"</span>&gt;&amp;#9829;&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__card c-hand__card--spade"</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__card-rank"</span>&gt;K&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__card-suit"</span>&gt;&amp;#9824;&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Full Hand Block &#8212; Complete Structure</p>
+<div class="sg-code">&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand"</span>&gt;
+  <span class="cmt">&lt;!-- Dark header bar --&gt;</span>
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__header"</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__header-title"</span>&gt;Cash Game&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__header-meta"</span>&gt;NL200 6-max&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__header-badge"</span>&gt;Key Hand&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  <span class="cmt">&lt;!-- Hero card display with visual cards --&gt;</span>
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__hero"</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__hero-label"</span>&gt;Hero (BTN)&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__cards"</span>&gt;...cards here...&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__hero-stack"</span>&gt;
+      Stack: &lt;<span class="tag">strong</span>&gt;$500&lt;/<span class="tag">strong</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  <span class="cmt">&lt;!-- Action body with streets --&gt;</span>
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__body"</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__street"</span>&gt;
+      &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__street-header"</span>&gt;
+        &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__street-name"</span>&gt;Flop&lt;/<span class="tag">span</span>&gt;
+        &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__street-pot"</span>&gt;Pot: $85&lt;/<span class="tag">span</span>&gt;
+      &lt;/<span class="tag">div</span>&gt;
+      &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__board"</span>&gt;...board cards...&lt;/<span class="tag">div</span>&gt;
+      &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__action"</span>&gt;
+        &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__player c-hand__player--hero"</span>&gt;Hero&lt;/<span class="tag">span</span>&gt;
+        &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__verb"</span>&gt;bets&lt;/<span class="tag">span</span>&gt;
+        &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"c-hand__amount"</span>&gt;$28&lt;/<span class="tag">span</span>&gt;
+      &lt;/<span class="tag">div</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__divider"</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    <span class="cmt">&lt;!-- Repeat .c-hand__street for turn, river --&gt;</span>
+  &lt;/<span class="tag">div</span>&gt;
+
+  <span class="cmt">&lt;!-- Result or question footer --&gt;</span>
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"c-hand__result"</span>&gt;What should Hero do?&lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">Inline Suits &#8212; In Paragraph Text</p>
+<div class="sg-code"><span class="cmt">&lt;!-- .suit classes auto-append the suit symbol via CSS ::after --&gt;</span>
+&lt;<span class="tag">p</span>&gt;Hero holds
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"suit suit-h"</span>&gt;A&lt;/<span class="tag">span</span>&gt;
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"suit suit-s"</span>&gt;K&lt;/<span class="tag">span</span>&gt;
+&lt;/<span class="tag">p</span>&gt;
+
+<span class="cmt">&lt;!-- .pip classes for mini card look --&gt;</span>
+&lt;<span class="tag">p</span>&gt;Villain shows
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"pip pip--h"</span>&gt;Q&amp;#9829;&lt;/<span class="tag">span</span>&gt;
+  &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"pip pip--c"</span>&gt;Q&amp;#9827;&lt;/<span class="tag">span</span>&gt;
+&lt;/<span class="tag">p</span>&gt;</div>
+  </div>
+
+  <div class="sg-subsection"><p class="sg-subsection__label">JavaScript Helper &#8212; Auto-Generate Hand Blocks</p>
+<div class="sg-code"><span class="cmt">// Repeatable JS function to generate hand history blocks from data</span>
+
+function createHandBlock(config) {
+  const suitMap = { h: '&#9829;', d: '&#9830;', c: '&#9827;', s: '&#9824;' };
+  const suitClass = { h: 'heart', d: 'diamond', c: 'club', s: 'spade' };
+
+  function renderCard(rank, suit) {
+    return `&lt;div class="c-hand__card c-hand__card--${suitClass[suit]}"&gt;
+      &lt;span class="c-hand__card-rank"&gt;${rank}&lt;/span&gt;
+      &lt;span class="c-hand__card-suit"&gt;${suitMap[suit]}&lt;/span&gt;
+    &lt;/div&gt;`;
+  }
+
+  function renderBoardCard(rank, suit) {
+    return `&lt;span class="c-hand__board-card c-hand__board-card--${suit}"&gt;
+      ${rank}${suitMap[suit]}&lt;/span&gt;`;
+  }
+
+  <span class="cmt">// Usage:</span>
+  createHandBlock({
+    title: 'Cash Game',
+    meta: 'NL500 6-max',
+    badge: 'Key Hand',
+    hero: { position: 'BTN', cards: [['A','h'],['K','s']], stack: '$512' },
+    streets: [
+      { name: 'Preflop', actions: [
+        { player: 'Hero', verb: 'raises to', amount: '$12', isHero: true },
+        { player: 'Villain', verb: '3-bets to', amount: '$42' },
+      ]},
+      { name: 'Flop', pot: '$85',
+        board: [['K','s'],['9','h'],['4','d']],
+        actions: [
+          { player: 'Villain', verb: 'checks' },
+          { player: 'Hero', verb: 'bets', amount: '$28', isHero: true },
+        ]
+      },
+    ],
+    result: 'What should Hero do?'
+  });
+}</div>
+  </div>
+</div></section>
+
+<!-- BUTTONS / FORMS (condensed) -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Buttons</h2>
+  <p class="sg-section__subtitle">Interactive elements keep their softer 8px radius. Containers stay sharp at 2-3px.</p>
+  <div class="sg-preview"><div class="sg-preview__bar">All Variants + Sizes</div><div class="sg-preview__body"><div class="sg-row" style="gap:var(--space-4);">
+    <button class="c-btn c-btn--primary c-btn--sm">Small</button>
+    <button class="c-btn c-btn--primary">Default</button>
+    <button class="c-btn c-btn--secondary">Secondary</button>
+    <button class="c-btn c-btn--tertiary">Tertiary</button>
+    <button class="c-btn c-btn--ghost">Ghost</button>
+    <button class="c-btn c-btn--dark">Dark</button>
+    <button class="c-btn c-btn--primary c-btn--lg">Large CTA</button>
+    <button class="c-btn c-btn--primary c-btn--xl">Enroll Now &#8594;</button>
+  </div></div></div>
+  <div class="sg-preview" style="margin-top:var(--space-4);"><div class="sg-preview__bar">Disabled + Loading + Dark Surface</div><div class="sg-preview__body sg-preview__body--dark"><div class="sg-row">
+    <button class="c-btn c-btn--primary c-btn--lg">Start Free Trial &#8594;</button>
+    <button class="c-btn c-btn--tertiary" style="color:#fff;border-color:rgba(255,255,255,.3);">View Details</button>
+    <button class="c-btn c-btn--primary" disabled>Disabled</button>
+    <button class="c-btn c-btn--secondary c-btn--loading">Loading</button>
+  </div></div></div>
+</div></section>
+
+<!-- PRICING -->
+<section class="sg-section"><div class="l-container">
+  <h2 class="sg-section__title">Pricing</h2>
+  <div class="l-grid l-grid--3" style="align-items:start;">
+    <div class="c-pricing">
+      <div class="c-pricing__name">PLO Launch Pad</div>
+      <div class="c-pricing__price">$99</div>
+      <div class="c-pricing__desc">One-time &#183; Lifetime access</div>
+      <ul class="c-pricing__features"><li>Complete PLO fundamentals</li><li>Live play breakdowns</li><li>Exploit common tendencies</li></ul>
+      <button class="c-btn c-btn--tertiary" style="width:100%;">Learn More</button>
+    </div>
+    <div class="c-pricing c-pricing--featured">
+      <div class="c-pricing__name">Upswing Lab 2.0</div>
+      <div class="c-pricing__price">$99 <span>/mo</span></div>
+      <div class="c-pricing__desc">Cancel anytime &#183; New content weekly</div>
+      <ul class="c-pricing__features"><li>200+ hours of training</li><li>Full preflop chart suite</li><li>Weekly new modules</li><li>Private community</li><li>Hand history review</li></ul>
+      <button class="c-btn c-btn--primary" style="width:100%;">Start Learning &#8594;</button>
+    </div>
+    <div class="c-pricing">
+      <div class="c-pricing__name">Poker Blueprint</div>
+      <div class="c-pricing__price">$499</div>
+      <div class="c-pricing__desc">One-time &#183; By Uri Peleg</div>
+      <ul class="c-pricing__features"><li>Simplified NLH approach</li><li>Actionable strategies</li><li>Outmaneuver all opponents</li></ul>
+      <button class="c-btn c-btn--tertiary" style="width:100%;">Learn More</button>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA BANNER -->
+<section class="sg-section" style="padding:0;border:none;">
+  <div class="c-cta-banner"><div class="c-cta-banner__content">
+    <h2 class="c-cta-banner__title">Ready to Crush the Competition?</h2>
+    <p class="c-cta-banner__desc">Join 350,000+ poker players who trust Upswing to sharpen their edge.</p>
+    <div class="sg-row" style="justify-content:center;"><button class="c-btn c-btn--primary c-btn--xl">Start Your Free Trial &#8594;</button></div>
+  </div></div>
+</section>
+
+</main>
+<footer style="background:var(--color-neutral-900);padding:var(--space-8) var(--space-6);text-align:center;">
+  <p style="color:var(--color-neutral-500);font-size:var(--text-sm);font-family:var(--font-display);">Upswing Poker Design System v2.1</p>
+  <p style="color:var(--color-neutral-600);font-size:var(--text-xs);margin-top:var(--space-2);font-family:var(--font-mono);">Plus Jakarta Sans &#183; DM Sans &#183; JetBrains Mono</p>
+</footer>
+</body>
+</html>
